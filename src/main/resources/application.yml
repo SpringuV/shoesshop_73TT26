@@ -1,0 +1,24 @@
+spring:
+  server:
+    address: 0.0.0.0
+    port: 8080
+  banner:
+    mode: off
+  application:
+    name: hoseshop
+  datasource:
+    url: jdbc:mysql://localhost:3306/shoeshop
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+    password: hocmysql1234
+    username: root
+  jpa: # quan trong c� th? li�n k?t t?i database
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+jwt:
+  signerKey: U4Y83DUU7SEZtm+7oVG1c4KiGZkTBGsSUsccy51pt+XpLCxk9PXSnICaEiT5xvRM
+  valid-duration: 3600
+  refreshable-duration: 7200

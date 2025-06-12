@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/User.css">
+    <title>Document</title>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <a href="Home.html">
+            <img src="/images/Logo2.PNG" alt="ASICS Logo">
+        </a>
+    </div>
+<!--------------------- Menu --------------------->
+    <nav class="menu">
+        <ul>
+            <li>
+                <a href="/html/Products_men.html">Nam</a>
+                <ul class="sub-menu">
+                    <li><a href="#">Nổi bật</a>
+                        <ul>
+                            <li><a href="#">Sản phẩm mới</a></li>
+                            <li><a href="#">Bán chạy</a></li>
+                            <li><a href="#">Sale</a></li>
+                            <li><a href="#">Giày rộng</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Giày</a>
+                        <ul>
+                            <li><a href="#">Chạy bộ</a></li>
+                            <li><a href="#">Chạy địa hình</a></li>
+                            <li><a href="#">Bóng chuyền</a></li>
+                            <li><a href="#">Bóng rổ</a></li>
+                            <li><a href="#">Quần vợt</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/html/Products_women.html">Nữ</a>
+                <ul class="sub-menu">
+                    <li><a href="#">Nổi bật</a>
+                        <ul>
+                            <li><a href="#">Sản phẩm mới</a></li>
+                            <li><a href="#">Bán chạy</a></li>
+                            <li><a href="#">Sale</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Giày</a>
+                        <ul>
+                            <li><a href="#">Chạy bộ</a></li>
+                            <li><a href="#">Chạy địa hình</a></li>
+                            <li><a href="#">Bóng chuyền</a></li>
+                            <li><a href="#">Quần vợt</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="/html/Products_sports.html">Thể thao</a>
+                <ul class="sub-menu">
+                    <li><a href="#">Chạy bộ</a>
+                        <ul>
+                            <li><a href="#">Giày</a></li>
+                            <li><a href="#">METASPEED</a></li>
+                            <li><a href="#">GEL-KAYANO</a></li>
+                            <li><a href="#">GEL-NIMBUS</a></li>
+                            <li><a href="#">NOVABLAST</a></li>
+                            <li><a href="#">SUPERBLAST</a></li>
+                            <li><a href="#">MAGIC SPEED</a></li>
+                            <li><a href="#">GEL-CUMULUS</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Chạy địa hình</a>
+                        <ul>
+                            <li><a href="#">Giày</a></li>
+                            <li><a href="#">TRABUCO MAX</a></li>
+                            <li><a href="#">GEL-TRABUCO</a></li>
+                            <li><a href="#">GEL-SONOMA</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Quần vợt</a>
+                        <ul>
+                            <li><a href="#">Giày</a></li>
+                            <li><a href="#">GEL-RESOLUTION</a></li>
+                            <li><a href="#">SOLUTION SPEED FF</a></li>
+                            <li><a href="#">ASICS x A.P.C. Tennis Collection</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            
+        </ul>
+    </nav>
+<!--------------------- End Menu --------------------->
+
+<!--------------------- Others --------------------->
+    <div class="others">
+        <ul>
+            <li>
+                <input id="search-input" placeholder="Tìm kiếm" type="text">
+                <i class="fas fa-search"></i>
+            </li>
+            <li><a href="Cart.html" aria-label="Giỏ hàng"><i class="fas fa-shopping-cart"></i></a></li>
+            <li><a href="User.html" aria-label="Tài khoản"><i class="fas fa-user"></i></a></li>
+        </ul>
+    </div>
+<!--------------------- End Others --------------------->    
+    
+    
+<div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</header>
+<div class="menu-overlay"></div>
+
+<div class="container">
+<!--------------------- frmLogin --------------------->
+        <div class="from-box login">
+            <form action="">
+                <h1>Login</h1>
+                <div class="input-box">
+                    <input type="text" placeholder="Username" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <div class="forgot-link">
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn">Login</button>    
+                <p>or login social platforms</p>
+                <div class="social-icons">
+                    <a href="#"><i class='bx bxl-google' ></i></a>
+                    <a href="#"><i class='bx bxl-facebook' ></i></a>
+                    <a href="#"><i class='bx bxl-github' ></i></a>
+                    <a href="#"><i class='bx bxl-linkedin'></i></a>
+                </div>
+            </form>
+        </div>
+<!--------------------- End frmLogin --------------------->
+
+        
+<!--------------------- frmRegister --------------------->
+        <div class="from-box register">
+            <form action="">
+                <h1>Registration</h1>
+                <div class="input-box">
+                    <input id="ip_txt_username"  type="text" placeholder="Username" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+
+                <div class="input-box">
+                    <input id="ip_txt_email" type="email" placeholder="Email" required>
+                    <i class='bx bxs-envelope'></i>
+                </div>
+
+                <div  class="input-box">
+                    <input id="ip_txt_password" type="password" placeholder="Password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <button type="submit" class="btn">Register</button>    
+                <p>or register social platforms</p>
+                <div class="social-icons">
+                    <a href="#"><i class='bx bxl-google' ></i></a>
+                    <a href="#"><i class='bx bxl-facebook' ></i></a>
+                    <a href="#"><i class='bx bxl-github' ></i></a>
+                    <a href="#"><i class='bx bxl-linkedin'></i></a>
+                </div>
+            </form>
+        </div>
+<!--------------------- End frmRegister --------------------->
+        <div class="toggle-box">
+            <div class="toggle-panel toggle-left">
+                <h1>Hello, Welcome!</h1>
+                <p>Don't have an account?</p>
+                <button class="btn register-btn">Register</button>
+            </div>
+
+            <div class="toggle-panel toggle-right">
+                <h1>Welcome Back!</h1>
+                <p>Already have an account?</p>
+                <button class="btn login-btn">Login</button>
+            </div>
+        </div>
+</div>
+
+
+
+<script src="/js/User.js"></script>
+</body>
+</html>

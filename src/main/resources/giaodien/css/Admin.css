@@ -1,0 +1,264 @@
+:root {
+      --primary-color: #5a67d8;
+      --primary-hover: #434190;
+      --secondary-color: #edf2f7;
+      --text-color: #2d3748;
+      --danger-color: #e53e3e;
+      --success-color: #38a169;
+      --border-radius: 6px;
+      --input-padding: 8px 12px;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --transition: 0.3s ease;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: var(--font-family);
+      margin: 0;
+      background: #f7fafc;
+      color: var(--text-color);
+    }
+    header {
+      background: var(--primary-color);
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      user-select: none;
+    }
+    main {
+      display: flex;
+      height: calc(100vh - 60px);
+      overflow: hidden;
+    }
+    nav {
+      width: 220px;
+      background: white;
+      border-right: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+    }
+    nav button {
+      padding: 12px 20px;
+      border: none;
+      background: none;
+      text-align: left;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color var(--transition);
+      border-left: 4px solid transparent;
+      color: var(--text-color);
+    }
+    nav button.active,
+    nav button:hover {
+      background-color: var(--secondary-color);
+      border-left-color: var(--primary-color);
+      font-weight: 600;
+    }
+    section.content {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+      background: white;
+      position: relative;
+    }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+      font-weight: 700;
+    }
+    form {
+      margin-bottom: 2rem;
+      max-width: 600px;
+      background: var(--secondary-color);
+      padding: 1rem 1.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 5px rgb(0 0 0 / 0.05);
+    }
+    form > div {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="password"],
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid #cbd5e0;
+      border-radius: var(--border-radius);
+      padding: var(--input-padding);
+      font-size: 1rem;
+      transition: border-color var(--transition);
+    }
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--primary-color);
+      outline: none;
+    }
+    button {
+      background: var(--primary-color);
+      border: none;
+      color: white;
+      padding: 10px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: background-color var(--transition);
+    }
+    button:hover {
+      background: var(--primary-hover);
+    }
+    button.cancel-btn {
+      background: #a0aec0;
+      margin-left: 10px;
+    }
+    button.cancel-btn:hover {
+      background: #718096;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+      vertical-align: middle;
+    }
+    th {
+      background-color: var(--secondary-color);
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    tr:hover {
+      background-color: #ebf4ff;
+    }
+    .actions button {
+      margin-right: 6px;
+      background: #4299e1;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+    }
+    .actions button.delete {
+      background: var(--danger-color);
+    }
+    .actions button:hover {
+      filter: brightness(1.1);
+    }
+    .multi-checkbox-group {
+      max-height: 120px;
+      overflow-y: auto;
+      border: 1px solid #cbd5e0;
+      padding: 10px;
+      border-radius: var(--border-radius);
+      background-color: white;
+    }
+    .multi-checkbox-group label {
+      display: block;
+      font-weight: normal;
+      cursor: pointer;
+      margin-bottom: 5px;
+      user-select: none;
+    }
+    .footer {
+      text-align: center;
+      padding: 1rem 0;
+      color: #718096;
+      font-size: 0.9rem;
+      background: #f1f5f9;
+      user-select: none;
+    }
+    /* Modal styles */
+    #orderItemsModal {
+      display: none;
+      position: fixed;
+      z-index: 10001;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+    }
+    #orderItemsModal.active {
+      display: flex;
+    }
+    #orderItemsModal .modal-content {
+      background: white;
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      max-width: 700px;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    #orderItemsModal .modal-header {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+    #orderItemsModal .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: var(--danger-color);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: background-color var(--transition);
+    }
+    #orderItemsModal .close-btn:hover {
+      background: #922b2b;
+    }
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+        height: auto;
+      }
+      nav {
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      nav button {
+        flex: 1 0 auto;
+        text-align: center;
+        border-left: none;
+        border-bottom: 4px solid transparent;
+      }
+      nav button.active,
+      nav button:hover {
+        border-left: none;
+        border-bottom-color: var(--primary-color);
+      }
+      section.content {
+        padding: 1rem;
+      }
+    }
