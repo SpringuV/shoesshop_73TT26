@@ -1,215 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="/css/Admin.css">
-  <title>Admin Management - Shoes Shop</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/Admin.css">
+    <title>Admin Management - Shoes Shop</title>
 </head>
+
 <body>
-  <header>
-    Trang quản lý
-  </header>
-  <main>
-    <nav>
-      <button class="tab-btn active" data-tab="role">Vai trò</button>
-      <button class="tab-btn" data-tab="user">Người dùng</button>
-      <button class="tab-btn" data-tab="category">Danh mục</button>
-      <button class="tab-btn" data-tab="permission">Phân quyền</button>
-      <button class="tab-btn" data-tab="ordersRatings">Đơn hàng & Đánh giá</button>
-    </nav>
-    <section class="content">
-      <div id="role" class="tab-content active">
-        <h2>Quản lý vai trò</h2>
-        <form id="roleForm">
-          <input type="hidden" id="roleId" />
-          <div>
-            <label for="roleName">Tên vai trò:</label>
-            <input type="text" id="roleName" required placeholder="Nhập tên vai trò" />
-          </div>
-          <div>
-            <label for="roleDesc">Mô tả:</label>
-            <textarea id="roleDesc" rows="2" placeholder="Nhập mô tả"></textarea>
-          </div>
-          <button type="submit">Thêm vai trò</button>
-          <button type="button" class="cancel-btn" id="roleCancelBtn" style="display:none;">Thoát</button>
-        </form>
-        <table id="roleTable" aria-label="Role List">
-          <thead>
-            <tr>
-              <th>Tên vai trò</th>
-              <th>Mô tả</th>
-              <th>Thao tác</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-
-      <div id="user" class="tab-content" style="display:none;">
-        <h2>Quản lý người dùng</h2>
-        <form id="userForm">
-          <input type="hidden" id="userId" />
-          <div>
-            <label for="username">Tài khoản:</label>
-            <input type="text" id="username" required placeholder="Nhập tài khoản" />
-          </div>
-          <div>
-            <label for="password">Mật khẩu:</label>
-            <input type="password" id="password" required placeholder="Nhập mật khẩu" />
-          </div>
-          <div>
-            <label for="fullname">Họ và tên:</label>
-            <input type="text" id="fullname" placeholder="Nhập họ và tên" />
-          </div>
-          <div>
-            <label for="age">Tuổi:</label>
-            <input type="number" id="age" min="1" max="150" />
-          </div>
-          <div>
-            <label for="address">Địa chỉ:</label>
-            <input type="text" id="address" placeholder="Nhập địa chỉ" />
-          </div>
-          <div>
-            <label for="phone">Số điện thoại:</label>
-            <input type="text" id="phone" placeholder="Nhập số điện thoại" />
-          </div>
-          <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="Nhập email" />
-          </div>
-          <button type="submit">Thêm người dùng</button>
-          <button type="button" class="cancel-btn" id="userCancelBtn" style="display:none;">Thoát</button>
-        </form>
-        <table id="userTable" aria-label="User List">
-          <thead>
-            <tr>
-              <th>Tài khoản</th>
-              <th>Họ và tên</th>
-              <th>Tuổi</th>
-              <th>Địa chỉ</th>
-              <th>Điện thoại</th>
-              <th>Email</th>
-              <th>Thao tác</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-
-      <div id="category" class="tab-content" style="display:none;">
-        <h2>Quản lý danh mục</h2>
-        <form id="categoryForm">
-          <input type="hidden" id="categoryId" />
-          <div>
-            <label for="categoryName">Tên danh mục:</label>
-            <input type="text" id="categoryName" required placeholder="Nhập tên danh mục" />
-          </div>
-          <div>
-            <label>Sản phẩm:</label>
-            <div class="multi-checkbox-group" id="categoryProducts">
-              <!-- Dynamic checkboxes for products -->
+    <header>
+        Trang quản lý
+    </header>
+    <main>
+        <nav>
+            <button class="tab-btn active" data-tab="role">Vai trò</button>
+            <button class="tab-btn" data-tab="user">Người dùng</button>
+            <button class="tab-btn" data-tab="category">Danh mục</button>
+            <button class="tab-btn" data-tab="permission">Phân quyền</button>
+            <button class="tab-btn" data-tab="ordersRatings">Đơn hàng & Đánh giá</button>
+        </nav>
+        <section class="content">
+            <div id="role" class="tab-content active">
+                <h2>Quản lý vai trò</h2>
+                <form id="roleForm">
+                    <input type="hidden" id="roleId" />
+                    <div>
+                        <label for="roleName">Tên vai trò:</label>
+                        <input type="text" id="roleName" required placeholder="Nhập tên vai trò" />
+                    </div>
+                    <div>
+                        <label for="roleDesc">Mô tả:</label>
+                        <textarea id="roleDesc" rows="2" placeholder="Nhập mô tả"></textarea>
+                    </div>
+                    <button type="submit">Thêm vai trò</button>
+                    <button type="button" class="cancel-btn" id="roleCancelBtn" style="display:none;">Thoát</button>
+                </form>
+                <table id="roleTable" aria-label="Role List">
+                    <thead>
+                        <tr>
+                            <th>Tên vai trò</th>
+                            <th>Mô tả</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
-          </div>
-          <button type="submit">Thêm danh mục</button>
-          <button type="button" class="cancel-btn" id="categoryCancelBtn" style="display:none;">Thoát</button>
-        </form>
-        <table id="categoryTable" aria-label="Category List">
-          <thead>
-            <tr>
-              <th>Tên danh mục</th>
-              <th>Sản phẩm</th>
-              <th>Thao tác</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
 
-      <div id="permission" class="tab-content" style="display:none;">
-        <h2>Quản lý phân quyền</h2>
-        <form id="permissionForm">
-          <input type="hidden" id="permissionId" />
-          <div>
-            <label for="permissionName">Tên quyền:</label>
-            <input type="text" id="permissionName" required placeholder="Nhập tên quyền" />
-          </div>
-          <div>
-            <label for="permissionDesc">Mô tả:</label>
-            <textarea id="permissionDesc" rows="2" placeholder="Nhập mô tả"></textarea>
-          </div>
-          <button type="submit">Thêm quyền</button>
-          <button type="button" class="cancel-btn" id="permissionCancelBtn" style="display:none;">Thoát</button>
-        </form>
-        <table id="permissionTable" aria-label="Permission List">
-          <thead>
-            <tr>
-              <th>Tên quyền</th>
-              <th>Mô tả</th>
-              <th>Thao tác</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+            <div id="user" class="tab-content" style="display:none;">
+                <h2>Quản lý người dùng</h2>
+                <form id="userForm">
+                    <input type="hidden" id="userId" />
+                    <div>
+                        <label for="username">Tài khoản:</label>
+                        <input type="text" id="username" required placeholder="Nhập tài khoản" />
+                    </div>
+                    <div>
+                        <label for="password">Mật khẩu:</label>
+                        <input type="password" id="password" required placeholder="Nhập mật khẩu" />
+                    </div>
+                    <div>
+                        <label for="fullname">Họ và tên:</label>
+                        <input type="text" id="fullname" placeholder="Nhập họ và tên" />
+                    </div>
+                    <div>
+                        <label for="age">Tuổi:</label>
+                        <input type="number" id="age" min="1" max="150" />
+                    </div>
+                    <div>
+                        <label for="address">Địa chỉ:</label>
+                        <input type="text" id="address" placeholder="Nhập địa chỉ" />
+                    </div>
+                    <div>
+                        <label for="phone">Số điện thoại:</label>
+                        <input type="text" id="phone" placeholder="Nhập số điện thoại" />
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" placeholder="Nhập email" />
+                    </div>
+                    <button type="submit">Thêm người dùng</button>
+                    <button type="button" class="cancel-btn" id="userCancelBtn" style="display:none;">Thoát</button>
+                </form>
+                <table id="userTable" aria-label="User List">
+                    <thead>
+                        <tr>
+                            <th>Tài khoản</th>
+                            <th>Họ và tên</th>
+                            <th>Tuổi</th>
+                            <th>Địa chỉ</th>
+                            <th>Điện thoại</th>
+                            <th>Email</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
 
-      <div id="ordersRatings" class="tab-content" style="display:none;">
-        <h2>Đơn hàng & Đánh giá</h2>
-        <h3>Đơn hàng</h3>
-        <table id="ordersTable" aria-label="Orders List">
-          <thead>
-            <tr>
-              <th>Ngày đặt hàng</th>
-              <th>Trạng thái đơn hàng</th>
-              <th>Giá</th>
-              <th>Trạng thái thanh toán</th>
-              <th>Mã người dùng</th>
-              <th>Chi tiết đơn hàng</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+            <div id="category" class="tab-content" style="display:none;">
+                <h2>Quản lý danh mục</h2>
+                <form id="categoryForm">
+                    <input type="hidden" id="categoryId" />
+                    <div>
+                        <label for="categoryName">Tên danh mục:</label>
+                        <input type="text" id="categoryName" required placeholder="Nhập tên danh mục" />
+                    </div>
+                    <div>
+                        <label>Sản phẩm:</label>
+                        <div class="multi-checkbox-group" id="categoryProducts">
+                            <!-- Dynamic checkboxes for products -->
+                        </div>
+                    </div>
+                    <button type="submit">Thêm danh mục</button>
+                    <button type="button" class="cancel-btn" id="categoryCancelBtn" style="display:none;">Thoát</button>
+                </form>
+                <table id="categoryTable" aria-label="Category List">
+                    <thead>
+                        <tr>
+                            <th>Tên danh mục</th>
+                            <th>Sản phẩm</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
 
-        <h3>Đánh giá</h3>
-        <table id="ratingsTable" aria-label="Ratings List">
-          <thead>
-            <tr>
-              <th>Mã người dùng</th>
-              <th>Mã sản phẩm</th>
-              <th>Nội dung</th>
-              <th>Điểm đánh giá</th>
-              <th>Ngày tạo</th>
-              <th>Ngày cập nhật</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-  <div class="footer">
-    &copy; 2025 Shoes Shop Admin Panel
-  </div>
+            <div id="permission" class="tab-content" style="display:none;">
+                <h2>Quản lý phân quyền</h2>
+                <form id="permissionForm">
+                    <input type="hidden" id="permissionId" />
+                    <div>
+                        <label for="permissionName">Tên quyền:</label>
+                        <input type="text" id="permissionName" required placeholder="Nhập tên quyền" />
+                    </div>
+                    <div>
+                        <label for="permissionDesc">Mô tả:</label>
+                        <textarea id="permissionDesc" rows="2" placeholder="Nhập mô tả"></textarea>
+                    </div>
+                    <button type="submit">Thêm quyền</button>
+                    <button type="button" class="cancel-btn" id="permissionCancelBtn"
+                        style="display:none;">Thoát</button>
+                </form>
+                <table id="permissionTable" aria-label="Permission List">
+                    <thead>
+                        <tr>
+                            <th>Tên quyền</th>
+                            <th>Mô tả</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
 
-  <!-- Modal for order items -->
-  <div id="orderItemsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-content">
-      <button class="close-btn" aria-label="Close order items">&times;</button>
-      <div class="modal-header" id="modalTitle">Order Items</div>
-      <table id="orderItemsTable">
-        <thead>
-          <tr>
-            <th>Mã sản phẩm</th>
-            <th>Số lượng</th>
-            <th>Giá</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+            <div id="ordersRatings" class="tab-content" style="display:none;">
+                <h2>Đơn hàng & Đánh giá</h2>
+                <h3>Đơn hàng</h3>
+                <table id="ordersTable" aria-label="Orders List">
+                    <thead>
+                        <tr>
+                            <th>Ngày đặt hàng</th>
+                            <th>Trạng thái đơn hàng</th>
+                            <th>Giá</th>
+                            <th>Trạng thái thanh toán</th>
+                            <th>Mã người dùng</th>
+                            <th>Chi tiết đơn hàng</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+                <h3>Đánh giá</h3>
+                <table id="ratingsTable" aria-label="Ratings List">
+                    <thead>
+                        <tr>
+                            <th>Mã người dùng</th>
+                            <th>Mã sản phẩm</th>
+                            <th>Nội dung</th>
+                            <th>Điểm đánh giá</th>
+                            <th>Ngày tạo</th>
+                            <th>Ngày cập nhật</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <div class="footer">
+        &copy; 2025 Shoes Shop Admin Panel
     </div>
-  </div>
 
-  <script src="/js/Admin.js"></script>
+    <!-- Modal for order items -->
+    <div id="orderItemsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <button class="close-btn" aria-label="Close order items">&times;</button>
+            <div class="modal-header" id="modalTitle">Order Items</div>
+            <table id="orderItemsTable">
+                <thead>
+                    <tr>
+                        <th>Mã sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="/js/Admin.js"></script>
+    <script src="/js/authToken.js"></script>
 </body>
-</html>
 
+</html>

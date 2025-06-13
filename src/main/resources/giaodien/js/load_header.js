@@ -1,4 +1,5 @@
-fetch('/html/header.html')
+function loadHeader(){
+    fetch('/html/header.html')
     .then(response => response.text())
     .then(
         data => {
@@ -6,3 +7,11 @@ fetch('/html/header.html')
         }
     )
     .catch(error => console.error("Lỗi khi tải header:", error))
+}
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    // load header
+    loadHeader();
+
+    const userInfo = document.querySelector('.info-user');
+})
