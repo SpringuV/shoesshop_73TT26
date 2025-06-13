@@ -31,6 +31,8 @@ public interface UserMapper {
 
     @Mapping(target = "role", ignore = true)
     @Mapping(target = "userId", ignore = true)
+    @Mapping(target = "username", ignore = true)
+    @Mapping(target = "password", ignore = true)
     @Mapping(target = "cartItemSet", ignore = true)
     @Mapping(target = "ratingSet", ignore = true)
     @Mapping(target = "wishlistSet", ignore = true)

@@ -80,12 +80,9 @@ overlay.addEventListener("click", () => {
   });
 });
 
-// start exex add user to db
-let username = document.querySelector("#ip_txt_username");
-let pass = document.querySelector("#ip_txt_password");
-let email = document.querySelector("ip_txt_email");
 
+document.addEventListener("DOMContentLoaded", ()=>{
+  const userDetail = document.querySelector(".user-detail");
+  
 
-
-
-// end exex add user to db
+})

@@ -1,5 +1,6 @@
 package TT26_73.hoseshop.Service;
 
+import TT26_73.hoseshop.Configuration.PredefinedRole;
 import TT26_73.hoseshop.Dto.User.UserCreateRequest;
 import TT26_73.hoseshop.Dto.User.UserCreateResponse;
 import TT26_73.hoseshop.Dto.User.UserResponse;
@@ -29,13 +30,9 @@ public class UserService {
     UserMapper userMapper;
     UserRepository userRepository;
 
-    private User checkUserExist(String username){
-        return userRepository.findByUsername(username).orElseThrow(()-> new AppException(ErrorCode.USER_NOT_FOUND));
-    }
-
     public UserCreateResponse createUser(UserCreateRequest userCreateRequest){
         // checkUser existed
-        if(checkUserExist(userCreateRequest.getUsername())!= null){
+        if(userRepository.existsByUsername(userCreateRequest.getUsername())){
             throw new AppException(ErrorCode.USER_EXISTED);
         }
 

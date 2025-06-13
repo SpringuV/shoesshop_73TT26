@@ -4,6 +4,7 @@ import TT26_73.hoseshop.Dto.ApiResponse;
 import TT26_73.hoseshop.Dto.Role.RoleCreateRequest;
 import TT26_73.hoseshop.Dto.Role.RoleCreateResponse;
 import TT26_73.hoseshop.Dto.Role.RoleResponse;
+import TT26_73.hoseshop.Dto.Role.RoleUpdateRequest;
 import TT26_73.hoseshop.Service.RoleService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -23,9 +24,18 @@ import java.util.List;
 public class RoleController {
     RoleService roleService;
 
+    @PutMapping
+    ApiResponse<RoleResponse> updateRole(@RequestBody RoleUpdateRequest request){
+        return ApiResponse.<RoleResponse>builder()
+                .message("Update Role")
+                .result(roleService.updateRole(request))
+                .build();
+    }
+
     @PostMapping
     ApiResponse<RoleCreateResponse> createRole(@Valid @RequestBody RoleCreateRequest roleCreateRequest){
         return ApiResponse.<RoleCreateResponse>builder()
+                .message("Create Role")
                 .result(roleService.createRole(roleCreateRequest))
                 .build();
     }
@@ -33,6 +43,7 @@ public class RoleController {
     @GetMapping("/{roleName}")
     ApiResponse<RoleResponse> getRoleById(String roleName){
         return ApiResponse.<RoleResponse>builder()
+                .message("Get Role")
                 .result(roleService.getRoleByName(roleName))
                 .build();
     }

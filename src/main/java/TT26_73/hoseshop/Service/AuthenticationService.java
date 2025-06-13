@@ -93,7 +93,7 @@ public class AuthenticationService {
         JWSHeader jwsHeader = new JWSHeader(JWSAlgorithm.HS512);
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
                 .subject(user.getUsername())
-                .issuer("vu_tran.project")
+                .issuer("shoe-shop.project")
                 .issueTime(new Date())
                 .claim("scope", buildScope(user))
                 .expirationTime(new Date(
@@ -179,10 +179,13 @@ public class AuthenticationService {
 
     private String buildScope(User user) {
         StringJoiner joiner = new StringJoiner(" ");
-        Role role = user.getRole();
-        joiner.add("ROLE_" + role.getRoleName());
-        if (!CollectionUtils.isEmpty(role.getPermissionSet())) {
-            role.getPermissionSet().forEach(permission -> joiner.add(permission.getPermissionName()));
+        if (user != null && user.getRole() != null) {
+            Role role = user.getRole();
+            joiner.add("ROLE_" + (role.getRoleName() != null ? role.getRoleName() : ""));
+            if (!CollectionUtils.isEmpty(role.getPermissionSet())) {
+                role.getPermissionSet().forEach(permission ->
+                        joiner.add(permission.getPermissionName() != null ? permission.getPermissionName() : ""));
+            }
         }
         return joiner.toString();
     }

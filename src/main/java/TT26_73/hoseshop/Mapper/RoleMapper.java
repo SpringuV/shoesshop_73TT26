@@ -4,6 +4,7 @@ import TT26_73.hoseshop.Dto.Permission.PermissionResponse;
 import TT26_73.hoseshop.Dto.Role.RoleCreateRequest;
 import TT26_73.hoseshop.Dto.Role.RoleCreateResponse;
 import TT26_73.hoseshop.Dto.Role.RoleResponse;
+import TT26_73.hoseshop.Dto.Role.RoleUpdateRequest;
 import TT26_73.hoseshop.Model.Permission;
 import TT26_73.hoseshop.Model.Role;
 import org.mapstruct.Mapper;
@@ -19,6 +20,10 @@ public interface RoleMapper {
     @Mapping(target = "userSet", ignore = true)
     @Mapping(target = "permissionSet", ignore = true)
     Role toRoleFromCreate(RoleCreateRequest request);
+
+    @Mapping(target = "userSet", ignore = true)
+    @Mapping(target = "permissionSet", ignore = true)
+    Role toRoleEntityFromUpdateRequest(RoleUpdateRequest request);
 
     RoleCreateResponse toCreateResponse(Role role);
 

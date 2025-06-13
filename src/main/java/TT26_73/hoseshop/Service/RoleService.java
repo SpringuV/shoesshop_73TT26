@@ -3,10 +3,13 @@ package TT26_73.hoseshop.Service;
 import TT26_73.hoseshop.Dto.Role.RoleCreateRequest;
 import TT26_73.hoseshop.Dto.Role.RoleCreateResponse;
 import TT26_73.hoseshop.Dto.Role.RoleResponse;
+import TT26_73.hoseshop.Dto.Role.RoleUpdateRequest;
 import TT26_73.hoseshop.Exception.AppException;
 import TT26_73.hoseshop.Exception.ErrorCode;
 import TT26_73.hoseshop.Mapper.RoleMapper;
+import TT26_73.hoseshop.Model.Permission;
 import TT26_73.hoseshop.Model.Role;
+import TT26_73.hoseshop.Repository.PermissionRepository;
 import TT26_73.hoseshop.Repository.RoleRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +17,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +28,7 @@ import java.util.stream.Collectors;
 public class RoleService {
     RoleRepository roleRepository;
     RoleMapper roleMapper;
+    PermissionRepository permissionRepository;
 
     public RoleCreateResponse createRole(RoleCreateRequest request){
         if(roleRepository.existsById(request.getRoleName())){
@@ -33,6 +38,15 @@ public class RoleService {
         // save
         roleRepository.save(role);
         return roleMapper.toCreateResponse(role);
+    }
+
+    public RoleResponse updateRole(RoleUpdateRequest request){
+        Role role = roleRepository.findById(request.getRoleName()).orElseThrow(()-> new AppException(ErrorCode.ROLE_NOT_FOUND));
+        List<Permission> permissionList = permissionRepository.findAllById(request.getPerStringList());
+        role.setPermissionSet(new HashSet<>(permissionList));
+
+        roleRepository.save(role);
+        return roleMapper.toRoleResponse(role);
     }
 
     public List<RoleResponse> getListRole(){
