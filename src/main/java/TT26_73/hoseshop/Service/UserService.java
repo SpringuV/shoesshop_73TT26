@@ -7,6 +7,7 @@ import TT26_73.hoseshop.Dto.User.UserResponse;
 import TT26_73.hoseshop.Exception.AppException;
 import TT26_73.hoseshop.Exception.ErrorCode;
 import TT26_73.hoseshop.Mapper.UserMapper;
+import TT26_73.hoseshop.Model.Role;
 import TT26_73.hoseshop.Model.User;
 import TT26_73.hoseshop.Repository.UserRepository;
 import lombok.AccessLevel;
@@ -38,6 +39,7 @@ public class UserService {
 
         // map to user
         User user = userMapper.toUserFromUserCreateRequest(userCreateRequest);
+        user.setRole(Role.builder().roleName(PredefinedRole.USER_ROLE).build());
         user.setCreate_at(Instant.now());
         user.setPassword(new BCryptPasswordEncoder().encode(userCreateRequest.getPassword()));
 

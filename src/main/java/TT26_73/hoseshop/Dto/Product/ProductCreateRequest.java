@@ -2,6 +2,7 @@ package TT26_73.hoseshop.Dto.Product;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -18,5 +19,6 @@ public class ProductCreateRequest {
     String brand;
     int stock_quantity;
     String gender;
-    String status;
+    MultipartFile image;
+
 }

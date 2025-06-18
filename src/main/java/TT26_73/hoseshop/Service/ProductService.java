@@ -3,6 +3,7 @@ package TT26_73.hoseshop.Service;
 import TT26_73.hoseshop.Dto.Product.ProductCreateRequest;
 import TT26_73.hoseshop.Dto.Product.ProductCreateResponse;
 import TT26_73.hoseshop.Dto.Product.ProductResponse;
+import TT26_73.hoseshop.Dto.Product.ProductUpdateRequest;
 import TT26_73.hoseshop.Exception.AppException;
 import TT26_73.hoseshop.Exception.ErrorCode;
 import TT26_73.hoseshop.Mapper.ProductMapper;
@@ -11,18 +12,28 @@ import TT26_73.hoseshop.Repository.ProductRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Transactional
 public class ProductService {
+    private static final Logger log = LoggerFactory.getLogger(ProductService.class);
     ProductRepository productRepository;
     ProductMapper productMapper;
 
@@ -33,11 +44,54 @@ public class ProductService {
             throw new AppException(ErrorCode.PRODUCT_EXISTED);
         }
         Product product = productMapper.toProductFromCreateRequest(request);
-        product.setCreate_at(Instant.now());
+        // Xử lý ảnh
+        MultipartFile imageFile = request.getImage();
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                String uploadDir = "uploads/";
+                File directory = new File(uploadDir);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+
+                String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+                Path filePath = Paths.get(uploadDir, fileName);
+                Files.write(filePath, imageFile.getBytes());
+
+                product.setImagePath("/uploads/" + fileName); // lưu đường dẫn
+            } catch (IOException e) {
+                throw new AppException(ErrorCode.FILE_UPLOAD_ERROR);
+            }
+        }
 
         // save
         productRepository.save(product);
         return productMapper.toCreateResponse(product);
+    }
+
+    public ProductResponse updateProduct(ProductUpdateRequest request){
+        Product product = productRepository.findById(request.getProductId()).orElseThrow(()-> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
+        productMapper.updateProduct(product, request);
+
+        // Nếu người dùng upload ảnh mới
+        MultipartFile imageFile = request.getImage();
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                String uploadDir = "uploads/";
+                File directory = new File(uploadDir);
+                if (!directory.exists()) directory.mkdirs();
+
+                String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+                Path filePath = Paths.get(uploadDir, fileName);
+                Files.write(filePath, imageFile.getBytes());
+
+                product.setImagePath("/uploads/" + fileName); // Ghi đè ảnh cũ
+            } catch (IOException e) {
+                throw new AppException(ErrorCode.FILE_UPLOAD_ERROR);
+            }
+        }
+        productRepository.save(product);
+        return productMapper.toProductResponse(product);
     }
 
     public List<ProductResponse>  filterByNameCategory(String categoryName){
@@ -60,7 +114,19 @@ public class ProductService {
         return productMapper.toProductResponse(productRepository.findById(id).orElseThrow(()-> new AppException(ErrorCode.PRODUCT_NOT_FOUND)));
     }
 
-    public void deleteProductById(String id){
-        productRepository.deleteById(id);
+    public void deleteProductById(String id) throws IOException {
+
+        // xóa ảnh trong db
+        Product product = productRepository.findById(id).orElseThrow(()-> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
+        log.info("imagePath: {}", product.getImagePath());
+        String relativeImagePath = product.getImagePath();
+
+        // đường dẫn tuyệt đối
+        String absoluteUploadDir = System.getProperty("user.dir") + "/uploads";
+        Path fullImagePath = Paths.get(absoluteUploadDir, Paths.get(relativeImagePath).getFileName().toString());
+
+        Files.deleteIfExists(fullImagePath);
+
+        productRepository.delete(product);
     }
 }

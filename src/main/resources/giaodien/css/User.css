@@ -136,43 +136,6 @@ header {
     background-color: #e6f0fa;
 }
 
-.others {
-    flex: 0;
-    display: flex;
-    margin-left: auto;
-}
-
-.others > ul {
-    display: flex;
-    align-items: center;
-}
-
-.others > ul > li {
-    padding: 0 12px;
-    position: relative;
-}
-
-.others > ul > li:first-child input {
-    width: 100px;
-    border: none;
-    border-bottom: 1px solid #333;
-    background: transparent;
-    outline: none;
-}
-
-.others > ul > li:first-child i {
-    position: absolute;
-    right: 10px;
-}
-
-.others > ul > li a i {
-    font-size: 1.2rem;
-    transition: color 0.3s;
-}
-
-.others > ul > li a i:hover {
-    color: #003087;
-}
 
 /* Hamburger Menu Toggle */
 .menu-toggle {
@@ -412,7 +375,6 @@ form {
 
 .btn {
     width: 100%;
-    height: 48px;
     background: #7494ec;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

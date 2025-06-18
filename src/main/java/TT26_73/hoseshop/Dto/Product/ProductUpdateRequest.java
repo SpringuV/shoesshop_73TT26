@@ -2,8 +2,7 @@ package TT26_73.hoseshop.Dto.Product;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.time.Instant;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -11,16 +10,14 @@ import java.time.Instant;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
-public class ProductResponse {
+public class ProductUpdateRequest {
     String productId;
     String nameProduct;
     String description;
     double prices;
-    int stock_quantity;
     int size;
     String brand;
+    int stock_quantity;
     String gender;
-    String imagePath;
-    Instant create_at;
-    Instant update_at;
+    MultipartFile image;
 }

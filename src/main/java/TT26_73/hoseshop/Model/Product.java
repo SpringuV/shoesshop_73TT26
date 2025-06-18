@@ -44,8 +44,8 @@ public class Product {
     @Column(name = "gender")
     String gender;
 
-    @Column(name = "status")
-    String status;
+    @Column(name = "image_path")
+    String imagePath;
 
     @CreationTimestamp
     Instant create_at;

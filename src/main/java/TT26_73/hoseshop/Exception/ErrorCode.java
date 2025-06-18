@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public enum ErrorCode {
+    FILE_UPLOAD_ERROR(105, "Upload file error", HttpStatus.BAD_REQUEST),
     DELETE_OBJECT_EXCEPTION(105, "Delete object exception", HttpStatus.BAD_REQUEST),
     UN_AUTHENTICATED(101, "Un Authenticated", HttpStatus.UNAUTHORIZED),
     UN_AUTHORIZED_TO_DELETE_USER(101, "Un authorized to delete user", HttpStatus.UNAUTHORIZED),

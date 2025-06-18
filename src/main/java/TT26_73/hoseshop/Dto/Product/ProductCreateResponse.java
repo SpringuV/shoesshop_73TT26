@@ -17,6 +17,7 @@ public class ProductCreateResponse {
     int size;
     String brand;
     int stock_quantity;
+    String imagePath;
     String gender;
-    String status;
+    String create_at;
 }

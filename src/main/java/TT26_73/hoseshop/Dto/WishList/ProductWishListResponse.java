@@ -15,5 +15,7 @@ public class ProductWishListResponse {
     String description;
     double prices;
     String gender;
-    String status;
+    int size;
+    String brand;
+    int stock_quantity;
 }
