@@ -26,7 +26,8 @@ public class Product {
     @Column(name = "name_pro", unique = true)
     String nameProduct;
 
-    @Column(name = "description")
+    @Lob
+    @Column(name = "description", columnDefinition = "TEXT")
     String description;
 
     @Column(name = "price")

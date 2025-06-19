@@ -1,0 +1,182 @@
+<!-- --------------------Product---------------------- -->
+<div>
+    <div class="main-title">
+        <div class="icon"><i class="fa-solid fa-list"></i></div>
+        <h2 class="title-text">Quản lý sản phẩm</h2>
+    </div>
+    <div class="header-product">
+        <div class="order-action">
+            <div class="search">
+                <label>Tìm kiếm:</label>
+                <input id="seach-input" type="text" placeholder="Nhập từ cần tìm">
+            </div>
+            <div class="search-options">
+                <div class="item-search">
+                    <label for="top-select-brand">Thương hiệu</label>
+                    <select id="top-select-brand">
+                        <option value="NONE" selected>Chọn thương hiệu</option>
+                        <option value="ADIDAS">ADIDAS</option>
+                        <option value="PUMA">PUMA</option>
+                    </select>
+                </div>
+
+                <div class="item-search">
+                    <label>Mã SP</label>
+                    <input type="checkbox" name="searchField" value="productId">
+                </div>
+                <div class="item-search">
+                    <label>Tên SP</label>
+                    <input type="checkbox" name="searchField" value="nameProduct">
+                </div>
+                <div class="item-search">
+                    <label>Giới tính</label>
+                    <input type="checkbox" name="searchField" value="gender">
+                </div>
+                <div class="item-search">
+                    <label>Kích cỡ</label>
+                    <input type="checkbox" name="searchField" value="size">
+                </div>
+                <div class="item-search">
+                    <label>Giá</label>
+                    <input type="checkbox" name="searchField" value="price">
+                </div>
+                <div class="item-search">
+                    <label>Tất cả</label>
+                    <input type="checkbox" name="searchField" value="all" checked>
+                </div>
+            </div>
+        </div>
+        <div class="action-add">
+            <button id="callModalAddNewProduct" class="btn btn-add">Thêm mới sản phẩm</button>
+        </div>
+    </div>
+</div>
+<table id="productTable" aria-label="Product List">
+    <thead>
+        <tr>
+            <th>Mã sản phẩm</th>
+            <th>Tên sản phẩm</th>
+            <th>Đơn giá</th>
+            <th>Tồn kho</th>
+            <th>Thương hiệu</th>
+            <th>Giới tính</th>
+            <th>Kích cỡ</th>
+            <th>Mô tả</th>
+            <th>Hình ảnh</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+</table>
+
+</div>
+<!-- ADD PRODUCT -->
+<div class="modal-add-edit" id="addProductModal" style="display: none;">
+    <div class="modal-content">
+        <div class="top-modal">
+            <span class="close-btn" id="closeAddModal">&times;</span>
+            <h3 class="title-content">Thêm mới sản phẩm</h3>
+        </div>
+
+        <form id="productForm" enctype="multipart/form-data">
+            <div>
+                <label for="idProduct">Mã sản phẩm:</label>
+                <input type="text" id="idProduct" required placeholder="Nhập mã sản phẩm" />
+            </div>
+            <div>
+                <label for="nameProduct">Tên sản phẩm:</label>
+                <input type="text" id="nameProduct" required placeholder="Nhập tên sản phẩm" />
+            </div>
+            <div>
+                <label for="description">Mô tả:</label>
+                <textarea id="description" placeholder="Nhập mô tả"></textarea>
+            </div>
+            <div>
+                <label for="price">Đơn giá:</label>
+                <input type="number" id="price" min="1000" max="9999999999"
+                    placeholder="Nhập đơn giá (min-1000, max-9999999999)" />
+            </div>
+            <div>
+                <label for="size">Kích cỡ:</label>
+                <input type="number" id="size" placeholder="Nhập kích cỡ" />
+            </div>
+
+            <div>
+                <label for="brand">Thương hiệu:</label>
+                <select id="brand">
+                    <option value="NONE" selected>Chọn thương hiệu</option>
+                    <option value="ADIDAS">ADIDAS</option>
+                    <option value="PUMA">PUMA</option>
+                </select>
+            </div>
+            <div>
+                <label for="quantity_stock">Tồn kho:</label>
+                <input type="number" id="quantity_stock" min="1" max="1000000"
+                    placeholder="Nhập tồn kho (số lượng: min-1, max-1000000)" />
+            </div>
+            <div>
+                <label for="gender">Giới tính:</label>
+                <select id="gender">
+                    <option value="NONE" selected>Chọn giới tính</option>
+                    <option value="MALE">MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                    <option value="UNISEX">UNISEX</option>
+                </select>
+            </div>
+            <div>
+                <label for="fileInputAddProduct">Ảnh sản phẩm:</label>
+                <input type="file" name="file" id="fileInputAddProduct" required />
+                <img id="previewImageAddProduct" src="" alt="Ảnh sản phẩm"
+                    style="max-width: 100px; margin-top: 10px; display: none;" />
+            </div>
+            <button type="submit">Thêm sản phẩm</button>
+            <!-- <button type="button" class="cancel-btn" id="productCancel" style="display:none;">Thoát</button> -->
+        </form>
+    </div>
+</div>
+<!-- END ADD PRODUCT -->
+<!-- EDIT PRODUCT -->
+<div style="display: none;" class="modal-add-edit" id="editProductModal">
+    <div class="modal-content">
+        <div class="top-modal">
+            <span class="close-btn" id="closeEditModal">&times;</span>
+            <h3 style="text-align: center;">Sửa sản phẩm</h3>
+        </div>
+        <form id="editProductForm" enctype="multipart/form-data">
+            <div class="item">
+                <label>Mã sản phẩm <input type="text" id="editIdProduct" readonly></label>
+                <label>Tên sản phẩm: <input type="text" id="editNameProduct" /></label><br />
+                <label>Mô tả: <textarea type="text" id="editDescription"></textarea></label><br />
+                <label>Đơn giá: <input type="number" id="editPrice"
+                        placeholder="Nhập đơn giá (min-1000, max-9999999999)" /></label><br />
+                <label>Kích cỡ: <input type="number" id="editSize" /></label><br />
+                <label>Tồn kho: <input type="number" id="editStock"
+                        placeholder="Nhập tồn kho (số lượng: min-1, max-1000000)" /></label><br />
+                <label>Thương hiệu:
+                    <select id="editBrand">
+                        <option value="NONE">Chọn thương hiệu</option>
+                        <option value="ADIDAS">Adidas</option>
+                        <option value="PUMA">Puma</option>
+                    </select>
+                </label><br />
+                <label>Giới tính:
+                    <select id="editGender">
+                        <option value="NONE">Chọn giới tính</option>
+                        <option value="MALE">MALE</option>
+                        <option value="FEMALE">FEMALE</option>
+                        <option value="UNISEX">UNISEX</option>
+                    </select>
+                </label><br />
+                <label for="fileInputEditProduct">Ảnh sản phẩm:
+                    <input type="file" name="file" id="fileInputEditProduct" />
+                    <img id="previewImageEditProduct" src="" alt="Ảnh sản phẩm"
+                        style="max-width: 100px; margin-top: 10px; display: none;" />
+                </label>
+            </div>
+            <div class="item">
+                <button type="submit">Cập nhật</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- end product -->

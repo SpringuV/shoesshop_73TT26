@@ -48,7 +48,7 @@ public class ProductService {
         MultipartFile imageFile = request.getImage();
         if (imageFile != null && !imageFile.isEmpty()) {
             try {
-                String uploadDir = "uploads/";
+                String uploadDir = "uploads/products/";
                 File directory = new File(uploadDir);
                 if (!directory.exists()) {
                     directory.mkdirs();
@@ -58,7 +58,7 @@ public class ProductService {
                 Path filePath = Paths.get(uploadDir, fileName);
                 Files.write(filePath, imageFile.getBytes());
 
-                product.setImagePath("/uploads/" + fileName); // lưu đường dẫn
+                product.setImagePath("/uploads/products/" + fileName); // lưu đường dẫn
             } catch (IOException e) {
                 throw new AppException(ErrorCode.FILE_UPLOAD_ERROR);
             }
@@ -77,7 +77,7 @@ public class ProductService {
         MultipartFile imageFile = request.getImage();
         if (imageFile != null && !imageFile.isEmpty()) {
             try {
-                String uploadDir = "uploads/";
+                String uploadDir = "uploads/products/";
                 File directory = new File(uploadDir);
                 if (!directory.exists()) directory.mkdirs();
 
@@ -85,7 +85,7 @@ public class ProductService {
                 Path filePath = Paths.get(uploadDir, fileName);
                 Files.write(filePath, imageFile.getBytes());
 
-                product.setImagePath("/uploads/" + fileName); // Ghi đè ảnh cũ
+                product.setImagePath("/uploads/products/" + fileName); // Ghi đè ảnh cũ
             } catch (IOException e) {
                 throw new AppException(ErrorCode.FILE_UPLOAD_ERROR);
             }
@@ -118,12 +118,11 @@ public class ProductService {
 
         // xóa ảnh trong db
         Product product = productRepository.findById(id).orElseThrow(()-> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
-        log.info("imagePath: {}", product.getImagePath());
         String relativeImagePath = product.getImagePath();
 
         // đường dẫn tuyệt đối
-        String absoluteUploadDir = System.getProperty("user.dir") + "/uploads";
-        Path fullImagePath = Paths.get(absoluteUploadDir, Paths.get(relativeImagePath).getFileName().toString());
+        String absoluteUploadDir = System.getProperty("user.dir");
+        Path fullImagePath = Paths.get(absoluteUploadDir, relativeImagePath);
 
         Files.deleteIfExists(fullImagePath);
 

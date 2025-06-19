@@ -45,6 +45,9 @@ public class User {
     @Column(name = "email", unique = true)
     String email;
 
+    @Column(name = "image_path")
+    String imagePath;
+
     @CreationTimestamp
     Instant create_at;
 

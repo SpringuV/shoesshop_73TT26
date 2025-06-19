@@ -17,4 +17,5 @@ public class UserResponse {
     String address;
     String phone;
     String email;
+    String imagePath;
 }

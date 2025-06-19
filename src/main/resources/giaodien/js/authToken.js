@@ -37,7 +37,7 @@ function getRoleUser() {
             console.warn("Token không hợp lệ, không thể giải mã!");
         }
     } else {
-        throw new Error("Không tìm thấy tên người dùng trong payload");
+        console.warn("Người dùng chưa đăng nhập hoặc lỗi khi get ROLE");
     }
     return null;
 }

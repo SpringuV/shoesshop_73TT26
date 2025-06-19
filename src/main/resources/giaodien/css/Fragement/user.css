@@ -1,0 +1,26 @@
+.item-details{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+.inner-span{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-details img {
+    margin: 5px;
+    width: 200px;
+    height: auto;
+    border-radius: 6px;
+}
+
+.item-details label {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 40%;
+}

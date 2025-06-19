@@ -2,6 +2,7 @@ package TT26_73.hoseshop.Dto.User;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -15,4 +16,5 @@ public class UserUpdateRequest {
     int age;
     String address;
     String phone;
+    MultipartFile image;
 }

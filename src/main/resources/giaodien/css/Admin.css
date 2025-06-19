@@ -84,7 +84,8 @@ nav button:hover {
 
 section.content {
   flex: 1;
-  padding: 1.5rem 2rem;
+  margin-left: 10px;
+  margin-right: 10px;
   overflow-y: auto;
   background: white;
   position: relative;
@@ -131,6 +132,11 @@ select {
   transition: border-color var(--transition);
 }
 
+textarea {
+  height: 300px;
+  color: black;
+}
+
 input[type="text"]:focus,
 input[type="number"]:focus,
 input[type="email"]:focus,
@@ -143,6 +149,7 @@ select:focus {
 
 button {
   background: var(--primary-color);
+  margin: 5px;
   border: none;
   color: white;
   padding: 10px 24px;
@@ -173,18 +180,47 @@ table {
   font-size: 0.9rem;
 }
 
+td {
+  height: 100%;
+}
+
 th,
 td {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid #e2e8f0;
-  text-align: left;
+  text-align: center;
   vertical-align: middle;
+  border-right: 1px solid gray;
+}
+
+th {
+  border: none;
+}
+
+.actions {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 10px; thêm khoảng cách giữa 2 nút */
+}
+
+
+td:nth-last-child(1) {
+  height: 100%;
+  border-right: none;
+}
+
+tbody tr {
+  height: 130px;
 }
 
 th {
   background-color: var(--secondary-color);
   font-weight: 600;
   color: var(--primary-color);
+  text-align: center;
 }
 
 tr:hover {
@@ -192,7 +228,6 @@ tr:hover {
 }
 
 .actions button {
-  margin-right: 6px;
   background: #4299e1;
   padding: 6px 12px;
   font-size: 0.9rem;
@@ -324,7 +359,8 @@ tr:hover {
 .modal-add-edit {
   margin: 0;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.5); /* nền mờ đè lên toàn bộ trang */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* nền mờ đè lên toàn bộ trang */
   top: 0;
   left: 0;
   display: flex;
@@ -332,9 +368,11 @@ tr:hover {
   justify-content: center;
   z-index: 1000;
   width: 100vw;
-  border-radius: 0; /* cha không cần bo tròn */
+  border-radius: 0;
+  /* cha không cần bo tròn */
   height: 100vh;
-  overflow: auto; /* Cho phép scroll toàn modal khi cần */
+  overflow: auto;
+  /* Cho phép scroll toàn modal khi cần */
 }
 
 .modal-content {
@@ -343,15 +381,18 @@ tr:hover {
   background-color: #fff;
   padding: 20px 30px;
   border-radius: 8px;
-  width: 500px;
-  max-width: 100%;
-  max-height: 90vh; /* Không vượt quá chiều cao màn hình */
-  overflow-y: auto; /* Scroll nội dung nếu vượt */
+  min-width: 700px;
+  max-width: 40%;
+  max-height: 90vh;
+  /* Không vượt quá chiều cao màn hình */
+  overflow-y: auto;
+  /* Scroll nội dung nếu vượt */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  position: relative; /* Loại bỏ absolute + transform */
+  position: relative;
+  /* Loại bỏ absolute + transform */
 }
 
-.title-content{
+.title-content {
   text-align: center;
 }
 
@@ -368,8 +409,10 @@ tr:hover {
 .item {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;  /* bỏ căn giữa chiều dọc */
-  align-items: flex-start;      /* căn lề trái */
+  justify-content: flex-start;
+  /* bỏ căn giữa chiều dọc */
+  align-items: flex-start;
+  /* căn lề trái */
   width: 100%;
 }
 
@@ -382,26 +425,37 @@ tr:hover {
   width: 100%;
 }
 
-#editProductForm{
+#editProductForm {
   width: 90%;
 }
-.inner-bottom-btn{
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+
+.btn {
+  position: relative;
 }
 
-.btn.btn-add{
+/* .btn.btn-add {
   bottom: 0;
-  position: absolute;
+  position: fixed;
   margin-bottom: 1%;
-}
+} */
 
-.top-modal{
+.top-modal {
   display: flex;
   justify-content: space-evenly;
 }
 
-.img-product{
-    object-fit: cover;
+.img-product {
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
+
+.description {
+  min-width: 250px;
+  max-width: 350px;
+  max-height: 150px;
+  word-wrap: break-word;
+  text-align: center;
+  overflow: auto;
 }

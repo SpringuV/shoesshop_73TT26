@@ -1,0 +1,167 @@
+<h2>Quản lý người dùng</h2>
+<table id="userTable" aria-label="User List">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ảnh đại diện</th>
+            <th>Tài khoản</th>
+            <th>Họ và tên</th>
+            <th>Email</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody id="userTableBody"></tbody>
+</table>
+<div class="inner-bottom-btn">
+    <button id="btnAddNewUserModal" class="btn btn-add">Thêm mới người dùng</button>
+</div>
+<!-- Modal add -->
+<div class="modal-add-edit" id="addUserModal" style="display: none;">
+    <div class="modal-content">
+        <div class="top-modal">
+            <span class="close-btn" id="closeAddModel">&times;</span>
+            <h3 class="title-content">Thêm người dùng mới</h3>
+        </div>
+
+        <form id="userFormAdd" enctype="multipart/form-data">
+            <div>
+                <label for="username">Tài khoản:</label>
+                <input type="text" id="username" required placeholder="Nhập tài khoản" required />
+            </div>
+            <div>
+                <label for="password">Mật khẩu:</label>
+                <input type="password" id="password" required placeholder="Nhập mật khẩu" required />
+            </div>
+            <div>
+                <label for="fullname">Họ và tên:</label>
+                <input type="text" id="fullname" placeholder="Nhập họ và tên" required />
+            </div>
+            <div>
+                <label for="age">Tuổi:</label>
+                <input type="number" id="age" min="1" max="100" required />
+            </div>
+            <div>
+                <label for="address">Địa chỉ:</label>
+                <input type="text" id="address" placeholder="Nhập địa chỉ" required />
+            </div>
+            <div>
+                <label for="phone">Số điện thoại:</label>
+                <input type="text" id="phone" placeholder="Nhập số điện thoại" required />
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Nhập email" required />
+            </div>
+            <div>
+                <label for="fileInputEditUser">Ảnh người dùng:</label>
+                <input type="file" id="fileInputAddUser" required />
+                <img id="previewImageAddUser" src="" alt="Ảnh người dùng"
+                    style="max-width: 100px; margin-top: 10px; display: none;" />
+            </div>
+            <button type="submit">Thêm người dùng</button>
+        </form>
+    </div>
+</div>
+<!-- End modal add -->
+<!-- Modal Edit -->
+<div class="modal-add-edit" id="editUserModal" style="display: none;">
+    <div class="modal-content">
+        <div class="top-modal">
+            <span class="close-btn" id="closeEditModel">&times;</span>
+            <h3 class="title-content">Cập nhật thông tin người dùng</h3>
+        </div>
+
+        <form id="userFormEdit" enctype="multipart/form-data">
+            <div>
+                <label for="fullnameEdit">Họ và tên:</label>
+                <input type="text" id="fullnameEdit" placeholder="Nhập họ và tên" required />
+            </div>
+            <div>
+                <label for="ageEdit">Tuổi:</label>
+                <input type="number" id="ageEdit" min="1" max="150" required />
+            </div>
+            <div>
+                <label for="addressEdit">Địa chỉ:</label>
+                <input type="text" id="addressEdit" placeholder="Nhập địa chỉ" required />
+            </div>
+            <div>
+                <label for="phoneEdit">Số điện thoại:</label>
+                <input type="text" id="phoneEdit" placeholder="Nhập số điện thoại" required />
+            </div>
+            <div>
+                <label for="emailEdit">Email:</label>
+                <input type="email" id="emailEdit" placeholder="Nhập email" required />
+            </div>
+            <div>
+                <label for="fileInputEditUser">Ảnh người dùng:</label>
+                <input type="file" id="fileInputEditUser" required required />
+                <img id="previewImageEditUser" src="" alt="Ảnh người dùng"
+                    style="max-width: 100px; margin-top: 10px; display: none;" />
+            </div>
+            <button type="submit">Sửa người dùng</button>
+        </form>
+    </div>
+</div>
+<!-- End modal Edit  -->
+
+<!-- Modal Detail -->
+<div class="modal-add-edit" id="modalDetail" style="display: none;">
+    <div class="modal-content">
+        <div class="top-modal">
+            <span class="close-btn" id="closeDetailModal">&times;</span>
+            <h3 class="title-content">Thông tin chi tiết người dùng</h3>
+        </div>
+        <div id="details">
+            
+            <div class="item-details">
+                <label for="showUserid">Mã người dùng:</label>
+                <div class="inner-span">
+                    <span class="showItem" id="showUserid"></span>
+                </div>
+            </div>
+            <div class="item-details">
+                <label for="showUsername">Tên người dùng: </label>
+                <div class="inner-span">
+                    <span class="showItem" id="showUsername"></span>
+                </div>
+            </div>
+            <div class="item-details">
+                <label for="fullnameEdit">Email: </label>
+                <div class="inner-span">
+                    <span class="showItem" id="showEmail"></span>
+                </div>
+            </div>
+            <div class="item-details">
+                <label for="showFullname">Họ và tên:</label>
+                <div class="inner-span">
+                    <span class="showItem" id="showFullname"></span>
+                </div>
+            </div>
+            <div class="item-details">
+                <label for="showAge">Tuổi: </label>
+                <div class="inner-span">
+                    <span class="showItem" id="showAge"></span>
+                </div>
+            </div>
+            <div class="item-details">
+                <label for="showPhone">Số điện thoại: </label>
+                <div class="inner-span">
+                    <span class="showItem" id="showPhone"></span>
+                </div>
+            </div>
+            <div class="item-details">
+                <label for="showAddress">Địa chỉ: </label>
+                <div class="inner-span">
+                    <span class="showItem" id="showAddress"></span>
+                </div>
+            </div>
+            <div class="item-details">
+                <label for="showImage">Ảnh đại diện: </label>
+                <div class="inner-span">
+                    <img class="showItem" id="showImage">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--END Modal Detail -->

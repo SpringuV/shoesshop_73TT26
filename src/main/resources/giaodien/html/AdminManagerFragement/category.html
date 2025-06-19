@@ -1,0 +1,27 @@
+<div>
+    <h2>Quản lý danh mục</h2>
+    <form id="categoryForm">
+        <input type="hidden" id="categoryId" />
+        <div>
+            <label for="categoryName">Tên danh mục:</label>
+            <input type="text" id="categoryName" required placeholder="Nhập tên danh mục" />
+        </div>
+        <div>
+            <label>Sản phẩm:</label>
+            <div class="multi-checkbox-group" id="categoryProducts">
+                <!-- Dynamic checkboxes for products -->
+            </div>
+        </div>
+        <button type="submit">Thêm danh mục</button>
+    </form>
+    <table id="categoryTable" aria-label="Category List">
+        <thead>
+            <tr>
+                <th>Tên danh mục</th>
+                <th>Sản phẩm</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
