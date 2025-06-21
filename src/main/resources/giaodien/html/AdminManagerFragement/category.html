@@ -1,19 +1,25 @@
-<div>
-    <h2>Quản lý danh mục</h2>
-    <form id="categoryForm">
-        <input type="hidden" id="categoryId" />
-        <div>
-            <label for="categoryName">Tên danh mục:</label>
-            <input type="text" id="categoryName" required placeholder="Nhập tên danh mục" />
-        </div>
-        <div>
-            <label>Sản phẩm:</label>
-            <div class="multi-checkbox-group" id="categoryProducts">
-                <!-- Dynamic checkboxes for products -->
+<div class="main-content">
+    <h2 class="title">Quản lý danh mục</h2>
+    <div class="modal-add-edit" id="modalAddCategory" style="display: none;">
+        <div class="modal-content">
+            <div class="top-modal">
+                <span class="close-btn" id="closeAddModel">&times;</span>
+                <h3 class="title-content">Thêm Category mới</h3>
             </div>
+            <form id="categoryFormAdd">
+                <div>
+                    <label for="categoryName">Tên danh mục:</label>
+                    <input type="text" id="categoryName" required placeholder="Nhập tên danh mục" />
+                </div>
+                <div>
+                    <label>Sản phẩm:</label>
+                    <div class="multi-checkbox-group" id="categoryProducts">
+                    </div>
+                </div>
+                <button type="submit">Thêm danh mục</button>
+            </form>
         </div>
-        <button type="submit">Thêm danh mục</button>
-    </form>
+    </div>
     <table id="categoryTable" aria-label="Category List">
         <thead>
             <tr>
@@ -22,6 +28,9 @@
                 <th>Thao tác</th>
             </tr>
         </thead>
-        <tbody></tbody>
+        <tbody id="categoryTableBody"></tbody>
     </table>
+    <div class="inner-bottom-btn">
+        <button id="btnAddNewCategoryModal" class="btn btn-add">Thêm Category mới</button>
+    </div>
 </div>

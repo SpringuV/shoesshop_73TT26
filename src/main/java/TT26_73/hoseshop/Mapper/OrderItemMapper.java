@@ -13,8 +13,8 @@ public interface OrderItemMapper {
     @Mapping(target = "keyOrderItem", ignore = true)
     @Mapping(target = "orders", source = "orders")
     @Mapping(target = "product", source = "product")
-    @Mapping(target = "create_At", ignore = true)
-    @Mapping(target = "update_At", ignore = true)
+    @Mapping(target = "createAt", ignore = true)
+    @Mapping(target = "updateAt", ignore = true)
     OrderItem toEntityFromCreateRequest(OrderItemCreateRequest request, Product product, Orders orders);
 
     @Mapping(target = "itemOrderResponse", source = "orders")

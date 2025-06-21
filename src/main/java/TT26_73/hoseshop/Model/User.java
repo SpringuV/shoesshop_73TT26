@@ -48,11 +48,13 @@ public class User {
     @Column(name = "image_path")
     String imagePath;
 
+    @Column(name = "create_at")
     @CreationTimestamp
-    Instant create_at;
+    Instant createAt;
 
+    @Column(name = "update_at")
     @UpdateTimestamp
-    Instant update_at;
+    Instant updateAt;
 
     @ManyToOne
     @JoinColumn(name = "user_role")

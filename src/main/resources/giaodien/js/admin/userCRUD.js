@@ -9,10 +9,101 @@ function openDetailUser(User) {
     document.getElementById("showPhone").textContent = User.phone
     document.getElementById("showAddress").textContent = User.address
     utils.showImageFromAPI("showImage", User.imagePath)
-
     utils.openModel("modalDetail")
+
+    // Khi mở chi tiết -> đăng ký click edit
+    const btnEdit = document.querySelector(".edit-btn");
+    btnEdit.onclick = () => {
+        utils.closeModel("modalDetail");
+        editUserModalValue(User);
+        utils.openModel("editUserModal");
+
+        // Khi click ngoài để đóng modal edit
+        utils.setupOutsideClickToCloseModal("editUserModal", () => {
+            utils.openModel("modalDetail");
+        });
+        // Khi click dấu X để đóng modal edit
+        utils.click_X_toCloseModal("closeEditModel", "editUserModal", () => {
+            utils.openModel("modalDetail");
+        });
+    };
 }
 
+// Hàm đăng ký event click chi tiết
+function registerDetailButton(row, userResponse) {
+    const detailBtn = row.querySelector(".detail-btn");
+    if (detailBtn) {
+        detailBtn.addEventListener("click", () => {
+            openDetailUser(userResponse);
+            utils.click_X_toCloseModal("closeDetailModal", "modalDetail");
+            utils.setupOutsideClickToCloseModal("modalDetail");
+        });
+    }
+}
+
+function registerDeleteButton(row, idUser) {
+    // xử lý xóa người dùng
+    row.querySelector(".delete-btn")?.addEventListener("click", async () => {
+        await deleteUser(idUser)
+    })
+}
+
+function displayTablerowInTableBody(userResponse, idTableUserBody) {
+    // Kiểm tra xem dòng đó có tồn tại chưa
+    const existingRow = document.querySelector(`#${idTableUserBody} tr[data-id="${userResponse.userId}"]`);
+    const html = `
+        <td>${userResponse.userId}</td>
+        <td><img class="img-user" src="${userResponse.imagePath}" alt="user image"></td>
+        <td>${userResponse.username}</td>
+        <td>${userResponse.fullname}</td>
+        <td>${userResponse.email}</td>
+        <td>
+            <button class="detail-btn">Detail</button>
+            <button class="delete-btn" data-id="${userResponse.userId}">Xóa</button>
+        </td>
+    `;
+
+    if (existingRow) {
+        existingRow.innerHTML = html
+        // Đăng ký lại event nếu cần
+        registerDetailButton(existingRow, userResponse)
+    } else {
+        // Tạo dòng mới nếu chưa tồn tại
+        const tr = document.createElement("tr");
+        tr.setAttribute("data-id", userResponse.userId)
+        tr.innerHTML = html
+        registerDetailButton(tr, userResponse)
+        registerDeleteButton(tr, userResponse.userId)
+        document.getElementById(idTableUserBody).appendChild(tr)
+    }
+}
+
+async function deleteUser(idUser) {
+    if (!confirm("Bạn có chắc chắn muốn xóa người dùng này?")) {
+        return;
+    }
+    try {
+        const response = await fetch(`http://localhost:8080/api/users/${idUser}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+        })
+
+        if (!response.ok) {
+            alert("Xóa người dùng không thành công")
+        } else {
+            alert("Xóa người dùng thành công")
+            const deleteRow = document.querySelector(`tr[data-id="${idUser}"]`)
+            if (deleteRow) {
+                deleteRow.remove()
+            }
+        }
+    } catch (error) {
+        console.error("Lỗi xóa người dùng: ", error)
+        alert("Có lỗi xảy ra khi xóa người dùng.");
+    }
+}
 
 async function addStaffUserFromModalAdd(idTableUserBody) {
     const username = document.getElementById("username").value.trim()
@@ -23,7 +114,6 @@ async function addStaffUserFromModalAdd(idTableUserBody) {
     const phone = document.getElementById("phone").value.trim()
     const email = document.getElementById("email").value.trim()
     const fileInput = document.getElementById("fileInputAddUser")
-    console.log(fileInput)
 
     const formData = new FormData()
     formData.append("username", username)
@@ -48,40 +138,18 @@ async function addStaffUserFromModalAdd(idTableUserBody) {
 
         if (response.ok) {
             const data = response.json();
+            const userResponse = {
+                userId: data.result.userId,
+                imagePath: `http://localhost:8080${data.result.imagePath}`,
+                username: data.result.username,
+                fullname: data.result.fullname,
+                email: data.result.email,
+                age: data.result.age,
+                phone: data.result.phone,
+                address: data.result.address,
+            }
             alert("Thêm người dùng thành công")
-            const tr = document.createElement("tr")
-            tr.innerHTML = `
-                <td>${data.result.userId}</td>
-                <td>
-                    <img class = "img-product" src="http://localhost:8080${data.result.imagePath}" width="100" height="100" alt="product image">
-                </td>
-                <td>${data.result.username}</td>
-                <td>${data.result.fullname}</td>
-                <td>${data.result.email}</td>
-                <td>
-                    <button class="detail-btn">Detail</button>
-                    <button class="delete-btn" data-id="${data.result.userId}">Xóa</button>
-                </td>
-            `;
-            // event detail button
-            tr.querySelector(".detail-btn").addEventListener("click", () => {
-                const User = {
-                    userId: data.result.userId,
-                    username: data.result.username,
-                    email: data.result.email,
-                    fullname: data.result.fullname,
-                    age: data.result.age,
-                    phone: data.result.phone,
-                    address: data.result.address,
-                    imagePath: `http://localhost:8080${data.result.imagePath}`,
-                }
-                // open detail
-                openDetailUser(User)
-                utils.click_X_toCloseModal("closeDetailModal", "modalDetail")
-                utils.setupOutsideClickToCloseModal("modalDetail")
-            })
-            // hiển thị row
-            document.getElementById(idTableUserBody).appendChild(tr)
+            displayTablerowInTableBody(userResponse, idTableUserBody)
         } else {
             console.error("Response: Error fetch add staff - " + error);
         }
@@ -102,6 +170,93 @@ function addUserModalDisplay() {
     utils.openModel("addUserModal");
 }
 
+function editUserModalValue(User) {
+    document.getElementById("userIdEdit").value = User.userId
+    document.getElementById("emailEdit").value = User.email
+    document.getElementById("fullnameEdit").value = User.fullname
+    document.getElementById("ageEdit").value = User.age
+    document.getElementById("phoneEdit").value = User.phone
+    document.getElementById("addressEdit").value = User.address
+    utils.showImageFromAPI("previewImageEditUser", User.imagePath)
+    utils.previewImage("fileInputEditUser", "previewImageEditUser");
+}
+
+function receiveUserEditValueFromEditModal() {
+    const userId = document.getElementById("userIdEdit").value.trim()
+    const email = document.getElementById("emailEdit").value.trim()
+    const fullname = document.getElementById("fullnameEdit").value.trim()
+    const age = document.getElementById("ageEdit").value.trim()
+    const phone = document.getElementById("phoneEdit").value.trim()
+    const address = document.getElementById("addressEdit").value.trim()
+    const imageFileInput = document.getElementById("fileInputEditUser");
+    const imageFile = imageFileInput.files.length > 0 ? imageFileInput.files[0] : null
+    return {
+        userId, email, fullname, age, phone, address,
+        imageFileInput: imageFile,
+    }
+}
+
+async function updateUser(idTableUserBody) {
+    // get data
+    const userUpdateValue = receiveUserEditValueFromEditModal()
+    if (!userUpdateValue) return;
+    const userId = userUpdateValue.userId
+
+    const formData = new FormData()
+    formData.append("email", userUpdateValue.email)
+    formData.append("age", userUpdateValue.age)
+    formData.append("fullname", userUpdateValue.fullname)
+    formData.append("phone", userUpdateValue.phone)
+    formData.append("address", userUpdateValue.address)
+    // CHỈ append khi có file
+    if (userUpdateValue.imageFileInput && userUpdateValue.imageFileInput instanceof File) {
+        formData.append("image", userUpdateValue.imageFileInput);
+    }
+
+    // fetch
+    try {
+        const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+            body: formData,
+        })
+
+        if (response.ok) {
+            const data = await response.json()
+            alert("Cập nhật người dùng thành công")
+            const userResponse = {
+                userId: data.result.userId,
+                imagePath: `http://localhost:8080${data.result.imagePath}`,
+                username: data.result.username,
+                fullname: data.result.fullname,
+                email: data.result.email,
+                age: data.result.age,
+                phone: data.result.phone,
+                address: data.result.address,
+            }
+            // show table
+            displayTablerowInTableBody(userResponse, idTableUserBody)
+
+            // check detail có đang mở không
+            // Kiểm tra nếu chi tiết đó đang mở
+            // ?. là Optional Chaining
+            // Kiểm tra nếu phần trước đó(document.getElementById("showUserid")) tồn tại thì mới truy cập.textContent.
+            // Nếu phần đó null hoặc undefined, kết quả sẽ là undefined thay vì ném ra lỗi.
+            const detailId = document.getElementById("showUserid")?.textContent;
+
+            if (detailId && detailId == userResponse.userId) {
+                // 👉 Mở lại chi tiết ngay bằng dữ liệu mới
+                openDetailUser(userResponse);
+                utils.closeModel("editUserModal");
+            }
+        }
+    } catch (error) {
+        console.error("Lỗi khi update user", error)
+    }
+}
+
 async function loadListUserToTable(idTableUserBody) {
     const response = await fetch(`http://localhost:8080/api/users/list-user`, {
         method: "GET",
@@ -109,83 +264,59 @@ async function loadListUserToTable(idTableUserBody) {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         },
     })
-
-    if (response.ok) {
-        const data = await response.json()
-        data.result.forEach(user => {
-            const tr = document.createElement("tr")
-            tr.innerHTML = `
-                <td>${user.userId}</td>
-                <td>
-                    <img class = "img-product" src="http://localhost:8080${user.imagePath}" width="100" height="100" alt="product image">
-                </td>
-                <td>${user.username}</td>
-                <td>${user.fullname}</td>
-                <td>${user.email}</td>
-                <td>
-                    <button class="detail-btn" data-id="${user.userId}">Detail</button>
-                    <button class="delete-btn" data-id="${user.userId}">Xóa</button>
-                </td>
-            `;
-            // event detail button
-            tr.querySelector(".detail-btn").addEventListener("click", () => {
-                const User = {
-                    userId: `${user.userId}`,
-                    username: `${user.username}`,
-                    email: `${user.email}`,
-                    fullname: `${user.fullname}`,
-                    age: `${user.age}`,
-                    phone: `${user.phone}`,
-                    address: `${user.address}`,
-                    imagePath: `http://localhost:8080${user.imagePath}`,
-                }
-                console.log("User: ", User)
-                // open detail
-                openDetailUser(User)
-                utils.click_X_toCloseModal("closeDetailModal", "modalDetail")
-                utils.setupOutsideClickToCloseModal("modalDetail")
-            })
-            // hiển thị row
-            document.getElementById(idTableUserBody).appendChild(tr)
-        });
+    if (!response.ok) {
+        console.error("Error load user list");
+        return;
     }
+
+    const data = await response.json()
+    data.result.forEach(user => {
+        const userResponse = {
+            userId: user.userId,
+            imagePath: `http://localhost:8080${user.imagePath}`,
+            username: user.username,
+            fullname: user.fullname,
+            email: user.email,
+            age: user.age,
+            phone: user.phone,
+            address: user.address
+        };
+        displayTablerowInTableBody(userResponse, idTableUserBody);
+    });
 }
 
 export function load_user() {
     fetch(`/html/AdminManagerFragement/User.html`)
         .then(response => response.text())
         .then(data => {
-            document.querySelector(".section-user").innerHTML = data
+            document.querySelector(".section-user").innerHTML = data;
             const userFormAdd = document.getElementById("userFormAdd");
-            const userFormEdit = document.getElementById("userFormEdit")
-            const bodyUserTable = document.getElementById("userTableBody");
             const btnAddNewUserModal = document.getElementById("btnAddNewUserModal");
-            const userAddModal = document.getElementById("addUserModal");
-            const userEditModal = document.getElementById("editUserModal");
-            // -------------------------Load List user from Api --------------------------------------
-            loadListUserToTable("userTableBody")
-            // -------------------------END: Load List user from Api --------------------------------------
 
-            // -------------------------- modal add and process add new user --------------------------
-            btnAddNewUserModal.addEventListener('click', () => {
-                addUserModalDisplay()
-            })
+            // Load User List
+            loadListUserToTable("userTableBody");
 
-            // click dấu x hoặc click ra ngoài modal sẽ đóng form
+            // Mở modal thêm user
+            btnAddNewUserModal.addEventListener('click', addUserModalDisplay);
+
+            // Đóng modal thêm user
             utils.setupOutsideClickToCloseModal("addUserModal");
-            utils.click_X_toCloseModal("closeAddModel", "addUserModal")
-            // -------------------------- end modal add and process add new user --------------------------
+            utils.click_X_toCloseModal("closeAddModel", "addUserModal");
 
-            // process add user
+            // Preview ảnh
+            utils.previewImage("fileInputAddUser", "previewImageAddUser");
+
+            // Xử lý thêm user
             userFormAdd.addEventListener("submit", (event) => {
+                event.preventDefault();
+                addStaffUserFromModalAdd("userTableBody");
+            });
+
+            // xử lý edit user
+            document.getElementById("userFormEdit").addEventListener("submit", (event) => {
                 event.preventDefault()
-                addStaffUserFromModalAdd("userTableBody")
+                updateUser("userTableBody")
             })
-            // end process add user
-
-            //-------------------------- detail user--------------------------
-
-            //-------------------------- END: detail user--------------------------
         })
 }
 

@@ -31,11 +31,13 @@ public class Rating {
     @Max(5)
     int ratePoint;
 
+    @Column(name = "create_at")
     @CreationTimestamp
-    Instant create_at;
+    Instant createAt;
 
+    @Column(name = "updateAt")
     @CreationTimestamp
-    Instant update_at;
+    Instant updateAt;
 
     @ManyToOne
     @MapsId("userId")

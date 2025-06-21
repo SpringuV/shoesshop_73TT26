@@ -56,7 +56,7 @@ public class WishListService {
             Wishlist wishlist = wishListMapper.toEntityFromCreateRequest(request, user, product);
             wishlistRepository.save(wishlist);
             wishListCreateResponse = WishListCreateResponse.builder()
-                    .createAt(wishlist.getCreate_at())
+                    .createAt(wishlist.getCreateAt())
                     .productWishListResponse(wishListMapper.toProductWishListResponse(product))
                     .userWishListResponse(wishListMapper.toUserWishListResponse(user))
                     .isLiked(true)
@@ -67,7 +67,7 @@ public class WishListService {
 
     public List<WishListCreateResponse> getListWishList(){
         return wishlistRepository.findAll().stream().map(wishlist -> WishListCreateResponse.builder()
-                .createAt(wishlist.getCreate_at())
+                .createAt(wishlist.getCreateAt())
                 .productWishListResponse(wishListMapper.toProductWishListResponse(wishlist.getProduct()))
                 .userWishListResponse(wishListMapper.toUserWishListResponse(wishlist.getUser()))
                 .isLiked(true)
@@ -76,7 +76,7 @@ public class WishListService {
 
     public List<WishListCreateResponse> getListWishByUserId(String userId){
         return wishlistRepository.findAllByUser_UserId(userId).stream().map(wishlist -> WishListCreateResponse.builder()
-                .createAt(wishlist.getCreate_at())
+                .createAt(wishlist.getCreateAt())
                 .productWishListResponse(wishListMapper.toProductWishListResponse(wishlist.getProduct()))
                 .userWishListResponse(wishListMapper.toUserWishListResponse(wishlist.getUser()))
                 .isLiked(true)

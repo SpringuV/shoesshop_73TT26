@@ -48,11 +48,13 @@ public class Product {
     @Column(name = "image_path")
     String imagePath;
 
+    @Column(name = "create_at")
     @CreationTimestamp
-    Instant create_at;
+    Instant createAt;
 
+    @Column(name = "update_at")
     @UpdateTimestamp
-    Instant update_at;
+    Instant updateAt;
 
     @OneToMany(mappedBy = "product")
     Set<CartItem> cartItemSet;

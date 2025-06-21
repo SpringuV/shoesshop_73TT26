@@ -37,10 +37,10 @@ public class OrderItem {
     double discount;
 
     @CreationTimestamp
-    Instant create_At;
+    Instant createAt;
 
     @CreationTimestamp
-    Instant update_At;
+    Instant updateAt;
 
     @ManyToOne
     @MapsId("orderId") //Không bị lỗi ánh xạ trùng / Gán order hoặc product sẽ tự động cập nhật keyOrderItem / Dễ quản lý và ít bug hơn khi dùng trong thực tế.

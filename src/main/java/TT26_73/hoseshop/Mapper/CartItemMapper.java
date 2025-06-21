@@ -16,13 +16,13 @@ public interface CartItemMapper {
     @Mapping(target = "keyCartItem", ignore = true)
     @Mapping(target = "user", source = "user")
     @Mapping(target = "product", source = "product")
-    @Mapping(target = "create_at", ignore = true)
+    @Mapping(target = "createAt", ignore = true)
     CartItem toCartItem(CartItemCreateRequest request, User user, Product product);
 
 
     @Mapping(source = "user", target = "userCartItemResponse")
     @Mapping(source = "product", target = "productCartItemResponse")
-    @Mapping(source = "create_at", target = "createAt")
+    @Mapping(source = "createAt", target = "createAt")
     @Mapping(source = "quantity", target = "quantity")
     CartItemResponse toResponse(CartItem cartItem);
 

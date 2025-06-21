@@ -5,9 +5,9 @@ const dotItem = document.querySelectorAll('.dot');
 let imgNumber = imgPosition.length;
 let index = 0;
 
-imgPosition.forEach(function(img, index) {
+imgPosition.forEach(function (img, index) {
     img.style.left = index * 100 + '%';
-    dotItem[index].addEventListener('click', function() {
+    dotItem[index].addEventListener('click', function () {
         slider(index);
     });
 });
@@ -33,6 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevBtn = document.querySelector('.prev-btn');
     const nextBtn = document.querySelector('.next-btn');
     const productWidth = 250; // Chiều rộng mỗi sản phẩm (bao gồm gap)
+
+    if (!wrapper || !prevBtn || !nextBtn) {
+        console.error('Elements .products-wrapper, .prev-btn or .next-btn not found!');
+        return;
+    }
 
     prevBtn.addEventListener('click', () => {
         wrapper.scrollLeft -= productWidth;
@@ -82,36 +87,84 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-      const toggle = document.querySelector(".menu-toggle");
-      const menu = document.querySelector(".menu > ul");
-      const overlay = document.querySelector(".menu-overlay");
+    const toggle = document.querySelector(".menu-toggle");
+    const menu = document.querySelector(".menu > ul");
+    const overlay = document.querySelector(".menu-overlay");
 
-      toggle.addEventListener("click", () => {
-  const isOpen = menu.classList.contains("active");
-  if (isOpen) {
-    // Đang mở → đóng
-    menu.classList.remove("active");
-    toggle.classList.remove("active");
-    overlay.classList.remove("active");
-  } else {
-    // Đang đóng → mở
-    menu.classList.add("active");
-    toggle.classList.add("active");
-    overlay.classList.add("active");
-  }
-});
+    toggle.addEventListener("click", () => {
+        const isOpen = menu.classList.contains("active");
+        if (isOpen) {
+            // Đang mở → đóng
+            menu.classList.remove("active");
+            toggle.classList.remove("active");
+            overlay.classList.remove("active");
+        } else {
+            // Đang đóng → mở
+            menu.classList.add("active");
+            toggle.classList.add("active");
+            overlay.classList.add("active");
+        }
+    });
 
-      overlay.addEventListener("click", () => {
+    overlay.addEventListener("click", () => {
         menu.classList.remove("active");
         toggle.classList.remove("active");
         overlay.classList.remove("active");
-      });
-
-      document.querySelectorAll(".menu > ul > li > a").forEach(link => {
-        link.addEventListener("click", () => {
-          menu.classList.remove("active");
-          toggle.classList.remove("active");
-          overlay.classList.remove("active");
-        });
-      });
     });
+
+    document.querySelectorAll(".menu > ul > li > a").forEach(link => {
+        link.addEventListener("click", () => {
+            menu.classList.remove("active");
+            toggle.classList.remove("active");
+            overlay.classList.remove("active");
+        });
+    });
+});
+
+// -----------------------------------------------------------------------------------------------------
+function displayNewProduct(productList) {
+    const wrapper = document.querySelector(".products-wrapper")
+    wrapper.innerHTML = "";
+    productList.forEach(product =>{
+        const item = document.createElement('div')
+        item.classList.add("product-item")
+
+        item.innerHTML = `
+            <div class = "image-item-home">
+                <img class = "image-new-product" src="http://localhost:8080${product.imagePath}" alt="Sản phẩm 1">
+            </div>
+            <h3>${product.nameProduct}</h3>
+            <p>${product.brand}</p>
+            <p>${product.prices.toLocaleString()} đ</p>
+            <a href="#" class="color-btn">Mua</a>
+        `;
+        wrapper.appendChild(item)
+    })
+
+}
+
+export async function loadNewProducts() {
+    try {
+        const response = await fetch(`http://localhost:8080/api/products/new-products`, {
+            method: "GET",
+        })
+
+        if (response.ok) {
+            const data = await response.json()
+            displayNewProduct(data.result)
+        } else {
+            console.error("Error loading new products");
+            return;
+        }
+    } catch(error){
+        alert("Lỗi khi thực hiện loadNewProducts")
+        console.error("Lỗi khi loadNewProducts: ", error)
+    }
+}
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    loadNewProducts()
+})
+
+export default {loadNewProducts}
+

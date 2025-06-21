@@ -20,7 +20,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
-    @Column(name = "name_cate")
+    @Column(name = "name_cate", unique = true)
     String nameCate;
 
     @ManyToMany(mappedBy = "categorySet")

@@ -1,9 +1,6 @@
 package TT26_73.hoseshop.Mapper;
 
-import TT26_73.hoseshop.Dto.Product.ProductCreateRequest;
-import TT26_73.hoseshop.Dto.Product.ProductCreateResponse;
-import TT26_73.hoseshop.Dto.Product.ProductResponse;
-import TT26_73.hoseshop.Dto.Product.ProductUpdateRequest;
+import TT26_73.hoseshop.Dto.Product.*;
 import TT26_73.hoseshop.Model.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,8 +11,8 @@ import java.lang.annotation.Target;
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
-    @Mapping(target = "create_at", ignore = true)
-    @Mapping(target = "update_at", ignore = true)
+    @Mapping(target = "createAt", ignore = true)
+    @Mapping(target = "updateAt", ignore = true)
     @Mapping(target = "cartItemSet", ignore = true)
     @Mapping(target = "ratingSet", ignore = true)
     @Mapping(target = "wishlistSet", ignore = true)
@@ -28,8 +25,8 @@ public interface ProductMapper {
     @Mapping(source = "proId", target = "productId")
     ProductCreateResponse toCreateResponse(Product product);
 
-    @Mapping(target = "create_at", ignore = true)
-    @Mapping(target = "update_at", ignore = true)
+    @Mapping(target = "createAt", ignore = true)
+    @Mapping(target = "updateAt", ignore = true)
     @Mapping(target = "cartItemSet", ignore = true)
     @Mapping(target = "ratingSet", ignore = true)
     @Mapping(target = "imagePath", ignore = true)
@@ -41,4 +38,7 @@ public interface ProductMapper {
 
     @Mapping(source = "proId", target = "productId")
     ProductResponse toProductResponse(Product product);
+
+    @Mapping(source = "proId", target = "productId")
+    ProductShowInfo toProductShowInfo(Product product);
 }

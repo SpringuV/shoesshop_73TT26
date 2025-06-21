@@ -17,14 +17,14 @@ public interface RatingMapper {
     @Mapping(target = "keyRating", ignore = true)
     @Mapping(target = "user", source = "user")
     @Mapping(target = "product", source = "product")
-    @Mapping(target = "create_at", ignore = true)
-    @Mapping(target = "update_at", ignore = true)
+    @Mapping(target = "createAt", ignore = true)
+    @Mapping(target = "updateAt", ignore = true)
     Rating toRating(RatingCreateRequest request, User user, Product product);
 
 
     @Mapping(source = "user", target = "userRating")
     @Mapping(source = "product", target = "productRating")
-    @Mapping(source = "create_at", target = "createAt")
+    @Mapping(source = "createAt", target = "createAt")
     RatingResponse toResponse(Rating rating);
 
     // map User -> UserRatingResponse

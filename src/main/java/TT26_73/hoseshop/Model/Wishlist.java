@@ -22,7 +22,7 @@ public class Wishlist {
     KeyWishList keyWishList;
 
     @CreationTimestamp
-    Instant create_at;
+    Instant createAt;
 
     @ManyToOne
     @MapsId("userId")

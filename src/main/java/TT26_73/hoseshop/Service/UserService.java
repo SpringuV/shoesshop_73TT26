@@ -76,12 +76,13 @@ public class UserService {
     public UserResponse updateUser(String idUser, UserUpdateRequest request){
         User user = userRepository.findById(idUser).orElseThrow(()-> new AppException(ErrorCode.USER_NOT_FOUND));
         userMapper.toUserFromUpdateRequest(user, request);
-        // Xử lý ảnh
-        MultipartFile imageFile = request.getImage();
-        String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
-        exeProcessImage(imageFile, fileName);
-        user.setImagePath("/uploads/users/" + fileName);
-
+        if (request.getImage() != null && !request.getImage().isEmpty()) {
+            // Xử lý ảnh nếu có
+            MultipartFile imageFile = request.getImage();
+            String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+            exeProcessImage(imageFile, fileName);
+            user.setImagePath("/uploads/users/" + fileName);
+        }
         // save
         userRepository.save(user);
         return userMapper.toUserResponse(user);

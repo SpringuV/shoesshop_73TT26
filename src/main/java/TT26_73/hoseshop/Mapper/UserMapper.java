@@ -20,8 +20,8 @@ public interface UserMapper {
     @Mapping(target = "ratingSet", ignore = true)
     @Mapping(target = "wishlistSet", ignore = true)
     @Mapping(target = "ordersSet", ignore = true)
-    @Mapping(target = "create_at", ignore = true)
-    @Mapping(target = "update_at", ignore = true)
+    @Mapping(target = "createAt", ignore = true)
+    @Mapping(target = "updateAt", ignore = true)
     User toUserFromUserCreateRequest(UserCreateRequest userCreateRequest);
 
     @Mapping(target = "userId", ignore = true)
@@ -31,8 +31,8 @@ public interface UserMapper {
     @Mapping(target = "ratingSet", ignore = true)
     @Mapping(target = "wishlistSet", ignore = true)
     @Mapping(target = "ordersSet", ignore = true)
-    @Mapping(target = "create_at", ignore = true)
-    @Mapping(target = "update_at", ignore = true)
+    @Mapping(target = "createAt", ignore = true)
+    @Mapping(target = "updateAt", ignore = true)
     User toUserFromStaffCreateRequest(UserCreateStaffRequest request);
 
     UserResponse toUserResponse(User user);
@@ -46,8 +46,8 @@ public interface UserMapper {
     @Mapping(target = "imagePath", ignore = true)
     @Mapping(target = "wishlistSet", ignore = true)
     @Mapping(target = "ordersSet", ignore = true)
-    @Mapping(target = "create_at", ignore = true)
-    @Mapping(target = "update_at", ignore = true)
+    @Mapping(target = "createAt", ignore = true)
+    @Mapping(target = "updateAt", ignore = true)
     void toUserFromUpdateRequest(@MappingTarget User user, UserUpdateRequest userUpdateRequest);
 
     UserCreateResponse toCreateResponse(User user);

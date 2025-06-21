@@ -13,7 +13,7 @@ import org.mapstruct.Mapping;
 public interface WishListMapper {
 
     @Mapping(target = "keyWishList", ignore = true)
-    @Mapping(target = "create_at", ignore = true)
+    @Mapping(target = "createAt", ignore = true)
     Wishlist toEntityFromCreateRequest(WishListCreateRequest request, User user, Product product);
 
     @Mapping(source = "userId",target = "userId")

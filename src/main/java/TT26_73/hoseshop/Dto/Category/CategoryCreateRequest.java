@@ -11,4 +11,5 @@ import lombok.experimental.FieldDefaults;
 @Builder
 public class CategoryCreateRequest {
     String name;
+    String nameProduct;
 }

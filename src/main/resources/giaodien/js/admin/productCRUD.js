@@ -23,7 +23,6 @@ export function loadProduct() {
 				const stock_quantity = document.getElementById("quantity_stock").value.trim();
 				const gender = document.getElementById("gender").value;
 				const fileInput = document.getElementById("fileInputAddProduct");
-				console.log(fileInput)
 				if (!idProduct || !nameProduct || !description || !price || !size || brand === "NONE" || !stock_quantity || gender === "NONE") {
 					alert("Bạn vui lòng nhập đầy đủ dữ liệu");
 					return;
@@ -72,13 +71,14 @@ export function loadProduct() {
 					<td class="actions">
 							<button class="edit-btn" data-id="${data.result.productId}">Sửa</button>
 							<button class="delete-btn" data-id="${data.result.productId}">Xóa</button>
-						
 					</td>
 					`;
 						productTableBody.appendChild(tr);
 						// reset lại form
 						productForm.reset();
 						CKEDITOR.instances.description.setData("");
+					} else {
+						alert("Thêm sản phẩm thất bại")
 					}
 
 				} catch (error) {

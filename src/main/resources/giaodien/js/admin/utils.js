@@ -14,22 +14,30 @@ export function resetPreviewImage(previewId) {
     img.style.display = "none";
 }
 
-export function setupOutsideClickToCloseModal(modalId) {
+export function setupOutsideClickToCloseModal(modalId, callback) {
     const modal = document.getElementById(modalId)
     if (!modal) return;
 
     window.addEventListener("click", (event) => {
         if (event.target === modal) {
             modal.style.display = "none"
+            // nếu có call back thì sẽ thực hiện
+            if (callback && typeof callback === "function") {
+                callback();
+            }
         }
     })
 }
 
 // click vào dấu x
-export function click_X_toCloseModal(id_X, modalId) {
+export function click_X_toCloseModal(id_X, modalId, callback) {
     const btn_X = document.getElementById(id_X);
     btn_X.addEventListener("click", () => {
         closeModel(modalId)
+        // nếu có call back thì sẽ thực hiện
+        if (callback && typeof callback === "function") {
+            callback();
+        }
     })
 }
 

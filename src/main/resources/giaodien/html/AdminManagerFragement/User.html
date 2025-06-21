@@ -52,13 +52,18 @@
                 <label for="email">Email:</label>
                 <input type="email" id="email" placeholder="Nhập email" required />
             </div>
-            <div>
-                <label for="fileInputEditUser">Ảnh người dùng:</label>
-                <input type="file" id="fileInputAddUser" required />
-                <img id="previewImageAddUser" src="" alt="Ảnh người dùng"
-                    style="max-width: 100px; margin-top: 10px; display: none;" />
+            <div class="image-user">
+                <div class="input-image">
+                    <label for="fileInputAddUser">Ảnh người dùng:</label>
+                    <input type="file" id="fileInputAddUser" required />
+                </div>
+                <div class="preview">
+                    <img id="previewImageAddUser" src="" alt="Ảnh người dùng" />
+                </div>
             </div>
-            <button type="submit">Thêm người dùng</button>
+            <div class="inner-button">
+                <button type="submit">Thêm người dùng</button>
+            </div>
         </form>
     </div>
 </div>
@@ -72,6 +77,10 @@
         </div>
 
         <form id="userFormEdit" enctype="multipart/form-data">
+            <div>
+                <label for="userIdEdit">Mã người dùng:</label>
+                <input type="text" id="userIdEdit" readonly />
+            </div>
             <div>
                 <label for="fullnameEdit">Họ và tên:</label>
                 <input type="text" id="fullnameEdit" placeholder="Nhập họ và tên" required />
@@ -92,13 +101,18 @@
                 <label for="emailEdit">Email:</label>
                 <input type="email" id="emailEdit" placeholder="Nhập email" required />
             </div>
-            <div>
-                <label for="fileInputEditUser">Ảnh người dùng:</label>
-                <input type="file" id="fileInputEditUser" required required />
-                <img id="previewImageEditUser" src="" alt="Ảnh người dùng"
-                    style="max-width: 100px; margin-top: 10px; display: none;" />
+            <div class="image-user">
+                <div class="input-image">
+                    <label for="fileInputEditUser">Ảnh người dùng:</label>
+                    <input type="file" id="fileInputEditUser" />
+                </div>
+                <div class="preview">
+                    <img id="previewImageEditUser" src="" alt="Ảnh người dùng" />
+                </div>
             </div>
-            <button type="submit">Sửa người dùng</button>
+            <div class="inner-button">
+                <button type="submit">Sửa người dùng</button>
+            </div>
         </form>
     </div>
 </div>
@@ -112,7 +126,7 @@
             <h3 class="title-content">Thông tin chi tiết người dùng</h3>
         </div>
         <div id="details">
-            
+
             <div class="item-details">
                 <label for="showUserid">Mã người dùng:</label>
                 <div class="inner-span">
@@ -158,9 +172,12 @@
             <div class="item-details">
                 <label for="showImage">Ảnh đại diện: </label>
                 <div class="inner-span">
-                    <img class="showItem" id="showImage">
+                    <img class="showItem" id="showImage" alt="Ảnh người dùng">
                 </div>
             </div>
+        </div>
+        <div class="btn-bottom-modal">
+            <button class="edit-btn">Sửa Thông Tin</button>
         </div>
     </div>
 </div>

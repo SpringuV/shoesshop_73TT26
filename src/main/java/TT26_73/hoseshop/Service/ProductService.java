@@ -1,9 +1,6 @@
 package TT26_73.hoseshop.Service;
 
-import TT26_73.hoseshop.Dto.Product.ProductCreateRequest;
-import TT26_73.hoseshop.Dto.Product.ProductCreateResponse;
-import TT26_73.hoseshop.Dto.Product.ProductResponse;
-import TT26_73.hoseshop.Dto.Product.ProductUpdateRequest;
+import TT26_73.hoseshop.Dto.Product.*;
 import TT26_73.hoseshop.Exception.AppException;
 import TT26_73.hoseshop.Exception.ErrorCode;
 import TT26_73.hoseshop.Mapper.ProductMapper;
@@ -14,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -127,5 +127,10 @@ public class ProductService {
         Files.deleteIfExists(fullImagePath);
 
         productRepository.delete(product);
+    }
+
+    public List<ProductShowInfo> getNewProduct(){
+        Pageable pageable = PageRequest.of(0, 8, Sort.by("createAt").descending());
+        return productRepository.findAll(pageable).stream().map(productMapper::toProductShowInfo).toList();
     }
 }

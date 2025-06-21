@@ -21,8 +21,9 @@ public class CartItem {
     @EmbeddedId
     KeyCartItem keyCartItem;
 
+    @Column(name = "create_at")
     @CreationTimestamp
-    Instant create_at;
+    Instant createAt;
 
     @Column(name = "quantity")
     int quantity;

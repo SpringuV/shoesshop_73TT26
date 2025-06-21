@@ -19,5 +19,5 @@ public class ProductCreateResponse {
     int stock_quantity;
     String imagePath;
     String gender;
-    String create_at;
+    String createAt;
 }

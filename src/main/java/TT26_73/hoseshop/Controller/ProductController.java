@@ -1,10 +1,7 @@
 package TT26_73.hoseshop.Controller;
 
 import TT26_73.hoseshop.Dto.ApiResponse;
-import TT26_73.hoseshop.Dto.Product.ProductCreateRequest;
-import TT26_73.hoseshop.Dto.Product.ProductCreateResponse;
-import TT26_73.hoseshop.Dto.Product.ProductResponse;
-import TT26_73.hoseshop.Dto.Product.ProductUpdateRequest;
+import TT26_73.hoseshop.Dto.Product.*;
 import TT26_73.hoseshop.Service.ProductService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -30,6 +27,14 @@ public class ProductController {
         return ApiResponse.<ProductCreateResponse>builder()
                 .message("Create Product")
                 .result(productService.productCreate(productCreateRequest))
+                .build();
+    }
+
+    @GetMapping("/new-products")
+    ApiResponse<List<ProductShowInfo>> getNewProducts(){
+        return ApiResponse.<List<ProductShowInfo>>builder()
+                .message("Get New Product")
+                .result(productService.getNewProduct())
                 .build();
     }
 

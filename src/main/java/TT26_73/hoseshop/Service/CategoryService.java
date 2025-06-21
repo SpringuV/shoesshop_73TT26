@@ -37,6 +37,8 @@ public class CategoryService {
         }
         // end check cate existed
         Category category = categoryMapper.toCategoryFromCreateRequest(request);
+//        List<Product> productList = productRepository.f
+
         categoryRepository.save(category);
         return categoryMapper.toResponse(category);
     }
