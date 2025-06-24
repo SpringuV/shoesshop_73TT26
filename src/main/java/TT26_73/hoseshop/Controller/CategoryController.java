@@ -2,7 +2,7 @@ package TT26_73.hoseshop.Controller;
 
 import TT26_73.hoseshop.Dto.ApiResponse;
 import TT26_73.hoseshop.Dto.Category.CategoryCreateRequest;
-import TT26_73.hoseshop.Dto.Category.CategoryResponse;
+import TT26_73.hoseshop.Dto.Category.CategoryUpdateRequest;
 import TT26_73.hoseshop.Dto.Category.CategoryWithProductsResponse;
 import TT26_73.hoseshop.Service.CategoryService;
 import lombok.AccessLevel;
@@ -24,26 +24,34 @@ public class CategoryController {
     CategoryService categoryService;
 
     @PostMapping
-    ApiResponse<CategoryResponse> createCate(@RequestBody CategoryCreateRequest request){
-        return ApiResponse.<CategoryResponse>builder()
+    ApiResponse<CategoryWithProductsResponse> createCate(@RequestBody CategoryCreateRequest request){
+        return ApiResponse.<CategoryWithProductsResponse>builder()
                 .message("Create Cate")
                 .result(categoryService.createCategory(request))
                 .build();
     }
 
-    @PostMapping("/{cateId}/products")
-    ApiResponse<CategoryWithProductsResponse> addProductToCate(@PathVariable("cateId") String cateId, Set<String> productIds){
+    @PutMapping("/{cateId}")
+    ApiResponse<CategoryWithProductsResponse> updateCategory(@PathVariable("cateId") String cateId,@RequestBody CategoryUpdateRequest request){
         return ApiResponse.<CategoryWithProductsResponse>builder()
-                .message("Add Products To Cate")
-                .result(categoryService.addProductIntoCate(cateId, productIds))
+                .message("Update Products To Cate")
+                .result(categoryService.updateCate(cateId, request))
                 .build();
     }
 
     @GetMapping
-    ApiResponse<List<CategoryResponse>> getListCate(){
-        return ApiResponse.<List<CategoryResponse>>builder()
+    ApiResponse<List<CategoryWithProductsResponse>> getListCate(){
+        return ApiResponse.<List<CategoryWithProductsResponse>>builder()
                 .message("Get List Cate")
                 .result(categoryService.getListCate())
+                .build();
+    }
+
+    @GetMapping("/{cateId}")
+    ApiResponse<List<CategoryWithProductsResponse>> getCategory(@PathVariable("cateId") String cateId){
+        return ApiResponse.<List<CategoryWithProductsResponse>>builder()
+                .message("Get Cate with Product Response")
+                .result(categoryService.getCategoryWithProductResponse(cateId))
                 .build();
     }
 

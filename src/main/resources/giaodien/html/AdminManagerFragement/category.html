@@ -3,28 +3,26 @@
     <div class="modal-add-edit" id="modalAddCategory" style="display: none;">
         <div class="modal-content">
             <div class="top-modal">
-                <span class="close-btn" id="closeAddModel">&times;</span>
+                <span class="close-btn" id="closeAddModelCate">&times;</span>
                 <h3 class="title-content">Thêm Category mới</h3>
             </div>
             <form id="categoryFormAdd">
                 <div>
-                    <label for="categoryName">Tên danh mục:</label>
-                    <input type="text" id="categoryName" required placeholder="Nhập tên danh mục" />
+                    <label for="categoryNameAdd">Tên danh mục:</label>
+                    <input type="text" id="categoryNameAdd" required placeholder="Nhập tên danh mục" />
                 </div>
-                <div>
-                    <label>Sản phẩm:</label>
-                    <div class="multi-checkbox-group" id="categoryProducts">
-                    </div>
+                <div class="inner-button">
+                    <button type="submit">Thêm danh mục</button>
                 </div>
-                <button type="submit">Thêm danh mục</button>
+
             </form>
         </div>
     </div>
     <table id="categoryTable" aria-label="Category List">
         <thead>
             <tr>
+                <th>Mã danh mục</th>
                 <th>Tên danh mục</th>
-                <th>Sản phẩm</th>
                 <th>Thao tác</th>
             </tr>
         </thead>
@@ -32,5 +30,66 @@
     </table>
     <div class="inner-bottom-btn">
         <button id="btnAddNewCategoryModal" class="btn btn-add">Thêm Category mới</button>
+    </div>
+
+    <div class="modal-add-edit" id="modalDetailCategory" style="display: none;">
+        <div class="modal-content">
+            <div class="top-modal">
+                <span class="close-btn" id="closeDetailModel">&times;</span>
+                <h3 class="title-content">Chi Tiết Danh Mục</h3>
+            </div>
+            <form id="categoryFormDetail">
+                <div>
+                    <label for="categoryIdDetail">Mã danh mục: <input type="text" readonly
+                            id="categoryIdDetail"></label>
+                </div>
+                <div>
+                    <label for="categoryNameDetail">Tên danh mục:</label>
+                    <input type="text" id="categoryNameDetail" placeholder="Nhập tên danh mục" readonly />
+                </div>
+                <div>
+                    <label>Danh sách sản phẩm:</label>
+                    <table id="tableDisplayProductOfCategoryDetail">
+                        <thead>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Hình ảnh</th>
+                        </thead>
+                        <tbody id="tbodyProductOfCategoryDetail">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="inner-button">
+                    <button type="submit" id="btn_CallForm_ModifyCategory">Sửa danh mục</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-add-edit" id="modalEditCategory" style="display: none;">
+        <div class="modal-content">
+            <div class="top-modal">
+                <span class="close-btn" id="closeEditCategoryModel">&times;</span>
+                <h3 class="title-content">Sửa Danh Mục</h3>
+            </div>
+            <form id="categoryFormEdit">
+                <div>
+                    <label for="categoryIdEdit">Mã danh mục: <input type="text" readonly id="categoryIdEdit"></label>
+                </div>
+                <div>
+                    <label for="categoryNameEdit">Tên danh mục:</label>
+                    <input type="text" id="categoryNameEdit" placeholder="Nhập tên danh mục" required />
+                </div>
+                <div>
+                    <label>Danh sách sản phẩm:</label>
+                    <div class="multi-checkbox-group" id="editCategoryProducts">
+                        <!-- Sản phẩm sẽ được thêm bằng JS dưới dạng checkbox -->
+                    </div>
+                </div>
+                <div class="inner-button">
+                    <button type="submit" id="btnModifyCategory">Lưu thay đổi</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

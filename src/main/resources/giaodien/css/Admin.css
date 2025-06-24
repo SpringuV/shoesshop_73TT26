@@ -242,7 +242,8 @@ tr:hover {
 }
 
 .multi-checkbox-group {
-  max-height: 120px;
+  min-height: 20vhpx;
+  max-height: 50vh;
   overflow-y: auto;
   border: 1px solid #cbd5e0;
   padding: 10px;
@@ -356,7 +357,6 @@ tr:hover {
 }
 
 .modal-add-edit {
-  margin: 0;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
   /* nền mờ đè lên toàn bộ trang */
@@ -367,20 +367,20 @@ tr:hover {
   justify-content: center;
   z-index: 1000;
   width: 100vw;
-  border-radius: 0;
+  /* border-radius: 0; */
   /* cha không cần bo tròn */
   height: 100vh;
-  overflow: auto;
+  /* overflow: auto; */
   /* Cho phép scroll toàn modal khi cần */
 }
 
 .modal-content {
   box-sizing: border-box;
-  margin: 30px auto;
+  margin: 50px auto;
   background-color: #fff;
-  padding: 20px 30px;
+  padding: 5px 30px;
   border-radius: 8px;
-  min-width: 700px;
+  min-width: 300px;
   max-width: 40%;
   max-height: 90vh;
   /* Không vượt quá chiều cao màn hình */
@@ -389,6 +389,7 @@ tr:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: relative;
   /* Loại bỏ absolute + transform */
+  /* Đảm bảo không có margin tự động */
 }
 
 .title-content {

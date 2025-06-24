@@ -247,7 +247,7 @@ async function updateUser(idTableUserBody) {
             const detailId = document.getElementById("showUserid")?.textContent;
 
             if (detailId && detailId == userResponse.userId) {
-                // 👉 Mở lại chi tiết ngay bằng dữ liệu mới
+                // Mở lại chi tiết ngay bằng dữ liệu mới
                 openDetailUser(userResponse);
                 utils.closeModel("editUserModal");
             }

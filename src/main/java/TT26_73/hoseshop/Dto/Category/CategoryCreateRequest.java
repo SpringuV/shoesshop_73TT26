@@ -10,6 +10,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class CategoryCreateRequest {
-    String name;
+    String nameCate;
     String nameProduct;
 }
