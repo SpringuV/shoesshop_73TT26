@@ -28,7 +28,7 @@ public enum ErrorCode {
     PRODUCT_NOT_FOUND(102, "Product not found !", HttpStatus.NOT_FOUND),
     CATEGORY_NOT_FOUND(102, "Category not found !", HttpStatus.NOT_FOUND),
     WISH_LIST_NOT_FOUND(102, "Wish list not found !", HttpStatus.NOT_FOUND),
-    CART_ITEM_NOT_FOUND(102, "Product not found !", HttpStatus.NOT_FOUND),
+    CART_ITEM_NOT_FOUND(102, "Cart Items not found !", HttpStatus.NOT_FOUND),
     ROLE_NOT_FOUND(102, "Role not found !", HttpStatus.NOT_FOUND),
     PASSWORD_INVALID(103, "Password at least {min} characters", HttpStatus.BAD_REQUEST),
     USERNAME_INVALID(103, "Username at least {min} characters", HttpStatus.BAD_REQUEST),

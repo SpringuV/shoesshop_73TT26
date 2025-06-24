@@ -3,6 +3,7 @@ package TT26_73.hoseshop.Controller;
 import TT26_73.hoseshop.Dto.ApiResponse;
 import TT26_73.hoseshop.Dto.CartItem.CartItemCreateRequest;
 import TT26_73.hoseshop.Dto.CartItem.CartItemResponse;
+import TT26_73.hoseshop.Dto.CartItem.UpdateCartItemRequest;
 import TT26_73.hoseshop.Service.CartItemService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,14 @@ public class CartItemController {
         return ApiResponse.<CartItemResponse>builder()
                 .message("Create Cart Item")
                 .result(cartItemService.createCartItem(request))
+                .build();
+    }
+
+    @PutMapping("/update")
+    ApiResponse<List<CartItemResponse>> updateCartItem(@RequestBody UpdateCartItemRequest request){
+        return ApiResponse.<List<CartItemResponse>>builder()
+                .message("Update Cart Item")
+                .result(cartItemService.updateCartItem(request))
                 .build();
     }
 

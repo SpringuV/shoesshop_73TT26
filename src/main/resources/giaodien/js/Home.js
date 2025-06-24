@@ -83,9 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
     const toggle = document.querySelector(".menu-toggle");
     const menu = document.querySelector(".menu > ul");
@@ -125,23 +122,80 @@ document.addEventListener("DOMContentLoaded", () => {
 function displayNewProduct(productList) {
     const wrapper = document.querySelector(".products-wrapper")
     wrapper.innerHTML = "";
-    productList.forEach(product =>{
+    productList.forEach(product => {
         const item = document.createElement('div')
         item.classList.add("product-item")
 
         item.innerHTML = `
             <div class = "image-item-home">
-                <img class = "image-new-product" src="http://localhost:8080${product.imagePath}" alt="Sản phẩm 1">
+                <a href="/html/Product_detail.html">
+                    <img class = "image-new-product" src="http://localhost:8080${product.imagePath}" alt="Sản phẩm 1">
+                </a>
             </div>
             <h3>${product.nameProduct}</h3>
             <p>${product.brand}</p>
             <p>${product.prices.toLocaleString()} đ</p>
-            <a href="#" class="color-btn">Mua</a>
+            <div class= "item-action">
+                <button class="favorite"><i class="fa-solid fa-heart"></i></button>
+                <button class="color-btn" data-id="${product.productId}">Thêm vào giỏ hàng</button>
+            </div>
         `;
         wrapper.appendChild(item)
     })
-
 }
+
+async function getUserId() {
+    try {
+        const response = await fetch(`http://localhost:8080/api/users`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+
+        if (response.ok) {
+            const data = await response.json()
+            return data.result.userId;
+        } else {
+            alert("Lỗi thực hiện getUserId - 1")
+        }
+
+    } catch (error) {
+        console.log("Không lấy được Id Người dùng")
+        alert("Lỗi thực hiện getUserId - 2")
+    }
+}
+
+async function addProductToCart(productId) {
+    const userId = await getUserId();
+    const dataRequest = {
+        userId: userId,
+        productId: productId,
+        quantity: 1
+    }
+
+    try {
+        const response = await fetch(`http://localhost:8080/api/cart-items`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dataRequest)
+        })
+
+        if (response.ok) {
+            alert("Đã thêm vào giỏ hàng")
+
+        } else {
+            alert("Lỗi thực hiện addProductToCart - 1")
+        }
+    } catch (error) {
+        console.log("Không thêm được vào giỏ hàng")
+        alert("Lỗi thực hiện addProductToCart - 2")
+    }
+}
+
 
 export async function loadNewProducts() {
     try {
@@ -156,15 +210,27 @@ export async function loadNewProducts() {
             console.error("Error loading new products");
             return;
         }
-    } catch(error){
+    } catch (error) {
         alert("Lỗi khi thực hiện loadNewProducts")
         console.error("Lỗi khi loadNewProducts: ", error)
     }
 }
 
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", () => {
     loadNewProducts()
+
+    // xử lý thêm giỏ hàng và yêu thích
+    const wrapper = document.querySelector(".products-wrapper")
+    wrapper.addEventListener("click",async (event)=>{
+        console.log(event)
+        if(event.target.classList.contains("color-btn")){
+            const productId = event.target.dataset.id;
+            await addProductToCart(productId)
+        }
+    })
+
+
 })
 
-export default {loadNewProducts}
+export default { loadNewProducts }
 

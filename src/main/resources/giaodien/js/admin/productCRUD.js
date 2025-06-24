@@ -18,7 +18,8 @@ export function loadProduct() {
 				const nameProduct = document.getElementById("nameProduct").value.trim();
 				const description = CKEDITOR.instances.description.getData().trim();
 				const price = document.getElementById("price").value.trim();
-				const size = document.getElementById("size").value.trim();
+				// xu ly them size
+				const selectedSize = Array.from(document.querySelectorAll('#sizeCheckboxAdd input[type=checkbox]:checked')).map(cbvalue => cbvalue.value)
 				const brand = document.getElementById("brand").value;
 				const stock_quantity = document.getElementById("quantity_stock").value.trim();
 				const gender = document.getElementById("gender").value;
@@ -38,7 +39,9 @@ export function loadProduct() {
 				formData.append("nameProduct", nameProduct)
 				formData.append("description", description)
 				formData.append("prices", price)
-				formData.append("size", size)
+				selectedSize.forEach(value => {
+					formData.append("size", value)
+				})
 				formData.append("brand", brand)
 				formData.append("stock_quantity", stock_quantity)
 				formData.append("gender", gender)
@@ -63,7 +66,7 @@ export function loadProduct() {
 					<td>${data.result.stock_quantity}</td>
 					<td>${data.result.brand}</td>
 					<td>${data.result.gender}</td>
-					<td>${data.result.size}</td>
+					<td>${Array.isArray(data.result.sizeResponseSet) ? data.result.sizeResponseSet.join(", ") : data.result.sizeResponseSet}</td>
 					<td class= "description">${data.result.description}</td>
 					<td>
 						<img class = "img-product" src="http://localhost:8080${data.result.imagePath}" width="100" height="100" alt="product image">
@@ -93,7 +96,6 @@ export function loadProduct() {
 				document.getElementById("nameProduct").value = "";
 				document.getElementById("description").value = "";
 				document.getElementById("price").value = "";
-				document.getElementById("size").value = "";
 				document.getElementById("brand").value = "NONE";
 				document.getElementById("quantity_stock").value = "";
 				document.getElementById("gender").value = "NONE";
@@ -132,18 +134,18 @@ export function loadProduct() {
 						data.result.forEach(product => {
 							const tr = document.createElement("tr")
 							tr.innerHTML = `
-						<td>${product.productId}</td>
-						<td>${product.nameProduct}</td>
-						<td>${product.prices}</td>
-						<td>${product.stock_quantity}</td>
-						<td>${product.brand}</td>
+						<td style= "height: 130px; width: 80px; ">${product.productId}</td>
+						<td style= "height: 130px; width: 80px; ">${product.nameProduct}</td>
+						<td style= "height: 130px; width: 80px; ">${product.prices}</td>
+						<td style= "height: 130px; width: 80px; ">${product.stock_quantity}</td>
+						<td style= "height: 130px; width: 80px; ">${product.brand}</td>
 						<td>${product.gender}</td>
-						<td>${product.size}</td>
-						<td>${product.description}</td>
+						<td>${Array.isArray(product.sizeResponseSet) ? product.sizeResponseSet.join(", ") : product.sizeResponseSet}</td>
+						<td class="td-description">${product.description}</td>
 						<td>
 							<img class = "img-product" src="http://localhost:8080${product.imagePath}" width="100" height="100" alt="product image">
 						</td>
-						<td class="actions">
+						<td style= "height: 130px; width: 130px; " class="actions">
 							<button class="edit-btn" data-id="${product.productId}">Sửa</button>
 							<button class="delete-btn" data-id="${product.productId}">Xóa</button>
 						</td>
@@ -199,7 +201,7 @@ export function loadProduct() {
 				row.children[3].textContent = updatedProduct.stock_quantity;
 				row.children[4].textContent = updatedProduct.brand;
 				row.children[5].textContent = updatedProduct.gender;
-				row.children[6].textContent = updatedProduct.size;
+				row.children[6].textContent = updatedProduct.sizeResponseSet;
 				row.children[7].innerHTML = updatedProduct.description;
 				const imgElement = row.children[8].querySelector("img");
 				if (imgElement && updatedProduct.imagePath) {
@@ -215,7 +217,8 @@ export function loadProduct() {
 				// lấy description từ ckeditor
 				const description = CKEDITOR.instances.editDescription.getData();
 				const price = document.getElementById("editPrice").value.trim();
-				const size = document.getElementById("editSize").value.trim();
+				// xu ly size
+				const selectedSize = Array.from(document.querySelectorAll('#sizeCheckboxEdit input[type="checkbox"]:checked')).map(cbvalue => cbvalue.value)
 				const brand = document.getElementById("editBrand").value;
 				const stock_quantity = document.getElementById("editStock").value.trim();
 				const gender = document.getElementById("editGender").value;
@@ -227,7 +230,9 @@ export function loadProduct() {
 				formData.append("nameProduct", nameProduct)
 				formData.append("description", description)
 				formData.append("prices", price)
-				formData.append("size", size)
+				selectedSize.forEach(value => {
+					formData.append("size", value)
+				})
 				formData.append("brand", brand)
 				formData.append("stock_quantity", stock_quantity)
 				formData.append("gender", gender)
@@ -263,12 +268,18 @@ export function loadProduct() {
 
 			// click sửa xóa
 			function openEditModal(product) {
+				console.log({product})
 				document.getElementById("editIdProduct").value = product.productId;
 				document.getElementById("editNameProduct").value = product.nameProduct;
 				// gán description vào modal sửa
 				CKEDITOR.instances.editDescription.setData(product.description)
 				document.getElementById("editPrice").value = product.prices;
-				document.getElementById("editSize").value = product.size;
+				product.size.forEach(sizeValue =>{
+					const checkbox = document.querySelector(`#sizeCheckboxEdit input[value="${sizeValue}"`)
+					if(checkbox){
+						checkbox.checked = true;
+					}
+				})
 				document.getElementById("editStock").value = product.stock_quantity;
 				document.getElementById("editBrand").value = product.brand;
 				document.getElementById("editGender").value = product.gender;
@@ -289,7 +300,7 @@ export function loadProduct() {
 					const stock_quantity = row.children[3].textContent;
 					const brand = row.children[4].textContent;
 					const gender = row.children[5].textContent;
-					const size = row.children[6].textContent;
+					const size = row.children[6].textContent.split(", ").map(s => s.trim());
 					const description = row.children[7].innerHTML;
 					const imgElement = row.children[8].querySelector("img");
 					const imagePath = imgElement ? imgElement.getAttribute("src") : null;

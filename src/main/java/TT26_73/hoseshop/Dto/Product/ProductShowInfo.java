@@ -3,6 +3,8 @@ package TT26_73.hoseshop.Dto.Product;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -14,7 +16,7 @@ public class ProductShowInfo {
     String nameProduct;
     String description;
     double prices;
-    int size;
+    List<String> sizeResponseSet;
     String brand;
     String gender;
     String imagePath;

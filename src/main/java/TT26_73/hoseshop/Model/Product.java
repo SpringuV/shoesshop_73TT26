@@ -34,7 +34,7 @@ public class Product {
     double prices;
 
     @Column(name = "size")
-    int size;
+    String size;
 
     @Column(name = "stock_quantity")
     int stock_quantity;

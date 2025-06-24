@@ -1,11 +1,30 @@
-function isTokenExpired(token) {
+export function isTokenExpired(token) {
     const payload = JSON.parse(atob(token.split('.')[1]));
     const now = Math.floor(Date.now() / 1000);
     return payload.exp < now;
 }
 
+export function checkUserLogin() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        return false;
+    }
+
+    // Khi backend sẵn sàng:
+    // try {
+    //     const resp = await fetch("/api/auth/me", {
+    //         headers: { "Authorization": `Bearer ${token}` }
+    //     });
+    //     return resp.ok;
+    // } catch (error) {
+    //     return false;
+    // }
+
+    return true;
+}
+
 // hiển thị thông tin trên header
-function getUserName() {
+export function getUserName() {
     const token = localStorage.getItem("token");
     if (token) {
         const payload = parseJwt(token);
@@ -24,7 +43,7 @@ function getUserName() {
     }
 }
 
-function getRoleUser() {
+export function getRoleUser() {
     const token = localStorage.getItem("token");
     if (token) {
         const payload = parseJwt(token);
@@ -44,7 +63,7 @@ function getRoleUser() {
 
 
 // xử lý chuỗi để lấy role_*
-function extractRole(scope) {
+export function extractRole(scope) {
     // Tách chuỗi scope thành một mảng
     const scopeArray = scope.split(" ");
 
@@ -55,7 +74,7 @@ function extractRole(scope) {
 }
 
 // trích xuất thông tin từ jwt
-function parseJwt(token) {
+export function parseJwt(token) {
     try {
         // Decoding logic
         const base64Url = token.split('.')[1]; // payload nằm ở phần thứ 2, Splits the JWT string on the . delimiter and takes the second part (index 1), which is the Payload
@@ -73,11 +92,17 @@ function parseJwt(token) {
     }
 }
 
+export function getUserId() {
+    const token = localStorage.getItem("token");
+    const payload = parseJwt(token)
+    const userId = payload.userId
+    return userId
+}
+
 
 // save jwt khi đăng xuất
-async function logout() {
+export async function logout() {
     const token = localStorage.getItem("token");
-    console.log(token);
 
     if (!token) {
         window.location.replace("/html/Home.html"); // chuyển hướng về trang index
@@ -118,7 +143,7 @@ async function logout() {
 }
 
 
-function checkSession() {
+export function checkSession() {
     const token = localStorage.getItem("token");
     if (!token || isTokenExpired(token)) {
         alert("Phiên đăng nhập đã hết hạn hoặc không hợp lệ. Vui lòng đăng nhập lại.");
@@ -127,7 +152,7 @@ function checkSession() {
     }
 }
 
-function isTokenNearExpired(token, seconds = 120) {
+export function isTokenNearExpired(token, seconds = 120) {
     try {
         const payload = parseJwt(token);
         const now = Math.floor(Date.now() / 1000)
@@ -140,7 +165,7 @@ function isTokenNearExpired(token, seconds = 120) {
 }
 
 
-async function refreshAccessToken(userIsActive) {
+export async function refreshAccessToken(userIsActive) {
     const token = localStorage.getItem("token");
     if (!token) return false;
     if (userIsActive) {
@@ -174,7 +199,7 @@ async function refreshAccessToken(userIsActive) {
     }
 }
 
-function scheduleTokenRefresh() {
+export function scheduleTokenRefresh() {
     const token = localStorage.getItem("token")
     if (!token) return;
 
@@ -192,7 +217,7 @@ function scheduleTokenRefresh() {
     }, delay)
 }
 
-function startMonitoringUserActivity() {
+export function startMonitoringUserActivity() {
     let userActive = false;
 
     function setUserActive() {
@@ -235,3 +260,9 @@ window.onload = () => {
 
     scheduleTokenRefresh(); // vẫn dùng ở mọi trang nếu bạn muốn tự refresh token
 };
+
+export default {
+    checkUserLogin, getUserId,
+    isTokenNearExpired, checkSession, logout, parseJwt, extractRole, isTokenExpired,
+    getUserName, getRoleUser, isTokenExpired, startMonitoringUserActivity, scheduleTokenRefresh, refreshAccessToken
+}

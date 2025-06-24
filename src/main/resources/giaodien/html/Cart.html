@@ -1,37 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/Cart.css">
     <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/common.css">
     <title>Giỏ hàng của tôi</title>
 </head>
+
 <body>
-<!-- Header -->
+    <!-- Header -->
     <div class="header"></div>
-<!-- End Header -->
-<div class="menu-overlay"></div>
-<!--------------------- Cart --------------------->
-<section class="cart-container">
+    <!-- End Header -->
+    <!--------------------- Cart --------------------->
+    <section class="cart-container">
         <h2>Giỏ Hàng Của Bạn</h2>
-        <div class="cart-items" id="cart-items">
-            <!-- Sản phẩm sẽ được thêm vào đây bằng JavaScript -->
+        <div class="cart-item">
+            <table class="table-cart">
+                <thead>
+                    <th>Sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Tổng</th>
+                </thead>
+                <tbody id="tbody-cart-list">
+                    <tr>
+                        <td class="cart-td">
+                            <div class="image-cart">
+                                <img src="/images/SanPhamMoi2.webp">
+                            </div>
+                            <div class="summary-info">
+                                <h3>Tên sản phẩm</h3>
+                                <p>Thương hiệu: ADIDAS</p>
+                                <p>Size: 34</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cart-price">
+                                <span>5,000,000đ</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cart-action">
+                                <div class="minus">
+                                    <i class="fa-solid fa-minus"></i>
+                                </div>
+                                <div class="quantity-cart">
+                                    <input type="number" min="1" max="100" value="1" readonly />
+                                </div>
+                                <div class="plus">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="total-price">
+                                <span>5,000,000đ</span>
+                                <button class="delete-item"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="cart-summary">
-            <p>Tổng tiền: <span id="total-price">0đ</span></p>
-            <button class="checkout-btn">Thanh Toán</button>
+        <div class="inner-checkout">
+            <div class="cart-summary">
+                <div class="info-checkout">
+                    <p>Tổng tiền:</p>
+                    <span id="total-price">10,000,000đ</span>
+                </div>
+                <div class="inner-button">
+                    <button class="checkout-btn">Thanh Toán</button>
+                </div>
+            </div>
         </div>
     </section>
-<!--------------------- End Cart --------------------->
+    <!--------------------- End Cart --------------------->
 
-<!--------------------- Footer--------------------->
-<div class="footer"></div>
-<!--------------------- End Footer --------------------->
+    <!--------------------- Footer--------------------->
+    <div class="footer"></div>
+    <!--------------------- End Footer --------------------->
 </body>
-<script src="/js/Cart.js"></script>
-<script src="/js/load_header.js"></script>
+<script type="module" src="/js/Cart.js"></script>
+<script  type="module" src="/js/load_header.js"></script>
 <script src="/js/load_footer.js"></script>
-<script src="/js/authToken.js"></script>
+<script type="module" src="/js/authToken.js"></script>
+
 </html>

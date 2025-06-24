@@ -35,7 +35,7 @@ public interface CartItemMapper {
     // Map Product → ProductRatingResponse
     @Mapping(source = "proId", target = "proId")
     @Mapping(source = "nameProduct", target = "nameProduct")
-    @Mapping(source = "description", target = "description")
+    @Mapping(source = "prices", target = "prices")
     ProductCartItemResponse toProductCartItemResponse(Product product);
 
 }

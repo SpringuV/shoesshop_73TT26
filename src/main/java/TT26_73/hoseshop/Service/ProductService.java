@@ -23,10 +23,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.Instant;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -44,6 +44,11 @@ public class ProductService {
             throw new AppException(ErrorCode.PRODUCT_EXISTED);
         }
         Product product = productMapper.toProductFromCreateRequest(request);
+        StringBuilder sb = new StringBuilder();
+        for(String size : request.getSizeSet()){
+            sb.append(size).append(" ");
+        }
+        product.setSize(sb.toString().trim());
         // Xử lý ảnh
         MultipartFile imageFile = request.getImage();
         if (imageFile != null && !imageFile.isEmpty()) {
@@ -72,7 +77,11 @@ public class ProductService {
     public ProductResponse updateProduct(ProductUpdateRequest request){
         Product product = productRepository.findById(request.getProductId()).orElseThrow(()-> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
         productMapper.updateProduct(product, request);
-
+        StringBuilder sb = new StringBuilder();
+        for(String size : request.getSize()){
+            sb.append(size).append(" ");
+        }
+        product.setSize(sb.toString().trim());
         // Nếu người dùng upload ảnh mới
         MultipartFile imageFile = request.getImage();
         if (imageFile != null && !imageFile.isEmpty()) {

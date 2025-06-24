@@ -95,6 +95,7 @@ public class AuthenticationService {
                 .subject(user.getUsername())
                 .issuer("shoe-shop.project")
                 .issueTime(new Date())
+                .claim("userId", user.getUserId())
                 .claim("scope", buildScope(user))
                 .expirationTime(new Date(
                         Instant.now().plus(VALID_DURATION, ChronoUnit.SECONDS).toEpochMilli()))

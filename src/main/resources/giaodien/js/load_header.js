@@ -1,3 +1,4 @@
+import auth from './authToken.js';
 function loadHeader() {
     fetch('/html/header.html')
         .then(response => response.text())
@@ -5,8 +6,9 @@ function loadHeader() {
             data => {
                 document.querySelector(".header").innerHTML = data
                 setTimeout(() => {
-                    const userName = getUserName()
+                    const userName = auth.getUserName()
                     const area_login = document.querySelector(".btn.login-btn")
+
                     // lấy account_menu
                     const adminManager = document.querySelector(".btn.admin-manager")
                     const account_menu = document.querySelector(".account-menu")
@@ -36,20 +38,29 @@ function loadHeader() {
                         userSection.style.display = "none"
                         area_login.style.display = "inline-block"
                         const btn_login = document.querySelector(".login");
-                        console.log(btn_login)
                         btn_login.addEventListener("click", () => {
                             window.location.href = "/html/index.html"
                         })
                     }
 
+                    const cartManager = document.getElementById("cart-manager")
+                    cartManager.addEventListener('click', (event) => {
+                        // checklogin
+                        const logined = auth.checkUserLogin();
+                        if (!logined) {
+                            alert("Bạn cần phải đăng nhập")
+                            event.preventDefault()
+                        }
+                    })
+
                     // logout
                     const logoutBtn = document.querySelector(".logout")
                     logoutBtn.addEventListener("click", () => {
-                        logout();
+                        auth.logout();
                     })
 
                     // admin manager
-                    const roleUser = getRoleUser()
+                    const roleUser = auth.getRoleUser()
                     if (roleUser == "ROLE_ADMIN") {
                         adminManager.style.display = "inline-block"
                         adminManager.addEventListener("click", () => {

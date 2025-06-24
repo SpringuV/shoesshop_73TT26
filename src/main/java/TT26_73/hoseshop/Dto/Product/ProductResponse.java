@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.Instant;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ public class ProductResponse {
     String description;
     double prices;
     int stock_quantity;
-    int size;
+    List<String> sizeResponseSet;
     String brand;
     String gender;
     String imagePath;

@@ -93,12 +93,21 @@
             </div>
             <div>
                 <label for="price">Đơn giá:</label>
-                <input type="number" id="price" min="1000" max="9999999999"
-                    placeholder="Nhập đơn giá (min-1000, max-9999999999)" />
+                <input type="number" id="price" min="100000" max="99000000"
+                    placeholder="Nhập đơn giá (min-100000, max-99000000)" />
             </div>
-            <div>
-                <label for="size">Kích cỡ:</label>
-                <input type="number" id="size" placeholder="Nhập kích cỡ" />
+            <div> class="item-label"
+                <label for="sizeCheckboxAdd">Kích cỡ:</label>
+                <div id="sizeCheckboxAdd">
+                    <label class="item-label"><input type="checkbox" name="size" value="37"> 37</label>
+                    <label class="item-label"><input type="checkbox" name="size" value="38"> 38</label>
+                    <label class="item-label"><input type="checkbox" name="size" value="39"> 39</label>
+                    <label class="item-label"><input type="checkbox" name="size" value="40"> 40</label>
+                    <label class="item-label"><input type="checkbox" name="size" value="41"> 41</label>
+                    <label class="item-label"><input type="checkbox" name="size" value="42"> 42</label>
+                    <label class="item-label"><input type="checkbox" name="size" value="43"> 43</label>
+                    <label class="item-label"><input type="checkbox" name="size" value="44"> 44</label>
+                </div>
             </div>
 
             <div>
@@ -144,34 +153,68 @@
         </div>
         <form id="editProductForm" enctype="multipart/form-data">
             <div class="item">
-                <label>Mã sản phẩm <input type="text" id="editIdProduct" readonly></label>
-                <label>Tên sản phẩm: <input type="text" id="editNameProduct" /></label><br />
-                <label>Mô tả: <textarea type="text" id="editDescription"></textarea></label><br />
-                <label>Đơn giá: <input type="number" id="editPrice"
-                        placeholder="Nhập đơn giá (min-1000, max-9999999999)" /></label><br />
-                <label>Kích cỡ: <input type="number" id="editSize" /></label><br />
-                <label>Tồn kho: <input type="number" id="editStock"
-                        placeholder="Nhập tồn kho (số lượng: min-1, max-1000000)" /></label><br />
-                <label>Thương hiệu:
+                <div>
+                    <label for="editIdProduct">Mã sản phẩm: </label>
+                    <input type="text" id="editIdProduct" readonly>
+                </div>
+                <div>
+                    <label for="editNameProduct">Tên sản phẩm: </label>
+                    <input type="text" id="editNameProduct" />
+                </div>
+                <div>
+                    <label for="editDescription">Mô tả: </label>
+                    <textarea type="text" id="editDescription"></textarea>
+                </div>
+
+                <div>
+                    <label for="editPrice">Đơn giá:</label>
+                    <input type="number" id="editPrice" placeholder="Nhập đơn giá (min-100000, max-99000000)"
+                        min="100000" max="99000000" />
+                </div>
+
+                <div>
+                    <label for="sizeCheckboxEdit">Kích cỡ:</label>
+                    <div id="sizeCheckboxEdit">
+                        <label class="item-label"><input type="checkbox" name="sizeEdit" value="37"> 37</label>
+                        <label class="item-label"><input type="checkbox" name="sizeEdit" value="38"> 38</label>
+                        <label class="item-label"><input type="checkbox" name="sizeEdit" value="39"> 39</label>
+                        <label class="item-label"><input type="checkbox" name="sizeEdit" value="40"> 40</label>
+                        <label class="item-label"><input type="checkbox" name="sizeEdit" value="41"> 41</label>
+                        <label class="item-label"><input type="checkbox" name="sizeEdit" value="42"> 42</label>
+                        <label class="item-label"><input type="checkbox" name="sizeEdit" value="43"> 43</label>
+                        <label class="item-label"><input type="checkbox" name="sizeEdit" value="44"> 44</label>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="editStock">Tồn kho: </label>
+                    <input type="number" id="editStock" placeholder="Nhập tồn kho (số lượng: min-1, max-1000000)" />
+                </div>
+                <div>
+                    <label for="editBrand">Thương hiệu:</label>
                     <select id="editBrand">
                         <option value="NONE">Chọn thương hiệu</option>
                         <option value="ADIDAS">Adidas</option>
                         <option value="PUMA">Puma</option>
                     </select>
-                </label><br />
-                <label>Giới tính:
-                    <select id="editGender">
-                        <option value="NONE">Chọn giới tính</option>
-                        <option value="MALE">MALE</option>
-                        <option value="FEMALE">FEMALE</option>
-                        <option value="UNISEX">UNISEX</option>
-                    </select>
-                </label><br />
-                <label for="fileInputEditProduct">Ảnh sản phẩm:
+                </div>
+                <div>
+                    <label for="editGender">Giới tính:
+                        <select id="editGender">
+                            <option value="NONE">Chọn giới tính</option>
+                            <option value="MALE">MALE</option>
+                            <option value="FEMALE">FEMALE</option>
+                            <option value="UNISEX">UNISEX</option>
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <label for="fileInputEditProduct">Ảnh sản phẩm:</label>
                     <input type="file" name="file" id="fileInputEditProduct" />
                     <img id="previewImageEditProduct" src="" alt="Ảnh sản phẩm"
                         style="max-width: 100px; margin-top: 10px; display: none;" />
-                </label>
+                </div>
+
             </div>
             <div class="item">
                 <button type="submit">Cập nhật</button>
