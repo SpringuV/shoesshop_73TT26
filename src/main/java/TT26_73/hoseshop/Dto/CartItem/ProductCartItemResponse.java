@@ -13,5 +13,7 @@ public class ProductCartItemResponse {
     String proId;
     String nameProduct;
     String size;
+    String brand;
     int prices;
+    String imagePath;
 }
