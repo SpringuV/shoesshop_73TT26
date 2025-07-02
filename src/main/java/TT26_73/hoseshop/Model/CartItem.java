@@ -28,6 +28,9 @@ public class CartItem {
     @Column(name = "quantity")
     int quantity;
 
+    @Column(name = "size")
+    String size;
+
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "user_id")

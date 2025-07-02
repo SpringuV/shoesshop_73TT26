@@ -3,6 +3,8 @@ package TT26_73.hoseshop.Dto.CartItem;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -12,7 +14,7 @@ import lombok.experimental.FieldDefaults;
 public class ProductCartItemResponse {
     String proId;
     String nameProduct;
-    String size;
+    List<String> sizeResponseSet;
     String brand;
     int prices;
     String imagePath;

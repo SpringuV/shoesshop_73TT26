@@ -138,20 +138,6 @@
     margin: 10px 0;
 }
 
-.product-item .color-btn {
-    display: inline-block;
-    background-color: #003087;
-    color: white;
-    padding: 5px 10px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 0.9rem;
-}
-
-.product-item .color-btn:hover {
-    background-color: #0056d2;
-}
-
 /* Responsive New Products */
 @media (max-width: 768px) {
     #NewProducts {
@@ -218,20 +204,3 @@
 }
 
 /* ---------------------------------------- END NEW PRODUCT ------------------------------------- */
-
-.item-action{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.favorite{
-    padding: 7px;
-    margin: 0 10px;
-    border-radius: 5px;
-    background-color: #d9edff;
-}
-
-.favorite i:hover {
-    color: red;
-}

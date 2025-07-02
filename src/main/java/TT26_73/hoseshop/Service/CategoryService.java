@@ -95,8 +95,8 @@ public class CategoryService {
         return categoryRepository.findAll().stream().map(categoryMapper::toCategoryWithProductsResponse).toList();
     }
 
-    public List<CategoryWithProductsResponse> getListCateWithProductResponse(){
-        return categoryRepository.findAll().stream().map(categoryMapper::toCategoryWithProductsResponse).toList();
+    public CategoryWithProductsResponse getCateByName(String nameCate){
+        return categoryMapper.toCategoryWithProductsResponse(categoryRepository.findByNameCate(nameCate).orElseThrow(()-> new AppException(ErrorCode.CATEGORY_NOT_FOUND)));
     }
 
     public void deleteCateById(String id){

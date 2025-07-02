@@ -25,7 +25,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SercurityConfiguration {
 
     private final String[] PUBLIC_ENDPOINT = {"/api/users", "/api/auth/token", "/api/auth/logout", "/api/auth/refresh"};
-    private final String[] PUBLIC_ENDPOINT_GET = {"/api/products", "/uploads/**", "/api/products/new-products", "/api/categories" , "/api/categories/products", "/api/categories/*"};
+    private final String[] PUBLIC_ENDPOINT_GET = {"/api/products/**", "/uploads/**", "/api/products/new-products", "/api/categories/**"};
     private CustomJwtDecoder customJwtDecoder;
 
     @Autowired

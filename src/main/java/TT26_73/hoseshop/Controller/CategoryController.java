@@ -47,19 +47,19 @@ public class CategoryController {
                 .build();
     }
 
+    @GetMapping("/products/{nameCate}")
+    ApiResponse<CategoryWithProductsResponse> findCategoryByName(@PathVariable("nameCate") String nameCate){
+        return ApiResponse.<CategoryWithProductsResponse>builder()
+                .message("Get Cate By Name")
+                .result(categoryService.getCateByName(nameCate))
+                .build();
+    }
+
     @GetMapping("/{cateId}")
     ApiResponse<List<CategoryWithProductsResponse>> getCategory(@PathVariable("cateId") String cateId){
         return ApiResponse.<List<CategoryWithProductsResponse>>builder()
                 .message("Get Cate with Product Response")
                 .result(categoryService.getCategoryWithProductResponse(cateId))
-                .build();
-    }
-
-    @GetMapping("/products")
-    ApiResponse<List<CategoryWithProductsResponse>> getListCateWithProduct(){
-        return ApiResponse.<List<CategoryWithProductsResponse>>builder()
-                .message("Get List Cate With Product")
-                .result(categoryService.getListCateWithProductResponse())
                 .build();
     }
 

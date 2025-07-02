@@ -13,4 +13,5 @@ public class UpdateCartItemRequest {
     String userId;
     String productId;
     int quantity;
+    String size;
 }

@@ -13,4 +13,5 @@ public class CartItemCreateRequest {
     String userId;
     String productId;
     int quantity;
+    String size;
 }

@@ -206,6 +206,9 @@ async function createCategoryName(idTableBody) {
                 productInCategoryResponseSet: data.result.productInCategoryResponseSet ? data.result.productInCategoryResponseSet : []
             }
             displayCategoryInTableRowInBody(categoryResponse, idTableBody)
+            // reset input
+            document.getElementById("categoryNameAdd").value = ""
+
             // đóng modal sau khi tạo
             if (document.getElementById("modalAddCategory").style.display === "block") {
                 utils.closeModel("modalAddCategory")

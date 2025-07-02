@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi tiết sản phẩm</title>
-    <link rel="stylesheet" href="/css/Product_detail.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/Product_detail.css">
 </head>
 
 <body>
@@ -19,74 +20,17 @@
 
     <div class="breadcrumb">Trang chủ > Nam > GEL-KAYANO 30</div>
 
-    <section class="product-detail-container">
-        <div class="product-gallery">
-            <div class="main-image">
-                <img src="/images/shoe1.jpg" alt="GEL-KAYANO 30">
-            </div>
-            <!-- <div class="thumbnail-list">
-                <img src="/images/shoe1.jpg" alt="thumb">
-                <img src="/images/shoe1.jpg" alt="thumb">
-                <img src="/images/shoe1.jpg" alt="thumb">
-                <img src="/images/shoe1.jpg" alt="thumb">
-            </div> -->
-        </div>
-        <div class="product-detail-info">
-            <h1>GEL-KAYANO 30</h1>
-            <p class="price">3.490.000₫</p>
-
-            <div class="product-options">
-                <p><strong>Size:</strong></p>
-                <div class="size-buttons">
-                    <button>38</button><button>39</button><button>40</button><button>41</button><button>42</button><button>43</button>
-                </div>
-                <p><strong>Số lượng:</strong></p>
-                <div class="quantity-selector">
-                    <button>-</button>
-                    <input type="number" value="1" min="1">
-                    <button>+</button>
-                </div>
-            </div>
-
-            <button class="add-to-cart">Thêm vào giỏ</button>
-
-            <div class="product-shipping">
-                <p><i class="fas fa-truck"></i> Giao hàng nhanh từ 1 - 3 ngày</p>
-                <p><i class="fas fa-undo"></i> Đổi trả miễn phí trong 7 ngày</p>
-            </div>
-
-            <div class="product-details">
-                <h2>Chi tiết sản phẩm</h2>
-                <ul>
-                    <li>Xuất xứ: Việt Nam</li>
-                    <li>Chất liệu: Vải lưới + cao su</li>
-                    <li>Công nghệ: GEL™ technology, FlyteFoam™ cushioning</li>
-                    <li>Trọng lượng: 260g (size 42)</li>
-                </ul>
-
-                <h2>Hướng dẫn bảo quản</h2>
-                <ul>
-                    <li>Không giặt máy, chỉ giặt tay với nước lạnh</li>
-                    <li>Không sử dụng bàn chải cứng hoặc chất tẩy mạnh</li>
-                    <li>Phơi nơi thoáng mát, tránh ánh nắng trực tiếp</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+    <section class="product-detail-container"></section>
     <!--------------------- Footer--------------------->
     <div class="footer"></div>
     <!---------------------End Footer--------------------->
-    <script>
-        const thumbnails = document.querySelectorAll(".thumbnail-list img");
-        const mainImage = document.querySelector(".main-image img");
-
-        thumbnails.forEach(thumb => {
-            thumb.addEventListener("click", () => {
-                mainImage.src = thumb.src;
-            });
-        });
+    <script type="module">import { setUpHeader } from "/js/load_header.js"
+        setUpHeader()
     </script>
-    <script type="module" src="/js/load_header.js"></script>
+    <script type="module">
+        import {loadProductDetail} from "/js/product_detail.js"
+        loadProductDetail()
+    </script>
     <script src="/js/load_footer.js"></script>
     <script type="module" src="/js/authToken.js"></script>
 </body>

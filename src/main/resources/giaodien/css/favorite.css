@@ -1,0 +1,27 @@
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wish-list-wrapper {
+    margin-top: 10px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* mỗi hàng 4 item */
+    gap: 1%;
+}
+
+.wish-list-item {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.name-product{
+    text-align: center;
+    margin: 5px 0;
+}
+
+.prices {
+    text-align: center;
+        margin: 5px 0 10px 0;
+}

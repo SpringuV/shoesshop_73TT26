@@ -56,8 +56,15 @@
     <!--------------------- Footer--------------------->
     <div class="footer"></div>
     <!--------------------- End Footer --------------------->
-    <script type="module" src="/js/Home.js"></script>
-    <script type="module" src="/js/load_header.js"></script>
+    <script type="module">
+        import { setUpHomepageEvent, setupScrollButton, setupSlider } from "/js/Home.js"
+        setUpHomepageEvent()
+        setupScrollButton()
+        setupSlider()
+    </script>
+    <script type="module">import { setUpHeader } from "/js/load_header.js"
+        setUpHeader()
+    </script>
     <script src="/js/load_footer.js"></script>
     <script type="module" src="/js/authToken.js"></script>
 </body>

@@ -16,5 +16,6 @@ public class CartItemResponse {
     ProductCartItemResponse productCartItemResponse;
     UserCartItemResponse userCartItemResponse;
     int quantity;
+    String size;
     Instant createAt;
 }

@@ -22,6 +22,7 @@
             <table class="table-cart">
                 <thead>
                     <th>Sản phẩm</th>
+                    <th>Kích thước</th>
                     <th>Đơn giá</th>
                     <th>Số lượng</th>
                     <th>Tổng</th>
@@ -49,7 +50,9 @@
     <!--------------------- End Footer --------------------->
 </body>
 <script type="module" src="/js/Cart.js"></script>
-<script  type="module" src="/js/load_header.js"></script>
+<script  type="module" >import {setUpHeader} from "/js/load_header.js"
+    setUpHeader()
+</script>
 <script src="/js/load_footer.js"></script>
 <script type="module" src="/js/authToken.js"></script>
 

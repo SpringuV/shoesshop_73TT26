@@ -32,7 +32,7 @@ public class WishListService {
     ProductRepository productRepository;
 
 
-    public WishListCreateResponse createWishList(WishListCreateRequest request){
+    public WishListCreateResponse toggleWishList(WishListCreateRequest request){
         User user = userRepository.findById(request.getUserId()).orElseThrow(()-> new AppException(ErrorCode.USER_NOT_FOUND));
         Product product = productRepository.findById(request.getProductId()).orElseThrow(()-> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
 
@@ -63,15 +63,6 @@ public class WishListService {
                     .build();
         }
         return wishListCreateResponse;
-    }
-
-    public List<WishListCreateResponse> getListWishList(){
-        return wishlistRepository.findAll().stream().map(wishlist -> WishListCreateResponse.builder()
-                .createAt(wishlist.getCreateAt())
-                .productWishListResponse(wishListMapper.toProductWishListResponse(wishlist.getProduct()))
-                .userWishListResponse(wishListMapper.toUserWishListResponse(wishlist.getUser()))
-                .isLiked(true)
-                .build()).toList();
     }
 
     public List<WishListCreateResponse> getListWishByUserId(String userId){

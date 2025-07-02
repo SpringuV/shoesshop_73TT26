@@ -74,6 +74,7 @@ public class CartItemService {
         // check key existed ?
         CartItem cartItem = cartItemRepository.findById(keyCartItem).orElseThrow(()-> new AppException(ErrorCode.CART_ITEM_NOT_FOUND));
         cartItem.setQuantity(request.getQuantity());
+        cartItem.setSize(request.getSize());
         cartItemRepository.save(cartItem);
         return  getListCartItemByUser(user.getUserId());
     }

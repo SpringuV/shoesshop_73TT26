@@ -14,7 +14,15 @@ function displayCartItemToTable(dataListResponse, userId) {
                     <div class="summary-info">
                         <h3>${cartItem.productCartItemResponse.nameProduct}</h3>
                         <p>Thương hiệu: ${cartItem.productCartItemResponse.brand}</p>
-                        <p>Size: 34</p>
+                    </div>
+                </td>
+                <td>
+                    <div class = "select-size">
+                        <select data-proid="${cartItem.productCartItemResponse.proId}">
+                            ${cartItem.productCartItemResponse.sizeResponseSet.map(size => `
+                                <option value="${size}" ${size === cartItem.size ? "selected" : ""}>${size}</option>
+                            `).join("")}
+                        </select>
                     </div>
                 </td>
                 <td>
@@ -52,11 +60,27 @@ function displayCartItemToTable(dataListResponse, userId) {
         if (target.classList.contains('delete-item')) {
             handleDeleteCartItem(tableBodyCartItem, target, userId)
         } else {
-            handleQuantityChange(tableBodyCartItem, target, userId);
+            handleQuantityAndSizeChange(tableBodyCartItem, target, userId);
             updateAllTotals()
         }
     })
+
+    // ✅ Lắng nghe thay đổi size
+    tableBodyCartItem.addEventListener("change", (event) => {
+        if (event.target.tagName === "SELECT" && event.target.hasAttribute("data-proid")) {
+            const proid = event.target.getAttribute("data-proid")
+            const quantityInput = tableBodyCartItem.querySelector(`input[data-proid="${proid}"]`)
+            const quantity = quantityInput ? parseInt(quantityInput.value) : 1
+            const size = event.target.value
+
+            clearTimeout(debounceTimer)
+            debounceTimer = setTimeout(() => {
+                updateProductToDB(userId, proid, quantity, size)
+            }, 2000)
+        }
+    })
 }
+
 let debounceTimer;
 function handleDeleteCartItem(tableBody, target, userId) {
     const productId = target.getAttribute("data-proid")
@@ -64,7 +88,7 @@ function handleDeleteCartItem(tableBody, target, userId) {
     deleteCartItemDB(userId, productId, nameProduct, tableBody, target)
 }
 
-function handleQuantityChange(tableBody, target, userId) {
+function handleQuantityAndSizeChange(tableBody, target, userId) {
     const proid = target.getAttribute('data-proid')
     const quantityInput = tableBody.querySelector(`input[data-proid="${proid}"]`)
     if (!quantityInput) {
@@ -85,10 +109,14 @@ function handleQuantityChange(tableBody, target, userId) {
     const price = parseFloat(priceUnit.textContent.replace(/\D/g, '')) || 0 // \D = Ký tự KHÔNG phải số (0–9).g = Áp dụng trên toàn bộ chuỗi (global).
     totalPrice.textContent = (quantity * price).toLocaleString() + 'đ' || "0"
 
+    // lấy size chọn
+    const sizeSelect = tableBody.querySelector(`select[data-proid="${proid}"]`)
+    const size = sizeSelect ? sizeSelect.value : null;
+
     // DEBOUNCE Cập nhật lên DB
-    clearTimeout(debounceTimer) 
+    clearTimeout(debounceTimer)
     debounceTimer = setTimeout(() => {
-        updateProductToDB(userId, proid, quantity);
+        updateProductToDB(userId, proid, quantity, size);
     }, 2000) // 1000ms = 1 giây, tuỳ chỉnh
 }
 
@@ -118,7 +146,7 @@ function updateAllTotals() {
 }
 
 async function deleteCartItemDB(userId, productId, productName, tableBody, target) {
-    if(!confirm(`Bạn có chắc là sẽ xóa sản phẩm ${productName} khỏi giỏ hàng chứ`)){
+    if (!confirm(`Bạn có chắc là sẽ xóa sản phẩm ${productName} khỏi giỏ hàng chứ`)) {
         return;
     }
 
@@ -148,28 +176,29 @@ async function deleteCartItemDB(userId, productId, productName, tableBody, targe
     }
 }
 
-async function updateProductToDB(userId, productId, quantity) {
+async function updateProductToDB(userId, productId, quantity, size) {
     const dataRequest = {
         userId: userId,
         productId: productId,
-        quantity: quantity
+        quantity: quantity,
+        size: size
     }
 
-    try{
-        const response = await fetch(`http://localhost:8080/api/cart-items/update`,{
+    try {
+        const response = await fetch(`http://localhost:8080/api/cart-items/update`, {
             method: "PUT",
-            headers:{
+            headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(dataRequest)
         })
-        if(response.ok){
+        if (response.ok) {
             alert("Cập nhật số lượng sản phẩm trong giỏ hàng okk !!!")
         } else {
             alert("Lỗi khi updateProductToDB - 1")
         }
-    } catch(error){
+    } catch (error) {
         alert("Lỗi khi updateProductToDB - 2")
         console.error("Lỗi khi updateProductToDB - 2", error)
     }

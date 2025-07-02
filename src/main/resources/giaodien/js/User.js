@@ -80,9 +80,3 @@ overlay.addEventListener("click", () => {
   });
 });
 
-
-document.addEventListener("DOMContentLoaded", ()=>{
-  const userDetail = document.querySelector(".user-detail");
-  
-
-})

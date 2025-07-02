@@ -73,6 +73,17 @@ function loadHeader() {
                         })
                     }
 
+                    // sau khi header duoc truyen vao dom
+                    const links = document.querySelectorAll('a[data-name]')
+                    links.forEach(link => {
+                        link.addEventListener("click", (e) => {
+                            e.preventDefault()
+                            const nameCate = e.currentTarget.dataset.name;
+                            if (nameCate) {
+                                window.location.href = `/html/kiosk_product.html?nameCate=${encodeURIComponent(nameCate)}`
+                            }
+                        })
+                    })
 
                 }, 0); // chờ DOM render xong
             }
@@ -81,7 +92,9 @@ function loadHeader() {
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    // load header
-    loadHeader();
-})
+export function setUpHeader() {
+    document.addEventListener("DOMContentLoaded", () => {
+        // load header
+        loadHeader();
+    })
+}

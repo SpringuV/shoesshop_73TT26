@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/Products_men.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/kiosk_product.css">
     <title>Men</title>
 </head>
 
@@ -39,48 +39,13 @@
             </div>
         </aside>
 
-        <section class="products">
-            <div class="product">
+        <section class="section-item-products">
+            <!-- <div class="product-item">
                 <img src="../images/shoe1.jpg" alt="Giày 1">
                 <h4>GEL-KAYANO 30</h4>
                 <p>3.490.000₫</p>
                 <button>Thêm vào giỏ</button>
-            </div>
-
-            <div class="product">
-                <img src="../images/shoe2.jpg" alt="Giày 2">
-                <h4>NOVABLAST 3</h4>
-                <p>3.290.000₫</p>
-                <button>Thêm vào giỏ</button>
-            </div>
-
-            <div class="product">
-                <img src="../images/shoe3.jpg" alt="Giày 3">
-                <h4>GEL-CUMULUS 25</h4>
-                <p>2.990.000₫</p>
-                <button>Thêm vào giỏ</button>
-            </div>
-
-            <div class="product">
-                <img src="../images/shoe4.jpg" alt="Giày 4">
-                <h4>MAGIC SPEED 2</h4>
-                <p>3.190.000₫</p>
-                <button>Thêm vào giỏ</button>
-            </div>
-
-            <div class="product">
-                <img src="../images/shoe4.jpg" alt="Giày 5">
-                <h4>MAGIC SPEED 2</h4>
-                <p>3.190.000₫</p>
-                <button>Thêm vào giỏ</button>
-            </div>
-
-            <div class="product">
-                <img src="../images/shoe4.jpg" alt="Giày 6">
-                <h4>MAGIC SPEED 2</h4>
-                <p>3.190.000₫</p>
-                <button>Thêm vào giỏ</button>
-            </div>
+            </div> -->
         </section>
     </div>
 
@@ -93,9 +58,14 @@
     <!--------------------- Footer--------------------->
     <div class="footer"></div>
     <!--------------------- End Footer --------------------->
-    <script src="/js/Products_men.js"></script>
-    <script type="module" src="/js/load_header.js"></script>
+
+    <script type="module">import { setUpHeader } from "/js/load_header.js"
+        setUpHeader()
+    </script>
     <script src="/js/load_footer.js"></script>
+    <script type="module">import { kiosk_Product } from "/js/kiosk_product.js"
+        kiosk_Product()
+    </script>
     <script type="module" src="/js/authToken.js"></script>
 </body>
 

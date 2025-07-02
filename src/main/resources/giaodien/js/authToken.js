@@ -1,10 +1,10 @@
-export function isTokenExpired(token) {
+ function isTokenExpired(token) {
     const payload = JSON.parse(atob(token.split('.')[1]));
     const now = Math.floor(Date.now() / 1000);
     return payload.exp < now;
 }
 
-export function checkUserLogin() {
+ function checkUserLogin() {
     const token = localStorage.getItem("token");
     if (!token) {
         return false;
@@ -24,7 +24,7 @@ export function checkUserLogin() {
 }
 
 // hiển thị thông tin trên header
-export function getUserName() {
+ function getUserName() {
     const token = localStorage.getItem("token");
     if (token) {
         const payload = parseJwt(token);
@@ -43,7 +43,7 @@ export function getUserName() {
     }
 }
 
-export function getRoleUser() {
+ function getRoleUser() {
     const token = localStorage.getItem("token");
     if (token) {
         const payload = parseJwt(token);
@@ -63,7 +63,7 @@ export function getRoleUser() {
 
 
 // xử lý chuỗi để lấy role_*
-export function extractRole(scope) {
+ function extractRole(scope) {
     // Tách chuỗi scope thành một mảng
     const scopeArray = scope.split(" ");
 
@@ -74,7 +74,7 @@ export function extractRole(scope) {
 }
 
 // trích xuất thông tin từ jwt
-export function parseJwt(token) {
+ function parseJwt(token) {
     try {
         // Decoding logic
         const base64Url = token.split('.')[1]; // payload nằm ở phần thứ 2, Splits the JWT string on the . delimiter and takes the second part (index 1), which is the Payload
@@ -92,7 +92,7 @@ export function parseJwt(token) {
     }
 }
 
-export function getUserId() {
+ function getUserId() {
     const token = localStorage.getItem("token");
     const payload = parseJwt(token)
     const userId = payload.userId
@@ -101,7 +101,7 @@ export function getUserId() {
 
 
 // save jwt khi đăng xuất
-export async function logout() {
+ async function logout() {
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -143,7 +143,7 @@ export async function logout() {
 }
 
 
-export function checkSession() {
+ function checkSession() {
     const token = localStorage.getItem("token");
     if (!token || isTokenExpired(token)) {
         alert("Phiên đăng nhập đã hết hạn hoặc không hợp lệ. Vui lòng đăng nhập lại.");
@@ -152,7 +152,7 @@ export function checkSession() {
     }
 }
 
-export function isTokenNearExpired(token, seconds = 120) {
+ function isTokenNearExpired(token, seconds = 120) {
     try {
         const payload = parseJwt(token);
         const now = Math.floor(Date.now() / 1000)
@@ -165,7 +165,7 @@ export function isTokenNearExpired(token, seconds = 120) {
 }
 
 
-export async function refreshAccessToken(userIsActive) {
+ async function refreshAccessToken(userIsActive) {
     const token = localStorage.getItem("token");
     if (!token) return false;
     if (userIsActive) {
@@ -199,7 +199,7 @@ export async function refreshAccessToken(userIsActive) {
     }
 }
 
-export function scheduleTokenRefresh() {
+ function scheduleTokenRefresh() {
     const token = localStorage.getItem("token")
     if (!token) return;
 
@@ -217,7 +217,7 @@ export function scheduleTokenRefresh() {
     }, delay)
 }
 
-export function startMonitoringUserActivity() {
+ function startMonitoringUserActivity() {
     let userActive = false;
 
     function setUserActive() {

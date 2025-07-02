@@ -1,134 +1,108 @@
+
+import auth from "./authToken.js"
+
 /* Slider */
-const imgPosition = document.querySelectorAll('.aspect-ratio-169 img');
-const imgContainer = document.querySelector('.aspect-ratio-169');
-const dotItem = document.querySelectorAll('.dot');
-let imgNumber = imgPosition.length;
-let index = 0;
+export function setupSlider() {
+    const imgPosition = document.querySelectorAll(".aspect-ratio-169 img");
+    const imgContainer = document.querySelector(".aspect-ratio-169");
+    const dotItem = document.querySelectorAll(".dot");
 
-imgPosition.forEach(function (img, index) {
-    img.style.left = index * 100 + '%';
-    dotItem[index].addEventListener('click', function () {
-        slider(index);
+    if (!imgContainer || imgPosition.length === 0 || dotItem.length === 0) return;
+
+    let index = 0;
+    let imgNumber = imgPosition.length;
+
+    imgPosition.forEach((img, i) => {
+        img.style.left = i * 100 + "%";
+        dotItem[i]?.addEventListener("click", () => slider(i));
     });
-});
 
-function imgSlide() {
-    index++;
-    if (index >= imgNumber) index = 0;
-    slider(index);
+    function slider(i) {
+        index = i;
+        imgContainer.style.transform = `translateX(-${index * 100}%)`;
+        document.querySelector(".dot.active")?.classList.remove("active");
+        dotItem[index]?.classList.add("active");
+    }
+
+    function autoSlide() {
+        index = (index + 1) % imgNumber;
+        slider(index);
+    }
+
+    setInterval(autoSlide, 5000);
 }
-
-function slider(index) {
-    imgContainer.style.transform = `translateX(-${index * 100}%)`; // dùng transform thay vì left
-    const dotActive = document.querySelector('.dot.active');
-    if (dotActive) dotActive.classList.remove('active');
-    dotItem[index].classList.add('active');
-}
-
-setInterval(imgSlide, 5000); /* End Slider */
+/* End Slider */
 
 /* Product Scroll */
-document.addEventListener('DOMContentLoaded', () => {
-    const wrapper = document.querySelector('.products-wrapper');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    const productWidth = 250; // Chiều rộng mỗi sản phẩm (bao gồm gap)
+export function setupScrollButton() {
+    const wrapper = document.querySelector(".products-wrapper");
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+    const productWidth = 250;
 
-    if (!wrapper || !prevBtn || !nextBtn) {
-        console.error('Elements .products-wrapper, .prev-btn or .next-btn not found!');
-        return;
-    }
+    if (!wrapper || !prevBtn || !nextBtn) return;
 
-    prevBtn.addEventListener('click', () => {
+    prevBtn.addEventListener("click", () => {
         wrapper.scrollLeft -= productWidth;
     });
-
-    nextBtn.addEventListener('click', () => {
+    nextBtn.addEventListener("click", () => {
         wrapper.scrollLeft += productWidth;
     });
-});
-
-/* Hamburger Menu Toggle */
-document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menu = document.querySelector('.menu > ul');
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-
-    function handleToggle(e) {
-        e.preventDefault(); // Ngăn chặn xung đột sự kiện
-        if (menuToggle && menu && mediaQuery.matches) {
-            const isActive = menu.classList.contains('active');
-            menu.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-            // Đảm bảo trạng thái không bị thay đổi bởi slider
-            if (!isActive) {
-                setTimeout(() => {
-                    menu.classList.add('active');
-                    menuToggle.classList.add('active');
-                }, 0);
-            }
-        }
-    }
-
-    if (menuToggle && menu) {
-        menuToggle.addEventListener('click', handleToggle);
-    }
-
-    // Kiểm tra khi thay đổi kích thước màn hình
-    mediaQuery.addListener(() => {
-        if (!mediaQuery.matches) {
-            menu.classList.remove('active');
-            menuToggle.classList.remove('active');
-        }
-    });
-});
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     const toggle = document.querySelector(".menu-toggle");
     const menu = document.querySelector(".menu > ul");
     const overlay = document.querySelector(".menu-overlay");
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
 
-    toggle.addEventListener("click", () => {
-        const isOpen = menu.classList.contains("active");
-        if (isOpen) {
-            // Đang mở → đóng
-            menu.classList.remove("active");
-            toggle.classList.remove("active");
-            overlay.classList.remove("active");
-        } else {
-            // Đang đóng → mở
-            menu.classList.add("active");
-            toggle.classList.add("active");
-            overlay.classList.add("active");
-        }
-    });
+    if (!toggle || !menu || !overlay) return;
 
-    overlay.addEventListener("click", () => {
+    function closeMenu() {
         menu.classList.remove("active");
         toggle.classList.remove("active");
         overlay.classList.remove("active");
+    }
+
+    function openMenu() {
+        menu.classList.add("active");
+        toggle.classList.add("active");
+        overlay.classList.add("active");
+    }
+
+    toggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (menu.classList.contains("active")) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
     });
+
+    overlay.addEventListener("click", closeMenu);
 
     document.querySelectorAll(".menu > ul > li > a").forEach(link => {
-        link.addEventListener("click", () => {
-            menu.classList.remove("active");
-            toggle.classList.remove("active");
-            overlay.classList.remove("active");
-        });
+        link.addEventListener("click", closeMenu);
+    });
+
+    mediaQuery.addEventListener("change", (e) => {
+        if (!e.matches) {
+            closeMenu();
+        }
     });
 });
-
 // -----------------------------------------------------------------------------------------------------
 function displayNewProduct(productList) {
     const wrapper = document.querySelector(".products-wrapper")
     wrapper.innerHTML = "";
+    const isLoggedIn = auth.checkUserLogin()
     productList.forEach(product => {
         const item = document.createElement('div')
         item.classList.add("product-item")
 
         item.innerHTML = `
             <div class = "image-item-home">
-                <a href="/html/Product_detail.html">
+                <a href="/html/Product_detail.html?id=${product.productId}">
                     <img class = "image-new-product" src="http://localhost:8080${product.imagePath}" alt="Sản phẩm 1">
                 </a>
             </div>
@@ -136,42 +110,63 @@ function displayNewProduct(productList) {
             <p>${product.brand}</p>
             <p>${product.prices.toLocaleString()} đ</p>
             <div class= "item-action">
-                <button class="favorite"><i class="fa-solid fa-heart"></i></button>
-                <button class="color-btn" data-id="${product.productId}">Thêm vào giỏ hàng</button>
+                ${isLoggedIn ? `<button class="favorite"><i class="fa-solid fa-heart"></i></button>
+                <button class="color-btn" data-id="${product.productId}">Thêm vào giỏ hàng</button>` : `<p class = "not-logged-in">Đăng nhập để mua hàng</p>`}
             </div>
         `;
         wrapper.appendChild(item)
     })
 }
 
-async function getUserId() {
+async function addProductToWishList(productId) {
+    const isLoggedIn = auth.checkUserLogin();
+    if (!isLoggedIn) {
+        alert("Bạn cần đăng nhập để thêm vào giỏ hàng.");
+        return;
+    }
+    const userId = auth.getUserId()
+    const dataRequest = {
+        userId: userId,
+        productId: productId
+    }
     try {
-        const response = await fetch(`http://localhost:8080/api/users`, {
-            method: "GET",
+        const response = await fetch(`http://localhost:8080/api/wish-lists`, {
+            method: "POST",
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dataRequest)
         })
-
-        if (response.ok) {
+        if(response.ok){
             const data = await response.json()
-            return data.result.userId;
+            if(data.result.isLiked){
+                alert("Đã thêm vào mục yêu thích")
+            } else {
+                alert("Đã xóa khỏi mục yêu thích")
+            }
         } else {
-            alert("Lỗi thực hiện getUserId - 1")
+            alert("Lỗi thực hiện addProductToWishList - 1")
         }
-
     } catch (error) {
-        console.log("Không lấy được Id Người dùng")
-        alert("Lỗi thực hiện getUserId - 2")
+        console.log("Không thêm được vào Yêu thích")
+        alert("Lỗi thực hiện addProductToWishList - 2")
     }
 }
 
-async function addProductToCart(productId) {
-    const userId = await getUserId();
+async function addProductToCart(productId, quantity, size) {
+    const isLoggedIn = auth.checkUserLogin();
+    if (!isLoggedIn) {
+        alert("Bạn cần đăng nhập để thêm vào giỏ hàng.");
+        return;
+    }
+
+    const userId = auth.getUserId()
     const dataRequest = {
         userId: userId,
         productId: productId,
-        quantity: 1
+        quantity: quantity ? quantity : 1,
+        size: size ? size : null
     }
 
     try {
@@ -184,9 +179,11 @@ async function addProductToCart(productId) {
             body: JSON.stringify(dataRequest)
         })
 
-        if (response.ok) {
+        if (response.status === 409) {
+            alert("Sản phẩm đã tồn tại trong giỏ hàng")
+        }
+        else if (response.ok) {
             alert("Đã thêm vào giỏ hàng")
-
         } else {
             alert("Lỗi thực hiện addProductToCart - 1")
         }
@@ -197,7 +194,7 @@ async function addProductToCart(productId) {
 }
 
 
-export async function loadNewProducts() {
+async function loadNewProducts() {
     try {
         const response = await fetch(`http://localhost:8080/api/products/new-products`, {
             method: "GET",
@@ -216,21 +213,22 @@ export async function loadNewProducts() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    loadNewProducts()
 
-    // xử lý thêm giỏ hàng và yêu thích
-    const wrapper = document.querySelector(".products-wrapper")
-    wrapper.addEventListener("click",async (event)=>{
-        console.log(event)
-        if(event.target.classList.contains("color-btn")){
-            const productId = event.target.dataset.id;
-            await addProductToCart(productId)
-        }
+
+export function setUpHomepageEvent() {
+    document.addEventListener("DOMContentLoaded", () => {
+        loadNewProducts()
+
+        // xử lý thêm giỏ hàng và yêu thích
+        const wrapper = document.querySelector(".products-wrapper")
+        wrapper.addEventListener("click", async (event) => {
+            console.log(event)
+            if (event.target.classList.contains("color-btn")) {
+                const productId = event.target.dataset.id
+                await addProductToCart(productId)
+            }
+        })
     })
-
-
-})
-
-export default { loadNewProducts }
+}
+export default { loadNewProducts, addProductToCart }
 
