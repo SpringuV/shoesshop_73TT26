@@ -35,8 +35,7 @@ public class WishListService {
     public WishListCreateResponse toggleWishList(WishListCreateRequest request){
         User user = userRepository.findById(request.getUserId()).orElseThrow(()-> new AppException(ErrorCode.USER_NOT_FOUND));
         Product product = productRepository.findById(request.getProductId()).orElseThrow(()-> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
-
-        KeyWishList keyWishList = KeyWishList.builder().productId(request.getProductId()).userId(request.getUserId()).build();
+        KeyWishList keyWishList = KeyWishList.builder().proId(request.getProductId()).userId(request.getUserId()).build();
         WishListCreateResponse wishListCreateResponse;
         if(wishlistRepository.existsById(keyWishList)){
             // neu da thích thi xóa khỏi wishlist
@@ -54,6 +53,7 @@ public class WishListService {
         } else {
             // nếu chưa thích, thì thêm vào danh sách yêu thích
             Wishlist wishlist = wishListMapper.toEntityFromCreateRequest(request, user, product);
+            wishlist.setKeyWishList(keyWishList);
             wishlistRepository.save(wishlist);
             wishListCreateResponse = WishListCreateResponse.builder()
                     .createAt(wishlist.getCreateAt())

@@ -96,12 +96,12 @@ async function openFormEditCategory(category) {
         utils.openModel("modalDetailCategory")
     })
 
-    // submit
-    const submitCategoryFormEdit = document.getElementById('categoryFormEdit')
-    submitCategoryFormEdit.addEventListener("submit", (event) => {
-        event.preventDefault()
-        saveEditCategory();
-    }, { once: true })
+    // // submit
+    // const submitCategoryFormEdit = document.getElementById('categoryFormEdit')
+    // submitCategoryFormEdit.addEventListener("submit", (event) => {
+    //     event.preventDefault()
+    //     saveEditCategory();
+    // }, { once: true })
 }
 
 async function saveEditCategory() {
@@ -299,7 +299,12 @@ export function load_category() {
 
             utils.click_X_toCloseModal("closeAddModel", "modalAddCategory")
             utils.setupOutsideClickToCloseModal("modalAddCategory")
-
+            
+            const formEditSubmit = document.getElementById("categoryFormEdit")
+            formEditSubmit.addEventListener("submit", (event) => {
+                event.preventDefault()
+                saveEditCategory()
+            })
 
         })
 }

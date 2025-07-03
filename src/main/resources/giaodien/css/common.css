@@ -15,9 +15,9 @@ a {
 }
 
 .container {
-    margin-top: 7%;
-    margin-left: 6%;
-    margin-right: 6%;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 /* Header */
@@ -211,9 +211,6 @@ header {
     transform: rotate(-45deg) translate(8px, -8px);
 }
 
-.container{
-    margin-top: 6%;
-}
 
 /* Responsive Header */
 @media (max-width: 768px) {
@@ -507,4 +504,23 @@ footer {
 
 .color-btn:hover {
     background-color: #0056d2;
+}
+
+.favorite{
+    cursor: pointer;
+}
+
+.color-btn {
+    cursor: pointer;
+}
+
+.empty {
+    padding-top: 10px;
+    text-align: center;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.value-search{
+    color: #0056d2;
 }

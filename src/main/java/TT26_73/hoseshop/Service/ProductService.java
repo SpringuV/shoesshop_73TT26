@@ -103,6 +103,10 @@ public class ProductService {
         return productMapper.toProductResponse(product);
     }
 
+    public List<ProductResponse> filterByNameProduct(String nameProduct){
+        return productRepository.findAllByNameProductContainingIgnoreCase(nameProduct).stream().map(productMapper::toProductResponse).toList();
+    }
+
     public List<ProductResponse>  filterByNameCategory(String categoryName){
         return productRepository.findAllByCategorySet_NameCateOrderByPricesAsc(categoryName).stream().map(productMapper::toProductResponse).toList();
     }

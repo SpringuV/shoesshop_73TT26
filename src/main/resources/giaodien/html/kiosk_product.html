@@ -17,38 +17,41 @@
     <!-- End Header -->
     <div class="menu-overlay"></div>
 
-    <div class="breadcrumb">Trang chủ > Nam</div>
-
     <div class="container">
-        <aside class="sidebar">
-            <h3>Bộ lọc</h3>
-            <ul>
-                <li><a href="#">Chạy bộ</a></li>
-                <li><a href="#">Chạy địa hình</a></li>
-                <li><a href="#">Bóng chuyền</a></li>
-                <li><a href="#">Bóng rổ</a></li>
-                <li><a href="#">Quần vợt</a></li>
-            </ul>
+        <!-- <div class="breadcrumb">Trang chủ > Nam</div> -->
+        <p class="empty"></p>
+        <div class="main-content-kiosk">
+            <aside class="sidebar">
+                <h3>Lọc theo</h3>
+                <ul class="item-filter">
+                    <li><a href="#" data-name="Chạy bộ">Chạy bộ</a></li>
+                    <li><a href="#" data-name="Chạy địa hình">Chạy địa hình</a></li>
+                    <li><a href="#" data-name="Bóng chuyền">Bóng chuyền</a></li>
+                    <li><a href="#" data-name="Bóng rổ">Bóng rổ</a></li>
+                    <li><a href="#" data-name="Quần vợt">Quần vợt</a></li>
+                </ul>
 
-            <div class="filter-price">
-                <h4>Khoảng giá</h4>
-                <label><input type="checkbox" class="price-range" value="0-2000000"> Dưới 2 triệu</label><br>
-                <label><input type="checkbox" class="price-range" value="2000000-3000000"> 2 - 3 triệu</label><br>
-                <label><input type="checkbox" class="price-range" value="3000000-4000000"> 3 - 4 triệu</label><br>
-                <label><input type="checkbox" class="price-range" value="4000000-10000000"> Trên 4 triệu</label>
-            </div>
-        </aside>
-
-        <section class="section-item-products">
-            <!-- <div class="product-item">
+                <div class="filter-price">
+                    <h4>Khoảng giá</h4>
+                    <select class="select">
+                        <option class="option" value="none">Chọn khoảng giá</option>
+                        <option class="option" value="< 2000000">&lt; 2 triệu</option>
+                        <option class="option" value="2000000 - 3000000">2 - 3 triệu</option>
+                        <option class="option" value="3000000 - 4000000">3 - 4 triệu</option>
+                        <option class="option" value="> 4000000">&gt; 4 triệu</option>
+                    </select>
+                </div>
+            </aside>
+            <section class="section-item-products">
+                <!-- <div class="product-item">
                 <img src="../images/shoe1.jpg" alt="Giày 1">
                 <h4>GEL-KAYANO 30</h4>
-                <p>3.490.000₫</p>
+                <p class = "prices">3.490.000₫</p>
                 <button>Thêm vào giỏ</button>
             </div> -->
-        </section>
+            </section>
+        </div>
     </div>
-
     <div class="pagination">
         <button onclick="changePage(-1)">«</button>
         <span id="page-indicator">1</span>

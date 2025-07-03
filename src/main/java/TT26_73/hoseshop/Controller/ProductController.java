@@ -30,6 +30,14 @@ public class ProductController {
                 .build();
     }
 
+    @GetMapping("/search-name/{name}")
+    ApiResponse<List<ProductResponse>> findByName(@PathVariable("name") String nameProduct){
+        return ApiResponse.<List<ProductResponse>>builder()
+                .message("Find By Name Product")
+                .result(productService.filterByNameProduct(nameProduct))
+                .build();
+    }
+
     @GetMapping("/new-products")
     ApiResponse<List<ProductShowInfo>> getNewProducts(){
         return ApiResponse.<List<ProductShowInfo>>builder()

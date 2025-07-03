@@ -12,10 +12,8 @@ import lombok.experimental.FieldDefaults;
 public class ProductWishListResponse {
     String proId;
     String nameProduct;
-    String description;
     double prices;
     String gender;
-    int size;
     String brand;
-    int stock_quantity;
+    String imagePath;
 }

@@ -63,7 +63,11 @@ a i {
     background-color: gray;
 }
 
+
 /* btn login */
+.login {
+    color: white;
+}
 
 .btn {
     padding: 7px 15px;
@@ -75,7 +79,7 @@ a i {
 }
 
 .btn:hover{
-    background-color: #2f9ab4;
+    background-color: #33a7e9;
     cursor: pointer;
 }
 

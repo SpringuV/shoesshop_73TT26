@@ -30,7 +30,7 @@ public class Wishlist {
     User user;
 
     @ManyToOne
-    @MapsId("productId")
+    @MapsId("proId")
     @JoinColumn(name = "pro_id")
     Product product;
 }

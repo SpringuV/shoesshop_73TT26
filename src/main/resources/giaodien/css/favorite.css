@@ -8,7 +8,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* mỗi hàng 4 item */
-    gap: 1%;
+    gap: 2%;
 }
 
 .wish-list-item {
@@ -24,4 +24,13 @@
 .prices {
     text-align: center;
         margin: 5px 0 10px 0;
+}
+
+.wish-list-item a img {
+    cursor: pointer;
+    border-radius: 10px;
+    width: 100%;
+    object-fit: cover;
+    height: 235px;
+    overflow: hidden;
 }

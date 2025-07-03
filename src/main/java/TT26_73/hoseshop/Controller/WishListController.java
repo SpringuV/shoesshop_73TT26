@@ -27,8 +27,9 @@ public class WishListController {
             .build();
     }
 
-    @GetMapping("{userId}")
+    @GetMapping("/{userId}")
     ApiResponse<List<WishListCreateResponse>> getListWishList(@PathVariable("userId") String userId){
+        System.out.println(wishListService.getListWishByUserId(userId).size());
         return ApiResponse.<List<WishListCreateResponse>>builder()
                 .result(wishListService.getListWishByUserId(userId))
                 .build();

@@ -20,6 +20,6 @@ public class KeyWishList implements Serializable {
     String userId;
 
     @Column(name = "pro_id")
-    String productId;
+    String proId;
 
 }

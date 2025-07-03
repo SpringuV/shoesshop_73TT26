@@ -1,4 +1,3 @@
-
 import auth from "./authToken.js"
 
 /* Slider */
@@ -110,7 +109,7 @@ function displayNewProduct(productList) {
             <p>${product.brand}</p>
             <p>${product.prices.toLocaleString()} đ</p>
             <div class= "item-action">
-                ${isLoggedIn ? `<button class="favorite"><i class="fa-solid fa-heart"></i></button>
+                ${isLoggedIn ? `<button class="favorite" data-id="${product.productId}"><i class="fa-solid fa-heart"></i></button>
                 <button class="color-btn" data-id="${product.productId}">Thêm vào giỏ hàng</button>` : `<p class = "not-logged-in">Đăng nhập để mua hàng</p>`}
             </div>
         `;
@@ -138,9 +137,9 @@ async function addProductToWishList(productId) {
             },
             body: JSON.stringify(dataRequest)
         })
-        if(response.ok){
+        if (response.ok) {
             const data = await response.json()
-            if(data.result.isLiked){
+            if (data.result.liked) {
                 alert("Đã thêm vào mục yêu thích")
             } else {
                 alert("Đã xóa khỏi mục yêu thích")
@@ -181,8 +180,9 @@ async function addProductToCart(productId, quantity, size) {
 
         if (response.status === 409) {
             alert("Sản phẩm đã tồn tại trong giỏ hàng")
-        }
-        else if (response.ok) {
+        } else if (response.status == 401) {
+            confirm("Phiên đăng nhập đã hết hạn, bạn cần đăng nhập lại")
+        } else if (response.ok) {
             alert("Đã thêm vào giỏ hàng")
         } else {
             alert("Lỗi thực hiện addProductToCart - 1")
@@ -213,8 +213,6 @@ async function loadNewProducts() {
     }
 }
 
-
-
 export function setUpHomepageEvent() {
     document.addEventListener("DOMContentLoaded", () => {
         loadNewProducts()
@@ -226,9 +224,12 @@ export function setUpHomepageEvent() {
             if (event.target.classList.contains("color-btn")) {
                 const productId = event.target.dataset.id
                 await addProductToCart(productId)
+            } else if (event.target.closest(".favorite")) {
+                const productId = event.target.closest(".favorite").dataset.id
+                await addProductToWishList(productId)
             }
         })
     })
 }
-export default { loadNewProducts, addProductToCart }
+export default { loadNewProducts, addProductToCart, addProductToWishList }
 

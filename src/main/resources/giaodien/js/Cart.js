@@ -65,7 +65,7 @@ function displayCartItemToTable(dataListResponse, userId) {
         }
     })
 
-    // ✅ Lắng nghe thay đổi size
+    // Lắng nghe thay đổi size
     tableBodyCartItem.addEventListener("change", (event) => {
         if (event.target.tagName === "SELECT" && event.target.hasAttribute("data-proid")) {
             const proid = event.target.getAttribute("data-proid")

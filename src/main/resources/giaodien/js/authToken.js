@@ -9,17 +9,6 @@
     if (!token) {
         return false;
     }
-
-    // Khi backend sẵn sàng:
-    // try {
-    //     const resp = await fetch("/api/auth/me", {
-    //         headers: { "Authorization": `Bearer ${token}` }
-    //     });
-    //     return resp.ok;
-    // } catch (error) {
-    //     return false;
-    // }
-
     return true;
 }
 

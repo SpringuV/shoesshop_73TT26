@@ -1,4 +1,17 @@
 import auth from './authToken.js';
+
+function searchInput() {
+    const searchInput = document.getElementById("search-input")
+    searchInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            const keyWord = searchInput.value.trim()
+            if (keyWord) {
+                window.location.href = `/html/kiosk_product.html?search=${encodeURIComponent(keyWord)}`
+            }
+        }
+    })
+}
+
 function loadHeader() {
     fetch('/html/header.html')
         .then(response => response.text())
@@ -43,8 +56,20 @@ function loadHeader() {
                         })
                     }
 
+                    // cart shop
                     const cartManager = document.getElementById("cart-manager")
                     cartManager.addEventListener('click', (event) => {
+                        // checklogin
+                        const logined = auth.checkUserLogin();
+                        if (!logined) {
+                            alert("Bạn cần phải đăng nhập")
+                            event.preventDefault()
+                        }
+                    })
+
+                    // wishlist
+                    const wishList = document.getElementById("favorite")
+                    wishList.addEventListener('click', (event) => {
                         // checklogin
                         const logined = auth.checkUserLogin();
                         if (!logined) {
@@ -84,17 +109,16 @@ function loadHeader() {
                             }
                         })
                     })
-
+                    searchInput()
                 }, 0); // chờ DOM render xong
             }
         )
     // .catch(error => console.error("Lỗi khi tải header:", error))
 }
 
-
 export function setUpHeader() {
     document.addEventListener("DOMContentLoaded", () => {
         // load header
-        loadHeader();
+        loadHeader()
     })
 }

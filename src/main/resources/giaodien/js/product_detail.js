@@ -88,19 +88,23 @@ async function handleAddToCart() {
     const formAddToCart = document.getElementById("formDetailAddToCart")
     formAddToCart.addEventListener("submit", (e) => {
         e.preventDefault()
-        const productId = e.target.dataset.id
-        const userId = auth.getUserId()
-        const sizeBtnSelected = document.querySelector(".btn-size.selected")
-        if (!sizeBtnSelected) {
-            alert("Vui lòng chọn size trước khi thêm vào giỏ hàng");
-            return;
+        // checkuser logged
+        const isLoggedIn = auth.checkUserLogin()
+        if (!isLoggedIn) {
+            alert("Bạn cần phải đăng nhập để thực hiện chức năng này !")
+            return
+        } else {
+            const productId = e.target.dataset.id
+            const sizeBtnSelected = document.querySelector(".btn-size.selected")
+            if (!sizeBtnSelected) {
+                alert("Vui lòng chọn size trước khi thêm vào giỏ hàng");
+                return;
+            }
+            const size = sizeBtnSelected.textContent;
+            const quantity = parseInt(document.querySelector('.quantity-cart input').value)
+            // add to db
+            cart.addProductToCart(productId, quantity, size)
         }
-        const size = sizeBtnSelected.textContent;
-
-        const quantity = parseInt(document.querySelector('.quantity-cart input').value)
-
-        // add to db
-        cart.addProductToCart(productId, quantity, size)
     })
 }
 

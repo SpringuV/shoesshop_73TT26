@@ -6,6 +6,10 @@ body{
     background: linear-gradient(90deg, #e2e2e2, #c9d6ff);
 }
 
+.title-h1{
+    color: #7A90EC;
+}
+
 .container{
     position: relative;
     width: 850px;
