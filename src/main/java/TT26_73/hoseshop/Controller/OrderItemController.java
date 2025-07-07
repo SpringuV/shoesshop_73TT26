@@ -2,7 +2,6 @@ package TT26_73.hoseshop.Controller;
 
 import TT26_73.hoseshop.Dto.ApiResponse;
 import TT26_73.hoseshop.Dto.OrderItem.OrderItemCreateRequest;
-import TT26_73.hoseshop.Dto.OrderItem.OrderItemCreateResponse;
 import TT26_73.hoseshop.Dto.OrderItem.OrderItemResponse;
 import TT26_73.hoseshop.Service.OrderItemService;
 import jakarta.validation.Valid;
@@ -22,14 +21,6 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class OrderItemController {
     OrderItemService orderItemService;
-
-    @PostMapping
-    ApiResponse<OrderItemCreateResponse> createOrderItem(@RequestBody @Valid OrderItemCreateRequest request){
-        return ApiResponse.<OrderItemCreateResponse>builder()
-                .message("Create Order Item")
-                .result(orderItemService.createOrderItem(request))
-                .build();
-    }
 
     @GetMapping
     ApiResponse<List<OrderItemResponse>> getListOrderItem(){

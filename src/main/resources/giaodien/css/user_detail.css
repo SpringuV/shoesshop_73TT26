@@ -1,0 +1,209 @@
+.user-detail-info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inner-content {
+    display: flex;
+    justify-content: space-evenly;
+    width: 70%;
+}
+
+.inner-left,
+.inner-right {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.row {
+    margin-top: 10px;
+    padding: 8px 10px;
+    border: 1px solid blueviolet;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.data:hover {
+    background-color: #d9d9d9;
+    border-radius: 10px;
+}
+
+.data {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    color: blue;
+    font-weight: 600;
+}
+
+.section-act {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-edit {
+    width: 50%;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: #368df5;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+}
+
+.btn-edit:hover {
+    background-color: #0873f4;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.image img {
+    margin-top: 10px;
+    height: auto;
+    border-radius: 10px;
+    width: 300px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 8px;
+}
+
+.image img:hover {
+    transform: scale(1.03);
+}
+
+.modal-add-edit {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* nền mờ đè lên toàn bộ trang */
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    width: 100vw;
+    /* border-radius: 0; */
+    /* cha không cần bo tròn */
+    height: 100vh;
+    /* overflow: auto; */
+    /* Cho phép scroll toàn modal khi cần */
+}
+
+.modal-content {
+    box-sizing: border-box;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 5px 30px;
+    border-radius: 8px;
+    min-width: 300px;
+    max-width: 40%;
+    max-height: 90vh;
+    /* Không vượt quá chiều cao màn hình */
+    overflow-y: auto;
+    /* Scroll nội dung nếu vượt */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    /* Loại bỏ absolute + transform */
+    /* Đảm bảo không có margin tự động */
+}
+
+
+.modal-add-edit .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+}
+
+.top-modal {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.input-edit, .image-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.input-edit input {
+    width: 50%;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 4px 10px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    font-size: 17px;
+}
+
+.input-edit input:hover {
+    background-color: #d9d9d9;
+}
+
+.preview {
+    margin-top: 20px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#previewImageEditUser {
+    border-radius: 8px;
+    height: auto;
+    width: 200px;
+    transition: transform 0.4s ease-in-out;
+}
+
+#previewImageEditUser:hover{
+    transform: scale(1.1);
+}
+
+.inner-button{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.inner-button button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #368df5;
+    color: white;
+}
+
+.inner-button button:hover{
+    background-color: #0873f4;
+}
+
+.row label {
+    font-weight: 600;
+    font-size: 20px;
+}

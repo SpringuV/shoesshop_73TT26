@@ -165,7 +165,7 @@ async function addProductToCart(productId, quantity, size) {
         userId: userId,
         productId: productId,
         quantity: quantity ? quantity : 1,
-        size: size ? size : null
+        size: size ? size : 40
     }
 
     try {

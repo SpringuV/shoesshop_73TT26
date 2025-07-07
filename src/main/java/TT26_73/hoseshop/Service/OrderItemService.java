@@ -1,16 +1,11 @@
 package TT26_73.hoseshop.Service;
 
-import TT26_73.hoseshop.Dto.OrderItem.OrderItemCreateRequest;
-import TT26_73.hoseshop.Dto.OrderItem.OrderItemCreateResponse;
 import TT26_73.hoseshop.Dto.OrderItem.OrderItemResponse;
 import TT26_73.hoseshop.Exception.AppException;
 import TT26_73.hoseshop.Exception.ErrorCode;
 import TT26_73.hoseshop.Mapper.OrderItemMapper;
-import TT26_73.hoseshop.Mapper.OrderMapper;
 import TT26_73.hoseshop.Model.Key.KeyOrderItem;
 import TT26_73.hoseshop.Model.OrderItem;
-import TT26_73.hoseshop.Model.Orders;
-import TT26_73.hoseshop.Model.Product;
 import TT26_73.hoseshop.Repository.OrderItemRepository;
 import TT26_73.hoseshop.Repository.OrderRepository;
 import TT26_73.hoseshop.Repository.ProductRepository;
@@ -31,29 +26,6 @@ public class OrderItemService {
 
     OrderItemRepository orderItemRepository;
     OrderItemMapper orderItemMapper;
-    OrderRepository orderRepository;
-    ProductRepository productRepository;
-
-    public OrderItemCreateResponse createOrderItem(OrderItemCreateRequest request){
-        // start check key exist
-        Orders orders = orderRepository.findById(request.getIdOrders()).orElseThrow(()-> new AppException(ErrorCode.ORDERS_NOT_FOUND));
-        Product product = productRepository.findById(request.getProId()).orElseThrow(()-> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
-        // end check key exist
-        // start create key order item
-        KeyOrderItem keyOrderItem = KeyOrderItem.builder()
-                .orderId(request.getIdOrders())
-                .productId(request.getProId())
-                .build();
-        if(orderItemRepository.existsById(keyOrderItem)){
-            throw  new AppException(ErrorCode.ORDERS_ITEM_EXISTED);
-        }
-        // end create key order item
-        OrderItem orderItem = orderItemMapper.toEntityFromCreateRequest(request, product, orders);
-        orderItem.setKeyOrderItem(keyOrderItem);
-        // save
-        orderItemRepository.save(orderItem);
-        return orderItemMapper.toCreateResponse(orderItem);
-    }
 
     public List<OrderItemResponse> getListOrderItemByOrderId(String orderId){
         return orderItemRepository.findAllByOrder_IdOrders(orderId).stream().map(orderItemMapper::toResponse).toList();

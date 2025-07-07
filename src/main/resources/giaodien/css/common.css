@@ -524,3 +524,40 @@ footer {
 .value-search{
     color: #0056d2;
 }
+
+
+.modal-add-edit {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* nền mờ đè lên toàn bộ trang */
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  width: 100vw;
+  /* border-radius: 0; */
+  /* cha không cần bo tròn */
+  height: 100vh;
+  /* overflow: auto; */
+  /* Cho phép scroll toàn modal khi cần */
+}
+
+.modal-content {
+  box-sizing: border-box;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 5px 30px;
+  border-radius: 8px;
+  min-width: 300px;
+  max-width: 40%;
+  max-height: 90vh;
+  /* Không vượt quá chiều cao màn hình */
+  overflow-y: auto;
+  /* Scroll nội dung nếu vượt */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  /* Loại bỏ absolute + transform */
+  /* Đảm bảo không có margin tự động */
+}

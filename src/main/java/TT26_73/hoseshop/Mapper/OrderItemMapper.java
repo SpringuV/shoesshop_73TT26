@@ -14,19 +14,14 @@ public interface OrderItemMapper {
     @Mapping(target = "orders", source = "orders")
     @Mapping(target = "product", source = "product")
     @Mapping(target = "createAt", ignore = true)
+    @Mapping(target = "unit", ignore = true)
+    @Mapping(target = "price", ignore = true)
+    @Mapping(target = "discount", ignore = true)
     @Mapping(target = "updateAt", ignore = true)
     OrderItem toEntityFromCreateRequest(OrderItemCreateRequest request, Product product, Orders orders);
 
-    @Mapping(target = "itemOrderResponse", source = "orders")
     @Mapping(target = "itemProductResponse", source = "product")
     OrderItemResponse toResponse(OrderItem orderItem);
-
-    @Mapping(target = "itemOrderResponse", source = "orders")
-    @Mapping(target = "itemProductResponse", source = "product")
-    OrderItemCreateResponse toCreateResponse(OrderItem orderItem);
-
-
-    OrderItemOrderResponse toOrderItemOrderResponse(Orders orders);
 
     OrderItemProductResponse toOrderItemProductResponse(Product product);
 }

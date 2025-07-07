@@ -2,7 +2,6 @@ package TT26_73.hoseshop.Controller;
 
 import TT26_73.hoseshop.Dto.ApiResponse;
 import TT26_73.hoseshop.Dto.Order.OrderCreateRequest;
-import TT26_73.hoseshop.Dto.Order.OrderCreateResponse;
 import TT26_73.hoseshop.Dto.Order.OrdersResponse;
 import TT26_73.hoseshop.Service.OrderService;
 import jakarta.validation.Valid;
@@ -24,8 +23,8 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping
-    ApiResponse<OrderCreateResponse> createOrder(@RequestBody @Valid OrderCreateRequest request){
-        return ApiResponse.<OrderCreateResponse>builder()
+    ApiResponse<OrdersResponse> createOrder(@RequestBody @Valid OrderCreateRequest request){
+        return ApiResponse.<OrdersResponse>builder()
                 .message("Create Order")
                 .result(orderService.createOrder(request))
                 .build();

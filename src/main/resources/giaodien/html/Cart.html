@@ -34,6 +34,17 @@
         <div class="inner-checkout">
             <div class="cart-summary">
                 <div class="info-checkout">
+                    <label for="method-pay">Phương thức thanh toán:</label>
+                    <select id="method-pay">
+                        <option value="cash">Tiền mặt</option>
+                        <option value="bank-tranfer">Chuyển khoản</option>
+                    </select>
+                </div>
+                <div class="info-checkout">
+                    <p>Ghi chú:</p>
+                    <textarea id="note" placeholder="Ghi chú"></textarea>
+                </div>
+                <div class="info-checkout">
                     <p>Tổng tiền:</p>
                     <span id="total-price"></span>
                 </div>
@@ -45,11 +56,17 @@
     </section>
     <!--------------------- End Cart --------------------->
 
+    <div class="checkout">
+        
+    </div>
+
     <!--------------------- Footer--------------------->
     <div class="footer"></div>
     <!--------------------- End Footer --------------------->
 </body>
-<script type="module" src="/js/Cart.js"></script>
+<script type="module">import cart from "/js/Cart.js"
+    cart.setUpLoadCartPage()
+</script>
 <script  type="module" >import {setUpHeader} from "/js/load_header.js"
     setUpHeader()
 </script>

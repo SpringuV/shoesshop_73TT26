@@ -10,11 +10,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class OrderItemCreateRequest {
-    String idOrders;
     String proId;
     int quantity;
-    double price;
-    String unit;
-    String note;
-    double discount;
+    String size;
 }

@@ -13,4 +13,5 @@ public class UserOrderResponse {
     String userName;
     String id;
     String email;
+    String address;
 }

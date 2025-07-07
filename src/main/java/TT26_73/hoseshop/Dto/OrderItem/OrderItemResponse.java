@@ -10,11 +10,9 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class OrderItemResponse {
-    OrderItemOrderResponse itemOrderResponse;
     OrderItemProductResponse itemProductResponse;
     int quantity;
     double price;
     String unit;
-    String note;
     double discount;
 }

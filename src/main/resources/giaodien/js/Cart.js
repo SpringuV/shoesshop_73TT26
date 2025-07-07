@@ -204,7 +204,68 @@ async function updateProductToDB(userId, productId, quantity, size) {
     }
 }
 
-export async function loadCartItem() {
+// ---------------------- Check out -------------------
+
+async function processCheckout() {
+    const listOrderItemRows = document.querySelectorAll('#tbody-cart-list tr') // ok
+    if (listOrderItemRows.length === 0) {
+        alert("Giỏ hàng trống");
+        return;
+    }
+    const userId = auth.getUserId()
+    const note = document.getElementById("note").value || ""
+    const orderItems = []
+    listOrderItemRows.forEach(row => {
+        const proId = row.querySelector("select").getAttribute("data-proid")  // ok
+        const quantity = parseInt(row.querySelector("input").value) // ok
+        const size = row.querySelector("select").value // ok
+
+        orderItems.push({
+            proId: proId,
+            quantity: quantity,
+            size: size
+        })
+        console.log({
+            proId: proId,
+            quantity: quantity,
+            size: size
+        })
+    })
+
+    const dataRequest = {
+        note: note,
+        userId: userId,
+        itemsOrder: orderItems
+    }
+
+    try {
+        const response = await fetch(`http://localhost:8080/api/orders`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dataRequest)
+        })
+
+        if (response.ok) {
+            const data = await response.json();
+            alert("Đặt hàng thành công! Mã đơn hàng: " + data.result.orderId);
+
+            // Redirect hoặc clear giỏ hàng frontend
+            window.location.href = `/order-success.html?orderId=${data.result.orderId}`;
+        } else {
+            alert("Đặt hàng thất bại - 1");
+        }
+    } catch (error) {
+        console.error("Lỗi khi đặt hàng:", error);
+        alert("Lỗi khi đặt hàng - 2");
+    }
+}
+
+// ----------------------End Check out -------------------
+
+async function loadCartItem() {
     const userId = auth.getUserId()
     try {
         const response = await fetch(`http://localhost:8080/api/cart-items/${userId}`, {
@@ -228,8 +289,15 @@ export async function loadCartItem() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    loadCartItem();
-})
+function setUpLoadCartPage() {
+    document.addEventListener("DOMContentLoaded", () => {
+        loadCartItem();
 
-export default loadCartItem
+        const btnCheckout = document.querySelector(".checkout-btn") // done
+        btnCheckout.addEventListener("click", () => {
+            processCheckout()
+        })
+    })
+}
+
+export default { setUpLoadCartPage }

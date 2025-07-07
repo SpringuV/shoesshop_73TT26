@@ -3,6 +3,7 @@ package TT26_73.hoseshop.Model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 import java.util.Set;
@@ -22,7 +23,11 @@ public class Orders {
     @Column(name = "order_id")
     String idOrders;
 
+    @Column(name = "note")
+    String note;
+
     @Column(name = "order_date")
+    @CreationTimestamp
     Instant orderDate;
 
     @Column(name = "status")

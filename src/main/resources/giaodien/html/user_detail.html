@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Người dùng</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/user_detail.css">
+</head>
+
+<body>
+    <!-- Start header -->
+    <div class="header"></div>
+    <!-- End Header -->
+
+    <div class="container">
+        <h1 style="text-align: center; margin-top: 10px; margin-bottom: 10px;">Thông tin tài khoản</h1>
+        <div class="user-detail-info">
+            <div class="inner-content">
+                <div class="inner-left">
+                    <div class="row">
+                        <label>Tên người dùng:</label>
+                        <div class="data">
+                            <span id="username"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>Địa chỉ:</label>
+                        <div class="data">
+                            <span id="address"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>Số điện thoại:</label>
+                        <div class="data">
+                            <span id="phone"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="image">
+                            <!-- <div class="input-new-image">
+                                <label for="input-image-user"><i class="fa-solid fa-camera"></i> Tải ảnh đại diện
+                                    mới</label>
+                                <input id="input-image-user" type="file" hidden>
+                            </div> -->
+                            <label>Ảnh đại diện:</label>
+                            <img id="imageUser" src="" alt="Ảnh Người Dùng">
+                        </div>
+                    </div>
+                </div>
+                <div class="inner-right">
+                    <div class="row">
+                        <label>Email: </label>
+                        <div class="data">
+                            <span id="email"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>Age:</label>
+                        <div class="data">
+                            <span id="age"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>Họ và tên: </label>
+                        <div class="data">
+                            <span id="fullname"></span>
+                        </div>
+                    </div>
+                    <div class="section-act">
+                        <button class="btn-edit">Chỉnh sửa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-add-edit" id="editUserModal" style="display: none;">
+        <div class="modal-content">
+            <div class="top-modal">
+                <span class="close-btn" id="closeEditModel">&times;</span>
+                <h3 class="title-content">Cập nhật thông tin người dùng</h3>
+            </div>
+
+            <form id="userFormEdit" enctype="multipart/form-data">
+                <div class="input-edit">
+                    <label for="usernameEdit">Tên người dùng:</label>
+                    <input type="text" id="usernameEdit" readonly />
+                </div>
+                <div class="input-edit">
+                    <label for="fullnameEdit">Họ và tên:</label>
+                    <input type="text" id="fullnameEdit" placeholder="Nhập họ và tên" required />
+                </div>
+                <div class="input-edit">
+                    <label for="ageEdit">Tuổi:</label>
+                    <input type="number" id="ageEdit" min="1" max="100" required />
+                </div>
+                <div class="input-edit">
+                    <label for="addressEdit">Địa chỉ:</label>
+                    <input type="text" id="addressEdit" placeholder="Nhập địa chỉ" required />
+                </div>
+                <div class="input-edit">
+                    <label for="phoneEdit">Số điện thoại:</label>
+                    <input type="text" id="phoneEdit" placeholder="Nhập số điện thoại" required />
+                </div>
+                <div class="input-edit">
+                    <label for="emailEdit">Email:</label>
+                    <input type="email" id="emailEdit" placeholder="Nhập email" required />
+                </div>
+                <div class="image-user">
+                    <div class="input-image">
+                        <label for="fileInputEditUser">Chọn ảnh mới: <i class="fa-solid fa-camera"></i></label>
+                        <input type="file" id="fileInputEditUser" hidden/>
+                    </div>
+                    <div class="preview">
+                        <img id="previewImageEditUser" src="" alt="Ảnh người dùng" />
+                    </div>
+                </div>
+                <div class="inner-button">
+                    <button type="submit">Sửa thay đổi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--------------------- Footer--------------------->
+    <div class="footer"></div>
+    <!---------------------End Footer--------------------->
+    <script type="module">import { setUpHeader } from "/js/load_header.js"
+        setUpHeader()
+    </script>
+    <script type="module" >import {setUploadPage} from "/js/userDetail.js"
+        setUploadPage()
+    </script>
+    <script src="/js/load_footer.js"></script>
+    <script type="module" src="/js/authToken.js"></script>
+</body>
+
+</html>

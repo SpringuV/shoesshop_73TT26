@@ -30,9 +30,6 @@ public class OrderItem {
     @Column(name = "unit")
     String unit;
 
-    @Column(name = "note")
-    String note;
-
     @Column(name = "discount")
     double discount;
 

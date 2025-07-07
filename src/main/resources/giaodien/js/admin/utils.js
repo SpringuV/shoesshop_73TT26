@@ -61,6 +61,7 @@ export function previewImage(inputId, previewId) {
         if (file) {
             const reader = new FileReader();
             reader.onload = function (event) {
+                console.log(event)
                 previewImage.src = event.target.result;
                 previewImage.style.display = "block";
             };

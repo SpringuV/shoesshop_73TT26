@@ -24,6 +24,7 @@ body {
 
 /* Header */
 .header {
+  position: fixed;
   display: flex;
   justify-content: center;
   background: var(--primary-color);
@@ -433,11 +434,6 @@ tr:hover {
   position: relative;
 }
 
-/* .btn.btn-add {
-  bottom: 0;
-  position: fixed;
-  margin-bottom: 1%;
-} */
 
 .top-modal {
   display: flex;
@@ -448,8 +444,6 @@ tr:hover {
   object-fit: cover;
   border-radius: 8px;
 }
-
-
 
 .description {
   min-width: 250px;
