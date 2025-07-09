@@ -276,7 +276,11 @@ async function processCheckout() {
             alert("Đặt hàng thành công! Mã đơn hàng: " + data.result.idOrder);
 
             // Redirect hoặc clear giỏ hàng frontend
-            window.location.href = `/html/payment.html?orderId=${data.result.idOrder}&total=${data.result.totalPrice}`;
+            if(dataRequest.paymentMethod === "COD") {
+                window.location.href = "/html/order-history.html.html"
+            } else if(dataRequest.paymentMethod === "BANKING") {
+                window.location.href = `/html/payment.html?orderId=${data.result.idOrder}&total=${data.result.totalPrice}`;
+            }
             await clearCartFromDB(userId); // xóa giỏ hàng từ DB
             // Xoá giỏ hàng frontend
             document.querySelector("#tbody-cart-list").innerHTML = "";
