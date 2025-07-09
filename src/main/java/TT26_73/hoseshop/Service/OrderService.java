@@ -14,15 +14,18 @@ import TT26_73.hoseshop.Model.User;
 import TT26_73.hoseshop.Repository.OrderRepository;
 import TT26_73.hoseshop.Repository.ProductRepository;
 import TT26_73.hoseshop.Repository.UserRepository;
+import jakarta.persistence.criteria.Order;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -42,7 +45,9 @@ public class OrderService {
 
         Orders orders = Orders.builder()
 //                .status(request.getStatus())
+                .paymentMethod(request.getPaymentMethod())
                 .paymentStatus(request.getPaymentStatus())
+                .totalPrice(request.getTotalPrices())
                 .user(user)
                 .build();
         // save
@@ -52,6 +57,7 @@ public class OrderService {
                 .orders(savedOrder)
                 .product(productRepository.findById(itemOrder.getProId()).orElseThrow(()-> new AppException(ErrorCode.PRODUCT_NOT_FOUND)))
                 .quantity(itemOrder.getQuantity())
+                .size(itemOrder.getSize())
                 .build())
             .toList();
 
@@ -59,8 +65,8 @@ public class OrderService {
         savedOrder.setOrderItemSet(new HashSet<>(listOrderItem));
         orderRepository.save(savedOrder);
 
-        OrdersResponse ordersResponse = orderMapper.toResponse(orders);
-        List<OrderItemResponse> orderItemResponses = orders.getOrderItemSet().stream().map(orderItemMapper::toResponse).toList();
+        OrdersResponse ordersResponse = orderMapper.toResponse(savedOrder);
+        List<OrderItemResponse> orderItemResponses = savedOrder.getOrderItemSet().stream().map(orderItemMapper::toResponse).toList();
         ordersResponse.setOrderItemResponseList(orderItemResponses);
         return ordersResponse;
     }
@@ -87,5 +93,12 @@ public class OrderService {
         } catch (EmptyResultDataAccessException ex){
             throw  new AppException(ErrorCode.ORDERS_NOT_FOUND);
         }
+    }
+
+    public OrdersResponse confirmPayment(String orderId){
+        Orders optionalOrder = orderRepository.findById(orderId).orElseThrow(()-> new AppException(ErrorCode.ORDERS_NOT_FOUND));
+        optionalOrder.setPaymentStatus("PAID"); // cập nhật trạng thái
+        orderRepository.save(optionalOrder);
+        return orderMapper.toResponse(optionalOrder);
     }
 }

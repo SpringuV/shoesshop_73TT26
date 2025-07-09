@@ -19,6 +19,7 @@ public class OrdersResponse {
     String status; // (shipped, pending, delivered, cancelled)
     double totalPrice;
     String paymentStatus;
+    String paymentMethod;
     String note;
     UserOrderResponse userOrderResponse;
     List<OrderItemResponse> orderItemResponseList;

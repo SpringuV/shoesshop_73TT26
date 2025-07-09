@@ -117,7 +117,7 @@ function handleQuantityAndSizeChange(tableBody, target, userId) {
     clearTimeout(debounceTimer)
     debounceTimer = setTimeout(() => {
         updateProductToDB(userId, proid, quantity, size);
-    }, 2000) // 1000ms = 1 giây, tuỳ chỉnh
+    }, 2500) // 1000ms = 1 giây, tuỳ chỉnh
 }
 
 function updateAllTotals() {
@@ -125,25 +125,38 @@ function updateAllTotals() {
     let grandTotal = 0;
 
     rows.forEach(row => {
-        const quantityInput = row.querySelector('.quantity-cart input');
-        const priceUnit = row.querySelector('.cart-price span');
-        const totalPrice = row.querySelector('.total-price span');
+        const quantityInput = row.querySelector('.quantity-cart input')
+        const priceUnit = row.querySelector('.cart-price span')
+        const totalPrice = row.querySelector('.total-price span')
 
-        const quantity = parseInt(quantityInput.value);
-        const price = parseFloat(priceUnit.textContent.replace(/\D/g, ''));
+        const quantity = parseInt(quantityInput.value)
+        const price = parseFloat(priceUnit.textContent.replace(/\D/g, ''))
 
-        const lineTotal = quantity * price;
+        const lineTotal = quantity * price
 
-        totalPrice.textContent = lineTotal.toLocaleString() + 'đ';
-        grandTotal += lineTotal;
+        totalPrice.textContent = lineTotal.toLocaleString() + 'đ'
+        grandTotal += lineTotal
     });
 
     // Cập nhật tổng toàn bộ
-    const cartTotal = document.getElementById('total-price');
+    const cartTotal = document.getElementById('total-price')
     if (cartTotal) {
-        cartTotal.textContent = grandTotal.toLocaleString() + 'đ';
+        cartTotal.textContent = grandTotal.toLocaleString() + 'đ'
     }
 }
+
+
+function getTotalPriceAllProducts() {
+    const totalPriceElement = document.getElementById('total-price')
+    if (!totalPriceElement) {
+        console.error("Không tìm thấy phần tử tổng giá sản phẩm");
+        return 0;
+    }
+    const totalPriceText = totalPriceElement.textContent || "0đ";
+    const totalPrice = parseFloat(totalPriceText.replace(/\D/g, '')) || 0
+    return totalPrice
+}
+
 
 async function deleteCartItemDB(userId, productId, productName, tableBody, target) {
     if (!confirm(`Bạn có chắc là sẽ xóa sản phẩm ${productName} khỏi giỏ hàng chứ`)) {
@@ -215,6 +228,12 @@ async function processCheckout() {
     const userId = auth.getUserId()
     const note = document.getElementById("note").value || ""
     const orderItems = []
+    const paymentMethod = document.querySelector("#method-pay").value // ok
+    if (paymentMethod === "none") {
+        alert("Vui lòng chọn phương thức thanh toán")
+        return
+    }
+    const totalPrice = getTotalPriceAllProducts()
     listOrderItemRows.forEach(row => {
         const proId = row.querySelector("select").getAttribute("data-proid")  // ok
         const quantity = parseInt(row.querySelector("input").value) // ok
@@ -225,18 +244,22 @@ async function processCheckout() {
             quantity: quantity,
             size: size
         })
-        console.log({
-            proId: proId,
-            quantity: quantity,
-            size: size
-        })
     })
-
     const dataRequest = {
+        totalPrices: totalPrice,
+        paymentMethod: paymentMethod,
         note: note,
         userId: userId,
         itemsOrder: orderItems
     }
+    if (paymentMethod === "cash") {
+        dataRequest.paymentMethod = "COD" // Chuyển đổi sang COD nếu là tiền mặt
+        dataRequest.paymentStatus = "PAID" // Thêm trạng thái thanh toán
+    } else if (paymentMethod === "banking") {
+        dataRequest.paymentMethod = "BANKING" // Chuyển đổi sang BANKING nếu là chuyển khoản
+        dataRequest.paymentStatus = "PENDING" // Thêm trạng thái thanh toán
+    }
+    // Gửi yêu cầu đặt hàng
 
     try {
         const response = await fetch(`http://localhost:8080/api/orders`, {
@@ -250,10 +273,15 @@ async function processCheckout() {
 
         if (response.ok) {
             const data = await response.json();
-            alert("Đặt hàng thành công! Mã đơn hàng: " + data.result.orderId);
+            alert("Đặt hàng thành công! Mã đơn hàng: " + data.result.idOrder);
 
             // Redirect hoặc clear giỏ hàng frontend
-            window.location.href = `/order-success.html?orderId=${data.result.orderId}`;
+            window.location.href = `/html/payment.html?orderId=${data.result.idOrder}&total=${data.result.totalPrice}`;
+            await clearCartFromDB(userId); // xóa giỏ hàng từ DB
+            // Xoá giỏ hàng frontend
+            document.querySelector("#tbody-cart-list").innerHTML = "";
+            document.querySelector("#total-price").textContent = "0đ";
+
         } else {
             alert("Đặt hàng thất bại - 1");
         }
@@ -264,6 +292,23 @@ async function processCheckout() {
 }
 
 // ----------------------End Check out -------------------
+
+async function clearCartFromDB(userId) {
+    try {
+        const response = await fetch(`http://localhost:8080/api/cart-items/clear/${userId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+
+        if (!response.ok) {
+            console.warn("Không thể xoá giỏ hàng từ server");
+        }
+    } catch (error) {
+        console.error("Lỗi khi xoá giỏ hàng từ server:", error);
+    }
+}
 
 async function loadCartItem() {
     const userId = auth.getUserId()

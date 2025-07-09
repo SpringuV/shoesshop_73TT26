@@ -18,6 +18,7 @@ public interface OrderItemMapper {
     @Mapping(target = "price", ignore = true)
     @Mapping(target = "discount", ignore = true)
     @Mapping(target = "updateAt", ignore = true)
+    @Mapping(target = "size", ignore = true)
     OrderItem toEntityFromCreateRequest(OrderItemCreateRequest request, Product product, Orders orders);
 
     @Mapping(target = "itemProductResponse", source = "product")

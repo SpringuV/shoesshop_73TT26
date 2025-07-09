@@ -51,7 +51,7 @@
     align-items: center;
 }
 
-.btn-edit {
+.btn-edit, .btn-change {
     width: 50%;
     height: 40px;
     border: none;
@@ -62,8 +62,11 @@
     color: white;
     font-weight: 500;
 }
+.btn-change{
+    margin-bottom: 20px;
+}
 
-.btn-edit:hover {
+.btn-edit:hover, .btn-change:hover {
     background-color: #0873f4;
 }
 
@@ -206,4 +209,27 @@
 .row label {
     font-weight: 600;
     font-size: 20px;
+}
+
+#changePasswordModal .top-modal {
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    width: 100%;
+    padding-right: 35px; /* Để không đè icon */
+}
+
+.password-field .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #555;
 }

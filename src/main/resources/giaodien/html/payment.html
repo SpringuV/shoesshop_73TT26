@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/payment.css">
+</head>
+
+<body>
+    <!-- Start header -->
+    <div class="header"></div>
+    <!-- End Header -->
+
+    <div class="container">
+        <div class="title">
+            <h2>Quét mã QR để thanh toán cho đơn hàng <p></p></h2> 
+        </div>
+        <div class="image-qr">
+            <img src="/images/Qr-code.jpg" alt="QR Code" />
+        </div>
+        <p class="text price-pay">Số tiền: <span id="amount"></span></p>
+        <p class="text content-pay">Nội dung: <span id="content"></span></p>
+        <button id="btn-confirm-payment">Tôi đã thanh toán</button>
+    </div>
+
+    <!--------------------- Footer--------------------->
+    <div class="footer"></div>
+    <!---------------------End Footer--------------------->
+    <script type="module">import { setUpHeader } from "/js/load_header.js"
+        setUpHeader()
+    </script>
+    <script type="module">import payment from "/js/payment.js"
+        payment.setUpInit()
+    </script>
+    <script type="module" src="/js/authToken.js"></script>
+</body>
+
+</html>

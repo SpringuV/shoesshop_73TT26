@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử mua hàng</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+
+<body>
+    <!-- Start header -->
+    <div class="header"></div>
+    <!-- End Header -->
+
+    <div class="container">
+        <h1>Lịch sử mua hàng</h1>
+        <div class="order-history">
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Ngày đặt hàng</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="order-history-list">
+                    <!-- Dữ liệu lịch sử mua hàng sẽ được chèn vào đây -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal-detail-order" id="modal-detail-order" style="display: none;">
+        <div class="modal-content">
+            <div class="inner">
+                <div class="top-header-modal">
+                    <h2>Chi tiết đơn hàng</h2>
+                    <span id="close-detail-order" class="close-btn">&times;</span>
+                </div>
+            </div>
+            <div class="content-modal">
+                <div class="row">
+                    <label for="order-id">Mã đơn hàng:</label>
+                    <span id="order-id"></span>
+                </div>
+                <div class="row">
+                    <label for="order-date">Ngày đặt hàng:</label>
+                    <span id="order-date"></span>
+                </div>
+                <div class="row">
+                    <label for="order-total">Tổng tiền:</label>
+                    <span id="order-total"></span>
+                </div>
+                <div class="row">
+                    <label for="order-status">Trạng thái:</label>
+                    <span id="order-status"></span>
+                </div>
+                <div class="row-table">
+                    <table class="order-items-table">
+                        <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Giảm giá</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng</th>
+                            </tr>
+                        </thead>
+                        <tbody id="order-items-list">
+                            <!-- Dữ liệu chi tiết sản phẩm sẽ được chèn vào đây -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--------------------- Footer--------------------->
+    <div class="footer"></div>
+    <!---------------------End Footer--------------------->
+    <script type="module">import { setUpHeader } from "/js/load_header.js"
+        setUpHeader()
+    </script>
+    <script type="module">import order from "/js/order-history.js"
+        order.setUPLoadOrderHistory()
+    </script>
+    <script src="/js/load_footer.js"></script>
+    <script type="module" src="/js/authToken.js"></script>
+</body>
+
+</html>

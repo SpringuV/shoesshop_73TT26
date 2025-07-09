@@ -30,6 +30,9 @@ public class OrderItem {
     @Column(name = "unit")
     String unit;
 
+    @Column(name = "size")
+    String size;
+
     @Column(name = "discount")
     double discount;
 

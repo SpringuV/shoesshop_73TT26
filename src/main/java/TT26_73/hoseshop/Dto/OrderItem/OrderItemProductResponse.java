@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 public class OrderItemProductResponse {
     String proId;
     String nameProduct;
-    String gender;
     String imagePath;
     String brand;
+    double prices;
 }

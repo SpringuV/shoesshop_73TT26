@@ -20,6 +20,13 @@ a {
     margin-right: 5%;
 }
 
+.container h1{
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    text-align: center;
+}
 /* Header */
 header {
     display: flex;
@@ -41,7 +48,8 @@ header {
 }
 
 .logo img {
-    max-width: 70px; /* Điều chỉnh kích thước logo */
+    max-width: 70px;
+    /* Điều chỉnh kích thước logo */
 }
 
 .menu {
@@ -50,30 +58,31 @@ header {
     margin-left: auto;
 }
 
-.menu > ul {
+.menu>ul {
     display: flex;
     align-items: center;
 }
 
-.menu > ul > li {
+.menu>ul>li {
     position: relative;
-    padding: 0 12px; /* Tăng khoảng cách giữa các mục chính */
+    padding: 0 12px;
+    /* Tăng khoảng cách giữa các mục chính */
 }
 
 .menu ul a {
-    font-size: 16px; 
+    font-size: 16px;
     display: block;
     line-height: 20px;
     padding: 10px 0;
     transition: color 0.3s;
 }
 
-.menu > ul > li > a {
+.menu>ul>li>a {
     font-weight: 600;
     color: #333;
 }
 
-.menu > ul > li > a:hover {
+.menu>ul>li>a:hover {
     color: #003087;
 }
 
@@ -81,9 +90,11 @@ header {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 220px; /* Tăng chiều rộng để chứa nội dung */
-    background-color: white; 
-    border: 1px solid #e0e0e0; /* Viền mỏng */
+    width: 220px;
+    /* Tăng chiều rộng để chứa nội dung */
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    /* Viền mỏng */
     padding: 10px 0;
     visibility: hidden;
     opacity: 0;
@@ -92,24 +103,25 @@ header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.menu > ul > li:hover > .sub-menu {
+.menu>ul>li:hover>.sub-menu {
     visibility: visible;
     opacity: 1;
 }
 
-.sub-menu > li {
+.sub-menu>li {
     position: relative;
 }
 
-.sub-menu > li > a {
+.sub-menu>li>a {
     font-weight: 500;
     padding: 8px 20px;
     color: #444;
 }
 
-.sub-menu > li > a:hover {
+.sub-menu>li>a:hover {
     color: #003087;
-    background-color: #e6f0fa; /* Màu nền khi hover */
+    background-color: #e6f0fa;
+    /* Màu nền khi hover */
 }
 
 .sub-menu ul {
@@ -127,7 +139,7 @@ header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.sub-menu li:hover > ul {
+.sub-menu li:hover>ul {
     visibility: visible;
     opacity: 1;
 }
@@ -149,17 +161,17 @@ header {
     margin-left: auto;
 }
 
-.others > ul {
+.others>ul {
     display: flex;
     align-items: center;
 }
 
-.others > ul > li {
+.others>ul>li {
     padding: 0 12px;
     position: relative;
 }
 
-.others > ul > li:first-child input {
+.others>ul>li:first-child input {
     width: 100px;
     border: none;
     border-bottom: 1px solid #333;
@@ -167,17 +179,17 @@ header {
     outline: none;
 }
 
-.others > ul > li:first-child i {
+.others>ul>li:first-child i {
     position: absolute;
     right: 10px;
 }
 
-.others > ul > li a i {
+.others>ul>li a i {
     font-size: 1.2rem;
     transition: color 0.3s;
 }
 
-.others > ul > li a i:hover {
+.others>ul>li a i:hover {
     color: #003087;
 }
 
@@ -222,7 +234,7 @@ header {
         max-width: 80px;
     }
 
-    .menu > ul {
+    .menu>ul {
         display: none;
         position: absolute;
         top: 70px;
@@ -233,37 +245,40 @@ header {
         padding: 10px 0;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         z-index: 15;
-        max-height: 90vh;        /* không chiếm toàn bộ màn hình */
-        overflow-y: auto;        /* thêm cuộn dọc nếu dài */
+        max-height: 90vh;
+        /* không chiếm toàn bộ màn hình */
+        overflow-y: auto;
+        /* thêm cuộn dọc nếu dài */
     }
 
-    .menu > ul.active {
+    .menu>ul.active {
         display: flex;
     }
 
-    .menu > ul > li {
+    .menu>ul>li {
         margin: 10px 0;
         text-align: center;
         padding: 0;
     }
 
-    .menu > ul > li > a {
+    .menu>ul>li>a {
         padding: 10px;
     }
 
-    .menu > ul > li > a::before {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #fff;
-    transition: width 0.3s ease;
-}
-.menu > ul > li > a:hover:before {
-    width: 100%;
-}
+    .menu>ul>li>a::before {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #fff;
+        transition: width 0.3s ease;
+    }
+
+    .menu>ul>li>a:hover:before {
+        width: 100%;
+    }
 
     .sub-menu {
         position: static;
@@ -275,7 +290,7 @@ header {
         box-shadow: none;
     }
 
-    .menu > ul > li:hover > .sub-menu {
+    .menu>ul>li:hover>.sub-menu {
         top: 0;
     }
 
@@ -289,17 +304,17 @@ header {
         box-shadow: none;
     }
 
-    .sub-menu li:hover > ul {
+    .sub-menu li:hover>ul {
         visibility: visible;
         opacity: 1;
     }
 
-    .others > ul {
+    .others>ul {
         flex-direction: row;
         align-items: center;
     }
 
-    .others > ul > li input {
+    .others>ul>li input {
         width: 80px;
     }
 
@@ -317,11 +332,11 @@ header {
         max-width: 60px;
     }
 
-    .others > ul > li input {
+    .others>ul>li input {
         width: 60px;
     }
 
-    .others > ul > li {
+    .others>ul>li {
         padding: 0 8px;
     }
 
@@ -419,13 +434,13 @@ footer {
 
 /* item-aciton */
 
-.item-action{
+.item-action {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.favorite{
+.favorite {
     padding: 7px;
     margin: 0 10px;
     border-radius: 5px;
@@ -470,7 +485,7 @@ footer {
 
 .minus i,
 .plus i {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 .minus {
@@ -506,7 +521,7 @@ footer {
     background-color: #0056d2;
 }
 
-.favorite{
+.favorite {
     cursor: pointer;
 }
 
@@ -521,43 +536,210 @@ footer {
     font-weight: 600;
 }
 
-.value-search{
+.value-search {
     color: #0056d2;
 }
 
 
-.modal-add-edit {
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* nền mờ đè lên toàn bộ trang */
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  width: 100vw;
-  /* border-radius: 0; */
-  /* cha không cần bo tròn */
-  height: 100vh;
-  /* overflow: auto; */
-  /* Cho phép scroll toàn modal khi cần */
+.modal-add-edit,
+.modal-detail-order {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* nền mờ đè lên toàn bộ trang */
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    width: 100vw;
+    /* border-radius: 0; */
+    /* cha không cần bo tròn */
+    height: 100vh;
+    /* overflow: auto; */
+    /* Cho phép scroll toàn modal khi cần */
 }
 
 .modal-content {
-  box-sizing: border-box;
-  margin: 50px auto;
-  background-color: #fff;
-  padding: 5px 30px;
-  border-radius: 8px;
-  min-width: 300px;
-  max-width: 40%;
-  max-height: 90vh;
-  /* Không vượt quá chiều cao màn hình */
-  overflow-y: auto;
-  /* Scroll nội dung nếu vượt */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  position: relative;
-  /* Loại bỏ absolute + transform */
-  /* Đảm bảo không có margin tự động */
+    box-sizing: border-box;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 5px 30px;
+    border-radius: 8px;
+    min-width: 300px;
+    max-width: 70%;
+    max-height: 90vh;
+    /* Không vượt quá chiều cao màn hình */
+    overflow-y: auto;
+    /* Scroll nội dung nếu vượt */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    /* Loại bỏ absolute + transform */
+    /* Đảm bảo không có margin tự động */
+}
+
+
+/* detail order */
+.close-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: -20px;
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+    background-color: #003087;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.close-btn:hover {
+    background-color: #0056d2;
+}
+
+.top-header-modal {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content-modal {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.content-modal .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.row span {
+    width: 60%;
+    text-align: center;
+}
+
+.row-table {
+    margin-top: 10px;
+}
+
+.row-table table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
+}
+
+.row-table table tr, .row-table table th {
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ddd;
+    
+}
+
+.row-table table th{
+    background-color: #2d9aea;
+    color: white;
+    padding: 5px;
+}
+
+.row-table table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table td:first-child,table th:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+table td:last-child, table th:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.product-item-detail{
+    min-width: 350px;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-product-detail{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.image-detail{
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-detail img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.image-detail img:hover {
+    transform: scale(1.05);
+    /* Phóng to hình ảnh khi hover */
+}
+
+.order-history {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.order-history table {
+    border-collapse: separate;
+}
+
+.order-history table th{
+    background-color: #2d9aea;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+.order-history table td {
+    padding: 10px;
+    text-align: center;
+    background-color: #d5eef3;
+}
+
+.view-details-btn {
+    background-color: white;
+    color: black;
+    padding: 5px 10px;
+    border: 1px solid #267c33;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.sole-row td{
+    background-color: #edfdff;
 }

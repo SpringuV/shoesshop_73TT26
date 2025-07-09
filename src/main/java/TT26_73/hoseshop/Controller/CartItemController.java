@@ -51,4 +51,10 @@ public class CartItemController {
         cartItemService.deleteCartItemByKey(userId, productId);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/clear/{userId}")
+    ResponseEntity<Void> deleteCartItemAll(@PathVariable("userId") String userId){
+        cartItemService.deleteByUserId(userId);
+        return ResponseEntity.noContent().build();
+    }
 }

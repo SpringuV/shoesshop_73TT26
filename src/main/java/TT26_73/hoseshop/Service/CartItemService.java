@@ -88,4 +88,10 @@ public class CartItemService {
         CartItem cartItem = cartItemRepository.findById(keyCartItem).orElseThrow(()-> new AppException(ErrorCode.CART_ITEM_NOT_FOUND));
         cartItemRepository.delete(cartItem);
     }
+
+    public void deleteByUserId(String userId){
+        User user = userRepository.findById(userId).orElseThrow(()-> new AppException(ErrorCode.USER_NOT_FOUND));
+        List<CartItem> cartItemList = user.getCartItemSet().stream().toList();
+        cartItemRepository.deleteAll(cartItemList);
+    }
 }

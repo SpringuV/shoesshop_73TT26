@@ -220,7 +220,6 @@ export function setUpHomepageEvent() {
         // xử lý thêm giỏ hàng và yêu thích
         const wrapper = document.querySelector(".products-wrapper")
         wrapper.addEventListener("click", async (event) => {
-            console.log(event)
             if (event.target.classList.contains("color-btn")) {
                 const productId = event.target.dataset.id
                 await addProductToCart(productId)

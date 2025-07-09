@@ -15,6 +15,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,9 +33,9 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Transactional
 public class UserService {
-    AuthenticationService authenticationService;
     UserMapper userMapper;
     UserRepository userRepository;
+    PasswordEncoder passwordEncoder;
 
     private void exeProcessImage(MultipartFile imageFile, String fileName){
         if (!imageFile.isEmpty() && imageFile != null) {
@@ -124,6 +125,18 @@ public class UserService {
         } catch (EmptyResultDataAccessException ex){
             throw new AppException(ErrorCode.USER_NOT_FOUND);
         }
+    }
+
+    public UserChangePasswordResponse changePassword(UserChangePasswordRequest request){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(username).orElseThrow(()-> new AppException(ErrorCode.USER_NOT_FOUND));
+        if(passwordEncoder.matches(request.getOldPassword(), user.getPassword())){
+            user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        } else {
+            throw new AppException(ErrorCode.PASSWORD_NOT_MATCHED);
+        }
+        userRepository.save(user);
+        return UserChangePasswordResponse.builder().isChanged(true).build();
     }
 
     public UserResponse getInfoUser(){

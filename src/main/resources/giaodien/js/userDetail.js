@@ -107,6 +107,46 @@ async function processEditUser() {
     }
 }
 
+async function changePassword() {
+    const oldPassword = document.querySelector("#oldPassword").value.trim()
+    console.log(oldPassword)
+    const newPassword = document.querySelector("#newPassword").value.trim()
+    console.log(newPassword)
+    const confirmPassword = document.querySelector("#confirmPassword").value.trim()
+    if (oldPassword === "" || newPassword === "" || confirmPassword === "") {
+        alert("Vui lòng điền đầy đủ thông tin")
+        return
+    }
+    console.log(confirmPassword)
+    if (newPassword !== confirmPassword) {
+        alert("Mật khẩu mới và xác nhận mật khẩu không khớp")
+        return
+    }
+    const dataRequest = {
+        oldPassword: oldPassword,
+        newPassword: newPassword
+    }
+    try {
+        const response = await fetch(`http://localhost:8080/api/users/changePass`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dataRequest)
+        })
+
+        if (response.ok) {
+            alert("Đổi mật khẩu thành công")
+        } else {
+            alert("Lỗi khi đổi mật khẩu -1")
+        }
+    } catch (error) {
+        console.error("Lỗi khi đổi mật khẩu", error)
+        alert("Lỗi khi đổi mật khẩu -2")
+    }
+}
+
 export function setUploadPage() {
     loadUserToPage()
     document.querySelector(".btn-edit").addEventListener("click", () => {
@@ -116,8 +156,38 @@ export function setUploadPage() {
         utils.setupOutsideClickToCloseModal("editUserModal")
     })
 
-    document.querySelector("#userFormEdit").addEventListener("submit", (e)=>{
+    document.querySelector(".btn-change").addEventListener("click", () => {
+        utils.openModel("changePasswordModal")
+        utils.click_X_toCloseModal("closeChangePasswordModal", "changePasswordModal")
+        utils.setupOutsideClickToCloseModal("changePasswordModal")
+    })
+
+    document.querySelector("#userFormEdit").addEventListener("submit", (e) => {
         e.preventDefault()
         processEditUser()
+    })
+
+    const changePasswordForm = document.querySelector("#changePasswordForm");
+    changePasswordForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        changePassword();
+        utils.closeModel("changePasswordModal")
+    });
+
+    // toggle active display password
+    document.querySelectorAll('.toggle-password').forEach(icon => {
+        icon.addEventListener('click', () => {
+            const inputId = icon.getAttribute('data-target')
+            const input = document.getElementById(inputId)
+            if (input.type === "password") {
+                input.type = "text"
+                icon.classList.remove("fa-eye")
+                icon.classList.add("fa-eye-slash")
+            } else {
+                input.type = "password"
+                icon.classList.remove("fa-eye-slash")
+                icon.classList.add("fa-eye")
+            }
+        })
     })
 }

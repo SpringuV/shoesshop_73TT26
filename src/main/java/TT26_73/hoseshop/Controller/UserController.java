@@ -45,6 +45,14 @@ public class UserController {
                 .build();
     }
 
+    @PutMapping("/changePass")
+    ApiResponse<UserChangePasswordResponse> changePass(@RequestBody UserChangePasswordRequest request){
+        return ApiResponse.<UserChangePasswordResponse>builder()
+                .message("Change Pass")
+                .result(userService.changePassword(request))
+                .build();
+    }
+
     @GetMapping("/list-user/{address}")
     ApiResponse<List<UserResponse>> getListUserByAddress(@PathVariable("address") String address){
         return ApiResponse.<List<UserResponse>>builder()

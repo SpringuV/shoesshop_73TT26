@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label>Age:</label>
+                        <label>Tuổi:</label>
                         <div class="data">
                             <span id="age"></span>
                         </div>
@@ -72,6 +72,7 @@
                         </div>
                     </div>
                     <div class="section-act">
+                        <button class="btn-change">Đổi mật khẩu</button>
                         <button class="btn-edit">Chỉnh sửa</button>
                     </div>
                 </div>
@@ -114,7 +115,7 @@
                 <div class="image-user">
                     <div class="input-image">
                         <label for="fileInputEditUser">Chọn ảnh mới: <i class="fa-solid fa-camera"></i></label>
-                        <input type="file" id="fileInputEditUser" hidden/>
+                        <input type="file" id="fileInputEditUser" hidden />
                     </div>
                     <div class="preview">
                         <img id="previewImageEditUser" src="" alt="Ảnh người dùng" />
@@ -126,13 +127,48 @@
             </form>
         </div>
     </div>
+    <!-- Modal đổi mật khẩu -->
+    <div class="modal-add-edit" id="changePasswordModal" style="display: none;">
+        <div class="modal-content">
+            <div class="top-modal">
+                <span class="close-btn" id="closeChangePasswordModal">&times;</span>
+                <h3 class="title-content">Đổi mật khẩu</h3>
+            </div>
+            <form id="changePasswordForm">
+                <div class="input-edit">
+                    <label for="oldPassword">Mật khẩu cũ:</label>
+                    <div class="password-field">
+                        <input type="password" id="oldPassword" required />
+                        <i class="fa-solid fa-eye toggle-password" data-target="oldPassword"></i>
+                    </div>
+                </div>
+                <div class="input-edit">
+                    <label for="newPassword">Mật khẩu mới:</label>
+                    <div class="password-field">
+                        <input type="password" id="newPassword" required />
+                        <i class="fa-solid fa-eye toggle-password" data-target="newPassword"></i>
+                    </div>
+                </div>
+                <div class="input-edit">
+                    <label for="confirmPassword">Xác nhận mật khẩu mới:</label>
+                    <div class="password-field">
+                        <input type="password" id="confirmPassword" required />
+                        <i class="fa-solid fa-eye toggle-password" data-target="confirmPassword"></i>
+                    </div>
+                </div>
+                <div class="inner-button">
+                    <button type="submit">Thực hiện đổi mật khẩu</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <!--------------------- Footer--------------------->
     <div class="footer"></div>
     <!---------------------End Footer--------------------->
     <script type="module">import { setUpHeader } from "/js/load_header.js"
         setUpHeader()
     </script>
-    <script type="module" >import {setUploadPage} from "/js/userDetail.js"
+    <script type="module">import { setUploadPage } from "/js/userDetail.js"
         setUploadPage()
     </script>
     <script src="/js/load_footer.js"></script>

@@ -16,8 +16,10 @@ import java.util.List;
 public class OrderCreateRequest {
 //    String status; // (shipped, pending, delivered, cancelled)
 //    double totalPrice;
+    String paymentMethod;
     String paymentStatus;
     String userId;
     String note;
+    double totalPrices;
     List<OrderItemCreateRequest> itemsOrder;
 }

@@ -1,4 +1,4 @@
-body{
+body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,11 +6,11 @@ body{
     background: linear-gradient(90deg, #e2e2e2, #c9d6ff);
 }
 
-.title-h1{
+.title-h1 {
     color: #7A90EC;
 }
 
-.container{
+.container {
     position: relative;
     width: 850px;
     height: 550px;
@@ -33,10 +33,10 @@ body{
     text-align: center;
     padding: 40px;
     z-index: 1;
-    transition:  .6s ease-in-out 1.2s, visibility 0s 1s;
+    transition: .6s ease-in-out 1.2s, visibility 0s 1s;
 }
 
-.container.active .from-box{
+.container.active .from-box {
     right: 50%;
 }
 
@@ -81,15 +81,15 @@ form {
 
 .input-box i {
     position: absolute;
-    right:  20px;
+    right: 20px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 20px;
-    color: #888; 
+    color: #888;
 }
 
 .forgot-link {
-    margin: -15px 0 15px; 
+    margin: -15px 0 15px;
 }
 
 .forgot-link a {
@@ -193,25 +193,25 @@ form {
 .toggle-panel .btn {
     width: 160px;
     height: 46px;
-    background:  transparent;
+    background: transparent;
     border: 2px solid #fff;
     box-shadow: none;
 }
 
 @media screen and (max-width: 650px) {
-    .container{
+    .container {
         height: calc(100vh - 40px);
     }
 
-    .from-box{
+    .from-box {
         bottom: 0;
         width: 100%;
         height: 70%;
     }
 
-    .container.active .from-box{
+    .container.active .from-box {
         right: 0;
-        bottom: 30%;    
+        bottom: 30%;
     }
 
     .toggle-box::before {
@@ -261,4 +261,21 @@ form {
     }
 }
 
+.input-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
+.input-box input {
+    width: 100%;
+    padding-right: 35px;
+    /* đủ chỗ cho icon */
+}
+
+.input-box .toggle-password {
+    position: absolute;
+    right: 10px;
+    font-size: 18px;
+    color: #555;
+}

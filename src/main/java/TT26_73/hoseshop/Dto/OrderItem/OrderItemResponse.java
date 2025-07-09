@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 public class OrderItemResponse {
     OrderItemProductResponse itemProductResponse;
     int quantity;
-    double price;
     String unit;
+    String size;
     double discount;
 }

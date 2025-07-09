@@ -4,6 +4,7 @@ import TT26_73.hoseshop.Dto.ApiResponse;
 import TT26_73.hoseshop.Dto.Order.OrderCreateRequest;
 import TT26_73.hoseshop.Dto.Order.OrdersResponse;
 import TT26_73.hoseshop.Service.OrderService;
+import jakarta.persistence.criteria.Order;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -59,6 +60,14 @@ public class OrderController {
         return ApiResponse.<List<OrdersResponse>>builder()
                 .message("Get List By UserId And Payment Status")
                 .result(orderService.getListOrderByUserIdAndStatus(userId, paymentStatus))
+                .build();
+    }
+
+    @PutMapping("/{orderId}/confirm-payment")
+    ApiResponse<OrdersResponse> confirmPayment(@PathVariable String orderId) {
+        return ApiResponse.<OrdersResponse>builder()
+                .message("Confirm Payment")
+                .result(orderService.confirmPayment(orderId))
                 .build();
     }
 

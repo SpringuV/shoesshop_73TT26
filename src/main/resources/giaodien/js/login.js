@@ -11,8 +11,6 @@ document.addEventListener("DOMContentLoaded", function(){
             username: username,
             password: password
         }
-
-        console.log(dataRequest)
         try{
             const response = await fetch(`http://localhost:8080/api/auth/token`, {
                 method: "POST",
