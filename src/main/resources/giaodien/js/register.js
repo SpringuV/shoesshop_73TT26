@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function (){
             password: pass,
             email: email
         }
-        console.log(userData)
         try{
             const response = await fetch(`http://localhost:8080/api/users`, {
                 method: "POST",

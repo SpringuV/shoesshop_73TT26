@@ -7,11 +7,7 @@ function initPayment() {
 
     if (orderId && total) {
         document.querySelector(".title p").textContent = orderId;
-        console.log("Order ID:", orderId);
-        console.log(document.querySelector(".title p"))
         document.getElementById("amount").textContent = `${parseInt(total).toLocaleString()}đ`;
-        console.log(document.getElementById("amount"))
-        console.log(document.getElementById("content"))
         document.getElementById("content").textContent = `TT-${orderId}`;
     } else {
         alert("Thiếu thông tin đơn hàng!");

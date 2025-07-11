@@ -95,13 +95,6 @@ async function openFormEditCategory(category) {
     utils.setupOutsideClickToCloseModal("modalEditCategory", () => {
         utils.openModel("modalDetailCategory")
     })
-
-    // // submit
-    // const submitCategoryFormEdit = document.getElementById('categoryFormEdit')
-    // submitCategoryFormEdit.addEventListener("submit", (event) => {
-    //     event.preventDefault()
-    //     saveEditCategory();
-    // }, { once: true })
 }
 
 async function saveEditCategory() {

@@ -277,7 +277,7 @@ async function processCheckout() {
 
             // Redirect hoặc clear giỏ hàng frontend
             if(dataRequest.paymentMethod === "COD") {
-                window.location.href = "/html/order-history.html.html"
+                window.location.href = "/html/order-history.html"
             } else if(dataRequest.paymentMethod === "BANKING") {
                 window.location.href = `/html/payment.html?orderId=${data.result.idOrder}&total=${data.result.totalPrice}`;
             }
